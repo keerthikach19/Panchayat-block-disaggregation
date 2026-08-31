@@ -1,0 +1,25 @@
+{
+  "training_footprint": {
+    "name": "Maharashtra",
+    "bbox": {
+      "lon_min": 72.4963210756327,
+      "lat_min": 15.456184279308047,
+      "lon_max": 81.04834500755733,
+      "lat_max": 22.183999585296657
+    }
+  },
+  "target_district": {
+    "name": "Nashik",
+    "bbox": {
+      "lon_min": 73.09902836350444,
+      "lat_min": 19.43421495687542,
+      "lon_max": 75.08488359565352,
+      "lat_max": 21.014338061497043
+    }
+  },
+  "second_district": {
+    "name": "Pune"
+  },
+  "bbox_buffer_degrees": 0.15,
+  "crs": "EPSG:4326"
+}

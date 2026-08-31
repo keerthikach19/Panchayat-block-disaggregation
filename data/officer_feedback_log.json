@@ -1,0 +1,14 @@
+[
+  {
+    "log_id": "LOG_1788173402678",
+    "advisory_id": "MH_487_551455",
+    "officer_id": "DAMU_OFFICER_01",
+    "panchayat_id": "MH_487_551455",
+    "action_type": "APPROVE",
+    "field_modified": "agromet_advisory_en",
+    "original_value": "",
+    "modified_value": "",
+    "edit_reason": "Ground truth verified against KVK agromet network",
+    "timestamp": "2026-08-31T16:20:02.678747"
+  }
+]

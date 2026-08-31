@@ -1,0 +1,50 @@
+{
+  "evaluation_protocol": "Leave-Station-Out Cross-Validation (LOOCV)",
+  "sample_size_eval": 6120,
+  "headline_metrics": {
+    "downscaled_model_rmse_mm": 4.67,
+    "naive_baseline_rmse_mm": 4.75,
+    "rmse_improvement_percent": 1.78,
+    "downscaled_model_mae_mm": 2.0,
+    "naive_baseline_mae_mm": 1.55,
+    "mae_improvement_percent": -28.67
+  },
+  "correlation": {
+    "pearson_r_downscaled": 0.951,
+    "pearson_r_naive": 0.949,
+    "p_value": 0.0
+  },
+  "categorical_rain_0p1mm": {
+    "downscaled_model": {
+      "POD": 0.911,
+      "FAR": 0.109,
+      "CSI": 0.82
+    },
+    "naive_baseline": {
+      "POD": 0.995,
+      "FAR": 0.02,
+      "CSI": 0.975
+    }
+  },
+  "categorical_agricultural_20mm_threshold": {
+    "downscaled_model": {
+      "POD": 0.89,
+      "FAR": 0.172,
+      "CSI": 0.751
+    },
+    "naive_baseline": {
+      "POD": 0.895,
+      "FAR": 0.151,
+      "CSI": 0.772
+    }
+  },
+  "spatial_plausibility": {
+    "elevation_rainfall_correlation": 0.784,
+    "orographic_gradient_physically_sound": true
+  },
+  "ensemble_uncertainty_metrics": {
+    "mean_ensemble_spread_std_mm": 3.7,
+    "spread_skill_ratio": 0.79,
+    "interpretation": "Spread reliably captures predictive error dispersion."
+  }
+}
