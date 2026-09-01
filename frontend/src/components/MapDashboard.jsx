@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-function MapController({ center, zoom, geojsonLayer }) {
+function MapController({ center, zoom }) {
   const map = useMap();
   useEffect(() => {
     if (center && zoom) {
@@ -12,18 +12,62 @@ function MapController({ center, zoom, geojsonLayer }) {
   return null;
 }
 
+/**
+ * Compute dynamic color thresholds from the actual data range using
+ * quantile-based breaks so the map always shows a full gradient regardless
+ * of whether block-mean rain is 4 mm or 40 mm.
+ */
+function computeDynamicThresholds(geojsonLayer) {
+  if (!geojsonLayer?.features?.length) return null;
+
+  const values = geojsonLayer.features
+    .map(f => f.properties?.downscaled_rain_pred)
+    .filter(v => v !== undefined && v !== null)
+    .map(Number)
+    .filter(v => !isNaN(v));
+
+  if (values.length === 0) return null;
+
+  const sorted = [...values].sort((a, b) => a - b);
+  const pct = (p) => {
+    const idx = Math.floor(p * (sorted.length - 1));
+    return sorted[idx];
+  };
+
+  return {
+    min: sorted[0],
+    max: sorted[sorted.length - 1],
+    p20: pct(0.20),
+    p40: pct(0.40),
+    p60: pct(0.60),
+    p80: pct(0.80),
+    mean: values.reduce((a, b) => a + b, 0) / values.length,
+  };
+}
+
+// Five-stop color ramp: dry → wet
+const COLOR_RAMP = ['#7dd3fc', '#38bdf8', '#0284c7', '#4f46e5', '#1e1b4b'];
+
 export default function MapDashboard({
   district,
   onSelectPanchayat,
   selectedPanchayatId,
   geojsonLayer,
-  loading
+  loading,
+  forecastMeta
 }) {
   const [viewMode, setViewMode] = useState('downscaled'); // 'downscaled' | 'block' | 'uncertainty'
 
   const center = district === 'Nashik' ? [20.15, 74.0] : [18.65, 74.05];
   const zoom = district === 'Nashik' ? 9.2 : 9.0;
-  const blockMean = district === 'Nashik' ? 22.5 : 18.5;
+  const blockMean = Number(forecastMeta?.block_uniform_rain_mm ?? (district === 'Nashik' ? 22.5 : 18.5));
+  const source = forecastMeta?.forecast_input?.source;
+  const validDate = forecastMeta?.forecast_input?.selected_forecast_date;
+  const forecastStatus = forecastMeta?.forecast_input?.forecast_status;
+  const isLive = forecastStatus === 'LIVE_OK' || forecastStatus === 'LIVE_CACHED';
+
+  // Compute dynamic thresholds whenever geojsonLayer changes
+  const thresholds = useMemo(() => computeDynamicThresholds(geojsonLayer), [geojsonLayer]);
 
   const getPanchayatColor = (feature) => {
     const props = feature?.properties || {};
@@ -40,20 +84,17 @@ export default function MapDashboard({
       return '#f43f5e'; // High Uncertainty / Low Confidence (Rose)
     }
 
-    // Downscaled Mode: Orographic color scale tailored to district variance
-    if (district === 'Pune') {
-      if (rain < 14.5) return '#7dd3fc';      // Rain-shadow dry east (Daund/Indapur/Baramati)
-      if (rain < 17.5) return '#38bdf8';
-      if (rain < 19.5) return '#0284c7';      // Plateau average (Haveli/Shirur)
-      if (rain < 21.5) return '#4f46e5';
-      return '#1e1b4b';                       // Western Ghats crest (Mawal/Mulshi/Velhe/Bhor)
-    } else {
-      if (rain < 16.5) return '#7dd3fc';      // Rain-shadow dry (Malegaon/Deola)
-      if (rain < 20.0) return '#38bdf8';
-      if (rain < 23.5) return '#0284c7';      // Plateau average (Niphad/Sinnar)
-      if (rain < 26.0) return '#4f46e5';
-      return '#1e1b4b';                       // Sahyadri crest high-rain (Igatpuri/Trimbak/Peth)
+    // Downscaled Mode: Dynamic quantile-based color scale
+    if (thresholds) {
+      if (rain <= thresholds.p20) return COLOR_RAMP[0];
+      if (rain <= thresholds.p40) return COLOR_RAMP[1];
+      if (rain <= thresholds.p60) return COLOR_RAMP[2];
+      if (rain <= thresholds.p80) return COLOR_RAMP[3];
+      return COLOR_RAMP[4];
     }
+
+    // Fallback if thresholds not yet computed
+    return COLOR_RAMP[2];
   };
 
   const styleFeature = (feature) => {
@@ -73,7 +114,6 @@ export default function MapDashboard({
     const unc = Number(props.uncertainty_std || 3.8);
     const pName = props.panchayat_name || 'Gram Panchayat';
     const bName = props.block_name || district;
-    const isSelected = props.panchayat_id === selectedPanchayatId;
 
     let tooltipContent = '';
     if (viewMode === 'downscaled') {
@@ -178,10 +218,33 @@ export default function MapDashboard({
     });
   };
 
+  // Legend label helpers
+  const legendMin = thresholds ? thresholds.min.toFixed(1) : '—';
+  const legendMax = thresholds ? thresholds.max.toFixed(1) : '—';
+  const legendMean = thresholds ? thresholds.mean.toFixed(1) : blockMean.toFixed(1);
+
+  // Dry/wet zone labels by district
+  const dryLabel = district === 'Pune' ? 'Rain-Shadow Dry' : 'Rain-Shadow Dry';
+  const wetLabel = district === 'Pune' ? 'Ghats Crest' : 'Ghats Crest';
+
   return (
     <div className="map-viewport-wrapper">
       {/* Floating View Mode Switcher */}
       <div className="map-floating-controls">
+        {/* STATE A Live Feed Badge */}
+        <div className="state-a-badge glass-panel">
+          <span className={`state-a-dot ${isLive ? 'live' : ''}`}></span>
+          <span className="state-a-label">
+            STATE A: {isLive ? 'LIVE FEED (IMD MAUSAM)' : 'DEMO SCENARIO'}
+          </span>
+          <span className="state-a-value">{blockMean.toFixed(1)} mm</span>
+        </div>
+        {validDate && (
+          <div className="state-a-subtext glass-panel">
+            Observed: {validDate === new Date().toISOString().slice(0, 10) ? 'Today' : validDate}
+          </div>
+        )}
+
         <div className="toggle-group glass-panel">
           <button
             className={`toggle-btn ${viewMode === 'downscaled' ? 'active' : ''}`}
@@ -230,7 +293,7 @@ export default function MapDashboard({
         scrollWheelZoom={true}
         zoomControl={false}
       >
-        <MapController center={center} zoom={zoom} geojsonLayer={geojsonLayer} />
+        <MapController center={center} zoom={zoom} />
         {/* Dark-styled OpenStreetMap Base Layer */}
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -240,7 +303,7 @@ export default function MapDashboard({
 
         {geojsonLayer && (
           <GeoJSON
-            key={`${district}-${viewMode}-${selectedPanchayatId}`}
+            key={`${district}-${viewMode}-${selectedPanchayatId}-${thresholds?.min}`}
             data={geojsonLayer}
             style={styleFeature}
             onEachFeature={onEachFeature}
@@ -261,9 +324,8 @@ export default function MapDashboard({
           <>
             <div className="legend-bar"></div>
             <div className="legend-labels">
-              <span>{district === 'Pune' ? '< 14.5 mm (Dry East)' : '< 16.5 mm (Dry Plateau)'}</span>
-              <span>{blockMean.toFixed(1)} mm (Mean)</span>
-              <span>{district === 'Pune' ? '> 21.5 mm (Sahyadri)' : '> 26.0 mm (Ghats Crest)'}</span>
+              <span>&lt; {legendMin} mm ({dryLabel})</span>
+              <span>{legendMean} mm (Block Mean)&gt; {legendMax} mm ({wetLabel})</span>
             </div>
           </>
         ) : viewMode === 'block' ? (
@@ -281,3 +343,4 @@ export default function MapDashboard({
     </div>
   );
 }
+

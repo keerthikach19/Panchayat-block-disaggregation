@@ -54,10 +54,14 @@ data/boundaries/*.tar.gz
 data/boundaries/*.parquet
 
 # 4. Large Serialized ML Models & Caches
-data/models/*.pkl
+# NOTE: layer_b_models.pkl is INTENTIONALLY tracked (492KB) — it is the
+#       pre-trained downscaling model required for live inference without
+#       the full 5GB training dataset.  All other large serialised formats
+#       remain excluded.
 data/models/*.joblib
 data/models/*.bin
 *.onnx
+data/cache/
 
 # 5. OS & IDE Specific
 .DS_Store

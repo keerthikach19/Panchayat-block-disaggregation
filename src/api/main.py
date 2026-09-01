@@ -37,6 +37,7 @@ BOUNDARIES_DIR = DATA_DIR / "boundaries"
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.advisory.rule_engine import GKMSAdvisoryEngine
+from src.ingestion.imd_live import IMDLiveData, LiveDataUnavailable
 from src.modeling.downscaling_pipeline import DownscalingPipeline
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
@@ -76,6 +77,7 @@ if not FEEDBACK_LOG_PATH.exists():
 
 advisory_engine = GKMSAdvisoryEngine()
 pipeline = DownscalingPipeline()
+live_data = IMDLiveData()
 
 
 class OfficerReviewPayload(BaseModel):
@@ -129,18 +131,47 @@ def list_supported_districts():
 
 
 @app.get("/api/forecast/{district_name}")
-def get_downscaled_forecast(district_name: str, block_rain: Optional[float] = None):
+def get_downscaled_forecast(
+    district_name: str,
+    block_rain: Optional[float] = None,
+    forecast_date: Optional[str] = None,
+):
     """
     Get downscaled forecasts for all panchayats in the district.
     """
     dist_clean = district_name.capitalize()
     forecast_file = DATA_DIR / f"downscaled_forecast_{dist_clean.lower()}.csv"
 
-    if not forecast_file.exists() or block_rain is not None:
-        input_weather = {"rainfall_mm": block_rain} if block_rain is not None else None
-        df = pipeline.run_district_downscaling(district_name=dist_clean, input_block_weather=input_weather)
+    if block_rain is not None:
+        forecast_meta = {
+            "source": "Manual demo override",
+            "status": "MANUAL_OVERRIDE",
+            "selected_forecast_date": forecast_date or datetime.now().date().isoformat(),
+            "selected_rainfall_mm": block_rain,
+            "issued_date": None,
+            "source_url": None,
+        }
+        recent_observation = {"status": "NOT_REQUESTED"}
     else:
-        df = pd.read_csv(forecast_file)
+        try:
+            forecast_meta = live_data.fetch_forecast(dist_clean, forecast_date)
+        except LiveDataUnavailable as exc:
+            raise HTTPException(status_code=503, detail=str(exc)) from exc
+        recent_observation = live_data.fetch_recent_observation(dist_clean)
+
+    input_weather = {
+        "rainfall_mm": forecast_meta["selected_rainfall_mm"],
+        "forecast_source": forecast_meta["source"],
+        "forecast_status": forecast_meta["status"],
+        "forecast_issued_date": forecast_meta.get("issued_date"),
+        "forecast_valid_date": forecast_meta["selected_forecast_date"],
+        "forecast_source_url": forecast_meta.get("source_url"),
+        # Recent observed rain is advisory context only, never a Layer D input.
+        "observed_24h_mm": recent_observation.get("rainfall_mm"),
+        "observed_24h_date": recent_observation.get("observed_date"),
+        "observed_24h_status": recent_observation.get("status"),
+    }
+    df = pipeline.run_district_downscaling(district_name=dist_clean, input_block_weather=input_weather)
 
     # Convert to json records
     records = df.to_dict(orient="records")
@@ -150,6 +181,8 @@ def get_downscaled_forecast(district_name: str, block_rain: Optional[float] = No
         "block_uniform_rain_mm": float(df["block_rain_mean"].iloc[0]) if len(df) > 0 else 22.5,
         "min_rain_panchayat_mm": float(df["downscaled_rain_pred"].min()) if len(df) > 0 else 0.0,
         "max_rain_panchayat_mm": float(df["downscaled_rain_pred"].max()) if len(df) > 0 else 0.0,
+        "forecast_input": forecast_meta,
+        "recent_observation": recent_observation,
         "data": records
     }
 
@@ -242,7 +275,9 @@ def get_panchayat_explainability(panchayat_id: str):
         }
 
     # Generate Advisory Bulletin
-    bulletin = advisory_engine.generate_panchayat_advisory(p_row)
+    bulletin = advisory_engine.generate_panchayat_advisory(
+        p_row, forecast_date=p_row.get("forecast_valid_date")
+    )
 
     return {
         "panchayat_id": panchayat_id,
@@ -297,7 +332,10 @@ def list_advisories(district_name: str, limit: int = 50):
     df = pd.read_csv(f_file).head(limit)
     advisories = []
     for _, row in df.iterrows():
-        bulletin = advisory_engine.generate_panchayat_advisory(row.to_dict())
+        record = row.to_dict()
+        bulletin = advisory_engine.generate_panchayat_advisory(
+            record, forecast_date=record.get("forecast_valid_date")
+        )
         advisories.append(bulletin)
 
     return {"district": district_name, "count": len(advisories), "advisories": advisories}
@@ -409,7 +447,9 @@ def preview_dissemination(payload: DisseminationPreviewPayload):
         if not fm.empty:
             p_data.update(fm.iloc[0].to_dict())
 
-    bulletin = advisory_engine.generate_panchayat_advisory(p_data)
+    bulletin = advisory_engine.generate_panchayat_advisory(
+        p_data, forecast_date=p_data.get("forecast_valid_date")
+    )
 
     if payload.language == "mr":
         d_mr = "पुणे" if "pune" in d_name.lower() else "नाशिक"

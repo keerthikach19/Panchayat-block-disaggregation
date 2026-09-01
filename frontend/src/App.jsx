@@ -15,6 +15,7 @@ export default function App() {
   const [explainLoading, setExplainLoading] = useState(false);
   const [geojsonLayer, setGeojsonLayer] = useState(null);
   const [geojsonLoading, setGeojsonLoading] = useState(false);
+  const [forecastMeta, setForecastMeta] = useState(null);
   const [reviewModalAdvisory, setReviewModalAdvisory] = useState(null);
   const [disseminatePanchayatId, setDisseminatePanchayatId] = useState(null);
 
@@ -24,11 +25,21 @@ export default function App() {
     setExplainData(null);
     setSelectedPanchayatId(null);
     setGeojsonLoading(true);
-    fetch(`/api/panchayats/geojson/${selectedDistrict.toLowerCase()}`)
+    setForecastMeta(null);
+    // Refresh the IMD forecast and downscaled result before loading map values.
+    fetch(`/api/forecast/${selectedDistrict.toLowerCase()}`)
       .then(res => {
         if (!res.ok) {
-          throw new Error(`GeoJSON not available for ${selectedDistrict}`);
+          throw new Error(`Live forecast not available for ${selectedDistrict}`);
         }
+        return res.json();
+      })
+      .then(forecast => {
+        setForecastMeta(forecast);
+        return fetch(`/api/panchayats/geojson/${selectedDistrict.toLowerCase()}`);
+      })
+      .then(res => {
+        if (!res.ok) throw new Error(`GeoJSON not available for ${selectedDistrict}`);
         return res.json();
       })
       .then(data => {
@@ -67,38 +78,36 @@ export default function App() {
     <div className="app-shell">
       {/* Top Header Navigation */}
       <header className="top-nav">
-        <div className="nav-brand">
-          <div className="nav-logo-badge">IMD DAMU</div>
-          <div>
-            <div style={{ fontSize: '15px', fontWeight: '800', color: '#ffffff', letterSpacing: '-0.2px' }}>
-              Gramin Krishi Mausam Sewa (GKMS)
-            </div>
-            <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-              Block-to-Panchayat Physical Weather Downscaling & Advisory Engine
+        <div className="nav-left">
+          <div className="nav-brand">
+            <div className="nav-brand-title">
+              GKMS Weather Downscaling
             </div>
           </div>
-        </div>
 
-        {/* District Switcher (Scalability Proof) */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '12px', color: 'var(--text-dim)' }}>District Extent:</span>
-          <select
-            value={selectedDistrict}
-            onChange={(e) => setSelectedDistrict(e.target.value)}
-            style={{
-              background: 'rgba(15, 23, 42, 0.9)',
-              color: '#38bdf8',
-              border: '1px solid var(--border-active)',
-              padding: '6px 12px',
-              borderRadius: '8px',
-              fontWeight: '700',
-              fontSize: '13px',
-              cursor: 'pointer'
-            }}
-          >
-            <option value="Nashik">📍 Nashik (Target Demo - Extreme Gradient)</option>
-            <option value="Pune">📍 Pune (Multi-District Scalability Proof)</option>
-          </select>
+          {/* Compact Live Indicator */}
+          <div className="nav-badges">
+            <span className="nav-badge-live">
+              <span className="live-dot"></span> Live
+            </span>
+            {/* Demo scenario button - commented out for now
+            <span className="nav-badge-demo">
+              ⏳ Demo Scenario (2023)
+            </span>
+            */}
+          </div>
+
+          {/* District Switcher */}
+          <div className="nav-district-select">
+            <select
+              value={selectedDistrict}
+              onChange={(e) => setSelectedDistrict(e.target.value)}
+            >
+              <option value="Nashik">📍 Nashik</option>
+              <option value="Pune">📍 Pune</option>
+            </select>
+            <ChevronDown size={14} className="select-chevron" />
+          </div>
         </div>
 
         {/* Navigation Tabs */}
@@ -133,6 +142,7 @@ export default function App() {
             selectedPanchayatId={selectedPanchayatId}
             geojsonLayer={geojsonLayer}
             loading={geojsonLoading}
+            forecastMeta={forecastMeta}
           />
           <ExplainabilityPanel
             explainData={explainData}

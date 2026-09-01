@@ -49,6 +49,30 @@ class DownscalingPipeline:
         self.layer_d = EnsembleUncertaintyPropagator(num_members=30)
         self.is_trained = False
 
+        # Auto-load pre-trained model from disk if available.
+        # This enables live inference on a fresh GitHub clone without
+        # needing the full 5 GB training dataset.
+        self._try_load_pretrained_model()
+
+    def _try_load_pretrained_model(self):
+        """Load pre-trained Layer B models from disk if available."""
+        model_path = MODELS_DIR / "layer_b_models.pkl"
+        if not model_path.exists():
+            logger.info("No pre-trained model found at %s — will train on first request.", model_path)
+            return
+        try:
+            with open(model_path, "rb") as f:
+                saved = pickle.load(f)
+            self.layer_b = FootprintDeviationModel()
+            self.layer_b.rain_model = saved["rain_model"]
+            self.layer_b.temp_model = saved["temp_model"]
+            self.layer_b.rain_feature_importance = saved.get("rain_feature_importance", {})
+            self.layer_b.temp_feature_importance = saved.get("temp_feature_importance", {})
+            self.is_trained = True
+            logger.info("✓ Loaded pre-trained Layer B model from %s", model_path)
+        except Exception as exc:
+            logger.warning("Failed to load pre-trained model: %s — will retrain on first request.", exc)
+
     def train_footprint_pipeline(self):
         """
         Step 1: Train Layer B model ONCE across the full Maharashtra footprint.
@@ -96,8 +120,8 @@ class DownscalingPipeline:
 
         logger.info(f"Target District {district_name}: {len(district_covs)} panchayats found.")
 
-        # Default representative monsoonal weather input if none supplied
-        # In Nashik: Coarse block average ~22.0 mm rain, 28.5°C temp
+        # The serving layer supplies the current IMD forecast. These defaults
+        # remain only for explicit local/demo execution without an input.
         block_rain_val = input_block_weather.get("rainfall_mm", 22.5) if input_block_weather else 22.5
         block_tmax_val = input_block_weather.get("temp_max_c", 29.5) if input_block_weather else 29.5
         block_tmin_val = input_block_weather.get("temp_min_c", 21.0) if input_block_weather else 21.0
@@ -164,6 +188,13 @@ class DownscalingPipeline:
         final_df["uncertainty_std"] = ensemble_stats["uncertainty_std"]
         final_df["confidence_level"] = ensemble_stats["confidence_level"]
         final_df["dominant_factor"] = b_results["dominant_factor"].values
+        for field in (
+            "forecast_source", "forecast_status", "forecast_issued_date",
+            "forecast_valid_date", "forecast_source_url", "observed_24h_mm",
+            "observed_24h_date", "observed_24h_status",
+        ):
+            if input_block_weather and field in input_block_weather:
+                final_df[field] = input_block_weather[field]
 
         # Downscaled temperatures (elevation lapse rate adjusted)
         t_lapse = (district_covs["elevation_mean"].values - 550.0) * (6.5 / 1000.0)

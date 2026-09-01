@@ -1,0 +1,213 @@
+﻿
+IMD APIs | India Meteorological Department
+हिन्दी वेबसाईट
+India Meteorological Department
+Ministry of Earth Sciences
+Government of India
+Navigation Menu
+Home
+Departmental Websites
+About IMD
+History
+Mandate
+Organizational Structure
+Ex DGM's of IMD
+Citizen's/Client's Charter
+People
+Minister MoES
+Secretary MoES
+DGM IMD
+Publications
+Rashtriya Panchang
+The Indian Astronomical Ephemeris
+Mausam Journal
+Observed Rainfall Trend over States
+CLIVAR Exchanges
+Severe Weather Reports
+IMD News
+मौसम मंजूषा
+IMD Brochure
+IMD Annual Report
+MET Monograph
+Weather for Power System Operation
+FD 2022 POEM BOOK
+FD 2022 POSTER BOOK
+SOUVENIR
+SOP
+Aviation Meteorology
+EMRC
+GKMS
+Cyclone Warning
+Training
+Weather Forecasting & Warning Services
+Hydrometeorological Services
+NWP
+Satellite Meteorology
+Services
+Hydrometeorological Services in IMD
+Met. Services for Agriculture in India
+Met. Services for Civil Aviation in India
+SATMET Services
+IMD DWR Network
+Surface Meteorological Instrumentataion
+Upper Air Meteorological Instrumentataion
+Meteorological Telecomm. in IMD
+Environmental Monitoring
+Positional Astronomy
+WMO-Regional Training Institute
+Press Release
+Contacts
+Local Forecast
+Local Weather Report & Forecast
+Weather At Your Location
+IMD@150
+IMD API
+Warnings
+Subdivisionwise
+|
+Districtwise
+Nowcast
+Districtwise
+|
+Stationwise
+Public Observation
+(
+Multi Indian Languages
+)
+								 |
+Weather Realized
+Specialized Forecast
+Amarnath Yatra
+Marine Forecast
+Health Meteorological Bulletin
+Tourism Forecast
+Thunderstorm Prediction
+Flash Flood Bulletin
+AQEWS
+Air Quality forecast
+ENFUSER AQ
+Power Sector
+Pilgrimage Forecast
+Mountain Weather Bulletin
+Highway Forecast
+INDIAN RAILWAYS Forecast
+Press Release(English): Monthly Outlook for Rainfall and Temperature during September 2026
+Press Release: Monthly Outlook for Rainfall and Temperature during September 2026
+प्रेस विज्ञप्ति तारीखः 31 अगस्त, 2026 अगले एक हफ़्ते तक प्रायद्वीपीय भारत में बारिश की गतिविधियां कम रहने की संभावना है।
+Press Release Dated: 31st August 2026 Subdued rainfall activity likely to continue over Peninsular India during next one week.
+Current Weather Status and Extended Range Forecast for the next two weeks (27 August to 09 September 2026)
+India Meteorological Department (IMD) APIs
+The India Meteorological Department (IMD) has implemented various initiatives recently to improve data reception and the dissemination of weather forecasts and warnings using the latest technologies. 
+                      Dissemination methods include the official website, email, SMS, and various social media platforms. Detailed information can be found at:
+API Documentation (PDF)
+. For IP Whitelisting
+click here
+.
+Implementation Guidelines:
+Ensure proper attribution to IMD. Use client-side caching to optimize performance during peak weather events.
+Technical Support & Issue Reporting
+To report technical issues or connectivity errors, please include the
+API Endpoint URL
+and
+Station ID
+in your report.
+Submit an Issue Ticket: IMDAPIs Portal
+API Escalation & Contact Matrix
+Level
+Contact Person
+Email Address
+Phone Number
+Level 1
+ISSD Technical Support
+rthnewdelhi4@gmail.com
++91-11-24344325
+Level 2
+Dr. Sankar Nath, Sc-F
+sankar.nath@imd.gov.in
++91-9821832587
+Level 3
+Dr. Kuldeep Shrivastav, Sc-F
+kuldeep.srivastava@imd.gov.in
++91-11-43824314
+Forecasts
+Urban Meteorological Services
+Short to Medium Range Model Guidance
+Extended Range Model Guidance
+Seasonal Forecast
+Quantitative Precipitation Forecast
+Latest CAP Alerts
+for historical data related query
+1. Mr. Ranjan Phukan, Sc. D
+Contact No:
++91 9435669264
+, ranjan.phukan[at]imd[dot]gov[dot]in
+Specialised products & forecasts
+Cyclones
+|
+Monsoon
+|
+Satellite
+Radar
+|
+Rainfall
+|
+Agromet Advisories
+MAUSAM :
+|
+|
+Video
+Meghdoot Agro :
+|
+|
+Video
+Damini Lightning :
+|
+UMANG :
+|
+Data Service Portal - Meteorological Data
+Miscellaneous
+Citizen’s Charter
+|
+संगोष्ठी
+Frequently Asked Questions
+RTI
+|
+Feedback
+|
+Internal Complaint Committee
+Sexual Harassment complaint portal
+Weather Video
+|
+GKMS News Letter
+Database Login
+|
+Admin Login
+Tenders
+|
+WMO recruitment
+|
+Circulars
+Recruitment
+|
+Compassionate Appointment
+Immovable Property Return
+Disclaimer
+|
+Sitemap
+Contact Us
+Office of Director General of Meteorology
+India Meteorological Department (IMD)
+Mausam Bhawan, Lodhi Road
+New Delhi - 110003
+Weather related query for Media
+Query Time: 10:00am to 5:00pm
+1. Dr. Naresh Kumar, Sc. F
+Contact No:
++91 9968680077
+, naresh.nhac[at]gmail[dot]com
+2. Dr. Akhil Srivastava, Sc. D
+Contact No:
++91 8285281968
+, akhil.srivastava[at]imd[dot]gov[dot]in
+© Copyright 2026, Developed by IT Team, India Meteorological Department
+Ministry of Earth Sciences, New Delhi, India
