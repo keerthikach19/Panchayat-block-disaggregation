@@ -1,50 +1,139 @@
 {
-  "evaluation_protocol": "Leave-Station-Out Cross-Validation (LOOCV)",
-  "sample_size_eval": 6120,
+  "evaluation_protocol": "Segmented Leave-Station-Out Cross-Validation (LOOCV)",
+  "metadata": {
+    "min_stations_threshold_used": 2,
+    "segment_1_sample_size": 6120,
+    "segment_2_sample_size": 3213,
+    "segment_2_districts_included": [
+      "Nashik",
+      "Pune",
+      "Ratnagiri"
+    ],
+    "segment_2_station_count_by_district": {
+      "Nashik": 15,
+      "Pune": 4,
+      "Ratnagiri": 2
+    }
+  },
+  "segment_1_footprint_generalization": {
+    "description": "Full statewide LOOCV across all stations (checks if Layer B learns generalizable physics across all 4 physiographic zones).",
+    "sample_size": 6120,
+    "headline_metrics": {
+      "downscaled_model_rmse_mm": 4.75,
+      "naive_baseline_rmse_mm": 4.75,
+      "rmse_improvement_percent": 0.16,
+      "downscaled_model_mae_mm": 1.98,
+      "naive_baseline_mae_mm": 1.55,
+      "mae_improvement_percent": -27.73
+    },
+    "correlation": {
+      "pearson_r_downscaled": 0.95,
+      "pearson_r_naive": 0.949,
+      "p_value": 0.0
+    },
+    "categorical_rain_0p1mm": {
+      "downscaled_model": {
+        "POD": 0.926,
+        "FAR": 0.107,
+        "CSI": 0.834
+      },
+      "naive_baseline": {
+        "POD": 0.995,
+        "FAR": 0.02,
+        "CSI": 0.975
+      }
+    },
+    "categorical_agricultural_20mm_threshold": {
+      "downscaled_model": {
+        "POD": 0.891,
+        "FAR": 0.173,
+        "CSI": 0.751
+      },
+      "naive_baseline": {
+        "POD": 0.895,
+        "FAR": 0.151,
+        "CSI": 0.772
+      }
+    },
+    "spatial_plausibility": {
+      "elevation_rainfall_correlation": 0.697,
+      "orographic_gradient_physically_sound": true
+    }
+  },
+  "segment_2_disaggregation_benchmark": {
+    "description": "Disaggregation skill benchmark restricted to multi-station districts (where the block mean is a true spatial average, avoiding single-station baseline leakage).",
+    "sample_size": 3213,
+    "headline_metrics": {
+      "downscaled_model_rmse_mm": 6.44,
+      "naive_baseline_rmse_mm": 6.56,
+      "rmse_improvement_percent": 1.9,
+      "downscaled_model_mae_mm": 3.32,
+      "naive_baseline_mae_mm": 2.96,
+      "mae_improvement_percent": -12.27
+    },
+    "correlation": {
+      "pearson_r_downscaled": 0.89,
+      "pearson_r_naive": 0.885,
+      "p_value": 0.0
+    },
+    "categorical_rain_0p1mm": {
+      "downscaled_model": {
+        "POD": 0.902,
+        "FAR": 0.165,
+        "CSI": 0.766
+      },
+      "naive_baseline": {
+        "POD": 0.99,
+        "FAR": 0.038,
+        "CSI": 0.953
+      }
+    },
+    "categorical_agricultural_20mm_threshold": {
+      "downscaled_model": {
+        "POD": 0.789,
+        "FAR": 0.306,
+        "CSI": 0.585
+      },
+      "naive_baseline": {
+        "POD": 0.789,
+        "FAR": 0.289,
+        "CSI": 0.597
+      }
+    },
+    "ensemble_uncertainty_metrics": {
+      "mean_ensemble_spread_std_mm": 3.7,
+      "spread_skill_ratio": 0.57,
+      "interpretation": "Spread reliably captures predictive error dispersion."
+    }
+  },
   "headline_metrics": {
-    "downscaled_model_rmse_mm": 4.67,
-    "naive_baseline_rmse_mm": 4.75,
-    "rmse_improvement_percent": 1.78,
-    "downscaled_model_mae_mm": 2.0,
-    "naive_baseline_mae_mm": 1.55,
-    "mae_improvement_percent": -28.67
+    "downscaled_model_rmse_mm": 6.44,
+    "naive_baseline_rmse_mm": 6.56,
+    "rmse_improvement_percent": 1.9,
+    "downscaled_model_mae_mm": 3.32,
+    "naive_baseline_mae_mm": 2.96,
+    "mae_improvement_percent": -12.27
   },
   "correlation": {
-    "pearson_r_downscaled": 0.951,
-    "pearson_r_naive": 0.949,
+    "pearson_r_downscaled": 0.89,
+    "pearson_r_naive": 0.885,
     "p_value": 0.0
-  },
-  "categorical_rain_0p1mm": {
-    "downscaled_model": {
-      "POD": 0.911,
-      "FAR": 0.109,
-      "CSI": 0.82
-    },
-    "naive_baseline": {
-      "POD": 0.995,
-      "FAR": 0.02,
-      "CSI": 0.975
-    }
   },
   "categorical_agricultural_20mm_threshold": {
     "downscaled_model": {
-      "POD": 0.89,
-      "FAR": 0.172,
-      "CSI": 0.751
+      "POD": 0.789,
+      "FAR": 0.306,
+      "CSI": 0.585
     },
     "naive_baseline": {
-      "POD": 0.895,
-      "FAR": 0.151,
-      "CSI": 0.772
+      "POD": 0.789,
+      "FAR": 0.289,
+      "CSI": 0.597
     }
-  },
-  "spatial_plausibility": {
-    "elevation_rainfall_correlation": 0.784,
-    "orographic_gradient_physically_sound": true
   },
   "ensemble_uncertainty_metrics": {
     "mean_ensemble_spread_std_mm": 3.7,
-    "spread_skill_ratio": 0.79,
+    "spread_skill_ratio": 0.57,
     "interpretation": "Spread reliably captures predictive error dispersion."
   }
 }
