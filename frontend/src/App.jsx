@@ -88,13 +88,8 @@ export default function App() {
           {/* Compact Live Indicator */}
           <div className="nav-badges">
             <span className="nav-badge-live">
-              <span className="live-dot"></span> Live
+              <span className="live-dot"></span> IMD Live Feed
             </span>
-            {/* Demo scenario button - commented out for now
-            <span className="nav-badge-demo">
-              ⏳ Demo Scenario (2023)
-            </span>
-            */}
           </div>
 
           {/* District Switcher */}

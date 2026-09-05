@@ -61,10 +61,7 @@ export default function MapDashboard({
   const center = district === 'Nashik' ? [20.15, 74.0] : [18.65, 74.05];
   const zoom = district === 'Nashik' ? 9.2 : 9.0;
   const blockMean = Number(forecastMeta?.block_uniform_rain_mm ?? (district === 'Nashik' ? 22.5 : 18.5));
-  const source = forecastMeta?.forecast_input?.source;
   const validDate = forecastMeta?.forecast_input?.selected_forecast_date;
-  const forecastStatus = forecastMeta?.forecast_input?.forecast_status;
-  const isLive = forecastStatus === 'LIVE_OK' || forecastStatus === 'LIVE_CACHED';
 
   // Compute dynamic thresholds whenever geojsonLayer changes
   const thresholds = useMemo(() => computeDynamicThresholds(geojsonLayer), [geojsonLayer]);
@@ -231,40 +228,32 @@ export default function MapDashboard({
     <div className="map-viewport-wrapper">
       {/* Floating View Mode Switcher */}
       <div className="map-floating-controls">
-        {/* STATE A Live Feed Badge */}
-        <div className="state-a-badge glass-panel">
-          <span className={`state-a-dot ${isLive ? 'live' : ''}`}></span>
-          <span className="state-a-label">
-            STATE A: {isLive ? 'LIVE FEED (IMD MAUSAM)' : 'DEMO SCENARIO'}
-          </span>
-          <span className="state-a-value">{blockMean.toFixed(1)} mm</span>
-        </div>
-        {validDate && (
-          <div className="state-a-subtext glass-panel">
-            Observed: {validDate === new Date().toISOString().slice(0, 10) ? 'Today' : validDate}
-          </div>
-        )}
-
         <div className="toggle-group glass-panel">
           <button
             className={`toggle-btn ${viewMode === 'downscaled' ? 'active' : ''}`}
             onClick={() => setViewMode('downscaled')}
           >
-            ✨ Disaggregated Panchayat (After)
+            ✨ Disaggregated (After)
           </button>
           <button
             className={`toggle-btn ${viewMode === 'block' ? 'active' : ''}`}
             onClick={() => setViewMode('block')}
           >
-            📦 Coarse Block Mean (Before)
+            📦 Block Mean (Before)
           </button>
           <button
             className={`toggle-btn ${viewMode === 'uncertainty' ? 'active' : ''}`}
             onClick={() => setViewMode('uncertainty')}
           >
-            🛡️ Layer D Ensemble Confidence
+            🛡️ Ensemble Confidence
           </button>
         </div>
+
+        {validDate && (
+          <div className="state-a-subtext glass-panel">
+            Forecast Valid: {validDate}
+          </div>
+        )}
       </div>
 
       {/* Loading Overlay */}
@@ -325,7 +314,8 @@ export default function MapDashboard({
             <div className="legend-bar"></div>
             <div className="legend-labels">
               <span>&lt; {legendMin} mm ({dryLabel})</span>
-              <span>{legendMean} mm (Block Mean)&gt; {legendMax} mm ({wetLabel})</span>
+              <span>{legendMean} mm (Block Mean)</span>
+              <span>&gt; {legendMax} mm ({wetLabel})</span>
             </div>
           </>
         ) : viewMode === 'block' ? (
