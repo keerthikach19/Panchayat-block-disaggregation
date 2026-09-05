@@ -68,14 +68,28 @@ class DownscalingPipeline:
             self.layer_b.temp_model = saved["temp_model"]
             self.layer_b.rain_feature_importance = saved.get("rain_feature_importance", {})
             self.layer_b.temp_feature_importance = saved.get("temp_feature_importance", {})
+            self.layer_b.station_loso_preds = saved.get("station_loso_preds", {})
+            
+            # If station_loso_preds is empty in pickle, check if standalone JSON exists
+            if not self.layer_b.station_loso_preds:
+                json_path = MODELS_DIR / "station_loso_residuals.json"
+                if json_path.exists():
+                    try:
+                        with open(json_path, "r") as jf:
+                            self.layer_b.station_loso_preds = json.load(jf)
+                    except Exception:
+                        pass
+
             self.is_trained = True
-            logger.info("✓ Loaded pre-trained Layer B model from %s", model_path)
+            logger.info("✓ Loaded pre-trained Layer B model from %s (%d LOSO station predictions cached)", 
+                        model_path, len(self.layer_b.station_loso_preds))
         except Exception as exc:
             logger.warning("Failed to load pre-trained model: %s — will retrain on first request.", exc)
 
     def train_footprint_pipeline(self):
         """
         Step 1: Train Layer B model ONCE across the full Maharashtra footprint.
+        Precomputes out-of-sample Leave-One-Station-Out (LOSO) predictions for Layer C.
         """
         logger.info("=" * 70)
         logger.info(f"TRAINING DOWNSCALING PIPELINE ON FOOTPRINT: {self.footprint_name}")
@@ -92,7 +106,19 @@ class DownscalingPipeline:
         # Layer B: Footprint Deviation Training
         self.layer_b = FootprintDeviationModel()
         train_features = self.layer_b.prepare_station_training_features(decomposed_obs, cov_df)
-        self.layer_b.train_footprint_models(train_features)
+        self.layer_b.train_footprint_models(train_features, save_artifact=False)
+
+        # Step 1b: Precompute Leave-One-Station-Out (LOSO) predictions
+        # Methodological necessity: Using in-sample predictions causes GBDT memorization leakage
+        # where residuals collapse to ~0.00 mm. LOSO provides genuine out-of-sample station residuals.
+        self.layer_b.compute_station_loso_predictions(train_features)
+        self.layer_b.save_model_artifact()
+
+        # Also persist a human-readable JSON artifact for inspection
+        loso_json_path = MODELS_DIR / "station_loso_residuals.json"
+        with open(loso_json_path, "w") as jf:
+            json.dump(self.layer_b.station_loso_preds, jf, indent=2)
+        logger.info(f"  ✓ Saved station LOSO predictions to {loso_json_path}")
 
         self.is_trained = True
         logger.info("Pipeline Footprint Training Complete.")
@@ -146,14 +172,22 @@ class DownscalingPipeline:
             st_merged = district_stations.merge(st_avg_dev, on="station_id")
 
             # Layer B prediction at station locations
+            # CRITICAL METHODOLOGY FIX (PRP Layer C Geostatistical Correction):
+            # Re-predicting with the in-sample footprint rain_model causes GBDT memorization
+            # leakage over ~40 stations, collapsing residuals to ~0.00 mm (making Kriging a no-op).
+            # We instead use precomputed Leave-One-Station-Out (LOSO) out-of-sample predictions
+            # so that residual = observed_deviation - predicted_deviation captures genuine spatial
+            # error across the district.
             st_covs = self.layer_b.prepare_station_training_features(dist_decomp, cov_df)
-            st_preds = self.layer_b.rain_model.predict(st_covs[FEATURE_COLS])
-            # Aggregate station prediction mean
-            st_covs["pred"] = st_preds
-            st_pred_means = st_covs.groupby("station_id")["pred"].mean().reset_index()
-            st_merged = st_merged.merge(st_pred_means, on="station_id")
             
-            st_preds_arr = st_merged["pred"].values if "pred" in st_merged else np.zeros(len(st_merged))
+            loso_preds_list = []
+            for st_id in st_merged["station_id"].values:
+                st_sub = st_covs[st_covs["station_id"] == st_id]
+                pred_val = self.layer_b.get_station_loso_prediction(st_id, fallback_features=st_sub)
+                loso_preds_list.append(pred_val)
+
+            st_merged["pred"] = loso_preds_list
+            st_preds_arr = np.array(loso_preds_list)
 
             self.layer_c = LocalResidualCorrector(target_district=district_name)
             self.layer_c.fit_local_residuals(st_merged, st_preds_arr)

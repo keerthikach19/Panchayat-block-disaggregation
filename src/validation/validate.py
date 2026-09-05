@@ -81,7 +81,7 @@ def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
 
         model = FootprintDeviationModel()
         train_feats = model.prepare_station_training_features(train_obs, cov_df)
-        model.train_footprint_models(train_feats)
+        model.train_footprint_models(train_feats, save_artifact=False)
 
         # Evaluate on left-out station
         test_feats = model.prepare_station_training_features(test_obs, cov_df)

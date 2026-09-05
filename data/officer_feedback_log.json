@@ -1,5 +1,17 @@
 [
   {
+    "log_id": "LOG_1788634303117",
+    "advisory_id": "MH_PUNE_556389",
+    "officer_id": "DAMU_OFFICER_NASHIK_03",
+    "panchayat_id": "MH_PUNE_556389",
+    "action_type": "EDIT_ADVISORY",
+    "field_modified": "agromet_advisory_en",
+    "original_value": "Crop: Grape (Berry Development).  Conditions favorable for preventive spraying against Powdery Mildew. Spray Wettable Sulphur 80 WDG @ 2 g/L. Maintain light drip irrigation (2-3 hours/day) in the morning hours.",
+    "modified_value": "Crop: Grape (Berry Development).  Conditions favorable for preventive spraying against Powdery Mildew. Spray Wettable Sulphur 80 WDG @ 1.5 g/L. Maintain light drip irrigation (2-3 hours/day) in the morning hours.",
+    "edit_reason": "Verified against DAMU KVK Nashik automatic weather gauge network.",
+    "timestamp": "2026-09-06T00:21:43.117567"
+  },
+  {
     "log_id": "LOG_1788173402678",
     "advisory_id": "MH_487_551455",
     "officer_id": "DAMU_OFFICER_01",

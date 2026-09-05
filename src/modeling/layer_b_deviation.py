@@ -51,6 +51,7 @@ class FootprintDeviationModel:
         self.temp_model = None
         self.rain_feature_importance = {}
         self.temp_feature_importance = {}
+        self.station_loso_preds = {}
         self.metrics = {}
 
     def prepare_station_training_features(self, decomposed_df, covariates_df):
@@ -86,9 +87,10 @@ class FootprintDeviationModel:
         df_train = pd.DataFrame(feats_list)
         return df_train
 
-    def train_footprint_models(self, df_train):
+    def train_footprint_models(self, df_train, save_artifact=True):
         """
         Train footprint-wide LightGBM deviation models for rainfall and temperature.
+        If save_artifact=True, persists the model dictionary to data/models/layer_b_models.pkl.
         """
         MODELS_DIR.mkdir(parents=True, exist_ok=True)
         logger.info(f"Training Layer B Footprint Deviation Models on {len(df_train)} training records...")
@@ -139,21 +141,87 @@ class FootprintDeviationModel:
             for feat, imp in zip(FEATURE_COLS, temp_imp)
         }
 
-        # Save trained model artifacts
-        with open(MODELS_DIR / "layer_b_models.pkl", "wb") as f:
+        # Save trained model artifacts only if requested (prevents validation CV loops from corrupting production weights)
+        if save_artifact:
+            self.save_model_artifact()
+
+        logger.info(f"Top 3 Rain Deviation Features: {sorted(self.rain_feature_importance.items(), key=lambda x: x[1], reverse=True)[:3]}")
+        logger.info(f"Top 3 Temp Deviation Features: {sorted(self.temp_feature_importance.items(), key=lambda x: x[1], reverse=True)[:3]}")
+
+        return self
+
+    def save_model_artifact(self):
+        """Persist Layer B model artifacts and precomputed LOSO station predictions to disk."""
+        MODELS_DIR.mkdir(parents=True, exist_ok=True)
+        artifact_path = MODELS_DIR / "layer_b_models.pkl"
+        with open(artifact_path, "wb") as f:
             pickle.dump({
                 "rain_model": self.rain_model,
                 "temp_model": self.temp_model,
                 "rain_feature_importance": self.rain_feature_importance,
                 "temp_feature_importance": self.temp_feature_importance,
-                "feature_cols": FEATURE_COLS
+                "feature_cols": FEATURE_COLS,
+                "station_loso_preds": self.station_loso_preds
             }, f)
+        logger.info(f"  ✓ Saved Layer B models to {artifact_path}")
 
-        logger.info("  ✓ Saved Layer B models to data/models/layer_b_models.pkl")
-        logger.info(f"Top 3 Rain Deviation Features: {sorted(self.rain_feature_importance.items(), key=lambda x: x[1], reverse=True)[:3]}")
-        logger.info(f"Top 3 Temp Deviation Features: {sorted(self.temp_feature_importance.items(), key=lambda x: x[1], reverse=True)[:3]}")
+    def compute_station_loso_predictions(self, df_train):
+        """
+        Compute Leave-One-Station-Out (LOSO) out-of-sample rainfall deviation predictions
+        for all weather stations in the training dataset.
 
-        return self
+        Methodology Note (PRP Layer C Geostatistical Correction):
+        Evaluating the fully-fit Layer B model on its own training stations results in
+        in-sample memorization leakage (residuals collapse to ~0.00 mm). By training a separate
+        GBDT model with each target station withheld, we produce honest, out-of-sample predictions
+        (and therefore non-trivial residuals) for Layer C geostatistical interpolation.
+        """
+        if "station_id" not in df_train.columns:
+            logger.warning("df_train missing station_id; cannot compute LOSO predictions.")
+            return {}
+
+        unique_stations = df_train["station_id"].unique()
+        logger.info(f"Computing out-of-sample LOSO predictions across {len(unique_stations)} stations...")
+
+        rain_params = {
+            'objective': 'regression',
+            'metric': 'rmse',
+            'boosting_type': 'gbdt',
+            'num_leaves': 31,
+            'learning_rate': 0.05,
+            'feature_fraction': 0.85,
+            'min_child_samples': 20,
+            'verbose': -1,
+            'random_state': 42
+        }
+
+        loso_preds = {}
+        for st_id in unique_stations:
+            train_fold = df_train[df_train["station_id"] != st_id]
+            test_fold = df_train[df_train["station_id"] == st_id]
+
+            if len(train_fold) == 0 or len(test_fold) == 0:
+                continue
+
+            fold_ds = lgb.Dataset(train_fold[FEATURE_COLS], label=train_fold["rainfall_deviation"].values)
+            fold_model = lgb.train(rain_params, fold_ds, num_boost_round=150)
+            pred = float(fold_model.predict(test_fold[FEATURE_COLS]).mean())
+            loso_preds[st_id] = pred
+
+        self.station_loso_preds = loso_preds
+        logger.info(f"  ✓ Computed {len(loso_preds)} out-of-sample station predictions.")
+        return loso_preds
+
+    def get_station_loso_prediction(self, station_id, fallback_features=None):
+        """
+        Retrieve the out-of-sample LOSO predicted rainfall deviation for a given station.
+        Falls back to in-sample model prediction or 0.0 if the station was not precomputed.
+        """
+        if station_id in self.station_loso_preds:
+            return float(self.station_loso_preds[station_id])
+        if fallback_features is not None and self.rain_model is not None:
+            return float(self.rain_model.predict(fallback_features[FEATURE_COLS]).mean())
+        return 0.0
 
     def predict_panchayat_deviations(self, panchayat_covariates_df):
         """
