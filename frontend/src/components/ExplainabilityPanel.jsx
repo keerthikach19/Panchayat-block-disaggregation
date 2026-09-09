@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import { Mountain, Trees, Compass, Droplets, ShieldCheck, FileText, Send, Edit3, CheckCircle, AlertTriangle, CloudRain, Radio } from 'lucide-react';
 
+function getCompassDirection(deg) {
+  if (deg == null || isNaN(deg)) return '';
+  const d = ((Number(deg) % 360) + 360) % 360;
+  const dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  const idx = Math.round(d / 22.5) % 16;
+  return dirs[idx];
+}
+
 export default function ExplainabilityPanel({
   explainData,
   loading,
@@ -119,56 +127,100 @@ export default function ExplainabilityPanel({
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '13px' }}>
           <div>
             <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>Mean Elevation:</span>
-            <div style={{ fontWeight: '600', color: '#f8fafc' }}>{topo.elevation_mean_m ?? '—'} m AMSL</div>
+            <div style={{ fontWeight: '600', color: '#f8fafc' }}>
+              {topo.elevation_mean_m != null ? `${Number(topo.elevation_mean_m).toFixed(1)} m AMSL` : '—'}
+            </div>
+          </div>
+          <div>
+            <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>Aspect (Slope Azimuth):</span>
+            <div style={{ fontWeight: '600', color: '#38bdf8' }}>
+              {topo.aspect_degrees != null ? `${Number(topo.aspect_degrees).toFixed(1)}° (${getCompassDirection(topo.aspect_degrees)})` : '—'}
+            </div>
           </div>
           <div>
             <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>Terrain Slope / Relief:</span>
-            <div style={{ fontWeight: '600', color: '#f8fafc' }}>{topo.slope_degrees ?? '—'}° (σ {topo.elevation_std_m ?? 0}m)</div>
+            <div style={{ fontWeight: '600', color: '#f8fafc' }}>
+              {topo.slope_degrees != null ? `${Number(topo.slope_degrees).toFixed(1)}°` : '—'} (σ {topo.elevation_std_m != null ? Number(topo.elevation_std_m).toFixed(1) : 0}m)
+            </div>
           </div>
           <div>
             <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>Cropland (Orchard/Field):</span>
-            <div style={{ fontWeight: '600', color: '#34d399' }}>{lulc.cropland_pct ?? 0}%</div>
+            <div style={{ fontWeight: '600', color: '#34d399' }}>{lulc.cropland_pct != null ? `${Number(lulc.cropland_pct).toFixed(1)}%` : '0%'}</div>
           </div>
           <div>
             <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>Tree Cover (Western Ghats):</span>
-            <div style={{ fontWeight: '600', color: '#38bdf8' }}>{lulc.tree_cover_pct ?? 0}%</div>
+            <div style={{ fontWeight: '600', color: '#38bdf8' }}>{lulc.tree_cover_pct != null ? `${Number(lulc.tree_cover_pct).toFixed(1)}%` : '0%'}</div>
           </div>
           <div>
             <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>Distance to Coast:</span>
-            <div style={{ fontWeight: '600', color: '#f8fafc' }}>{dist.distance_to_coast_km ?? '—'} km</div>
+            <div style={{ fontWeight: '600', color: '#f8fafc' }}>{dist.distance_to_coast_km != null ? `${Number(dist.distance_to_coast_km).toFixed(1)} km` : '—'}</div>
           </div>
           <div>
             <span style={{ color: 'var(--text-dim)', fontSize: '11px' }}>Distance to River:</span>
-            <div style={{ fontWeight: '600', color: '#f8fafc' }}>{dist.distance_to_major_river_km ?? '—'} km</div>
+            <div style={{ fontWeight: '600', color: '#f8fafc' }}>{dist.distance_to_major_river_km != null ? `${Number(dist.distance_to_major_river_km).toFixed(1)} km` : '—'}</div>
           </div>
         </div>
       </div>
 
-      {/* Layer B Footprint Feature Importance (Explainability) */}
+      {/* Layer B Per-Panchayat Feature Contributions (Local Explainability) */}
       <div className="glass-panel" style={{ padding: '16px' }}>
         <h4 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '12px', color: '#e2e8f0' }}>
-          📊 Footprint Model Feature Weights (Why this Panchayat differs)
+          📊 Why This Panchayat Differs (Local Feature Drivers)
         </h4>
 
-        {p.feature_importance_weights && Object.entries(p.feature_importance_weights).slice(0, 5).map(([feat, weight]) => (
-          <div key={feat} className="feature-bar-wrapper">
-            <div className="feature-bar-label">
-              <span>{feat.replace(/_/g, ' ')}</span>
-              <strong>{(Number(weight) * 100).toFixed(1)}%</strong>
+        {p.local_feature_contributions && Object.keys(p.local_feature_contributions).length > 0 ? (
+          Object.entries(p.local_feature_contributions).slice(0, 5).map(([feat, info]) => {
+            const isPositive = info.direction === 'increases';
+            const barColor = isPositive ? '#34d399' : '#f87171';
+            const arrow = isPositive ? '↑' : info.direction === 'decreases' ? '↓' : '–';
+            const contribMm = info.contribution_mm !== undefined ? info.contribution_mm : 0;
+            const pctVal = info.pct_of_total !== undefined ? info.pct_of_total : 0;
+            return (
+              <div key={feat} className="feature-bar-wrapper">
+                <div className="feature-bar-label">
+                  <span>{feat.replace(/_/g, ' ')}</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ color: barColor, fontWeight: '700', fontSize: '12px' }}>
+                      {arrow} {contribMm > 0 ? '+' : ''}{contribMm.toFixed(2)} mm
+                    </span>
+                    <strong>{pctVal.toFixed(1)}%</strong>
+                  </span>
+                </div>
+                <div className="feature-bar-track">
+                  <div className="feature-bar-fill" style={{ width: `${Math.min(100, pctVal)}%`, background: barColor }}></div>
+                </div>
+              </div>
+            );
+          })
+        ) : p.feature_importance_weights && Object.keys(p.feature_importance_weights).length > 0 ? (
+          /* Fallback to global feature importance if local contributions are unavailable */
+          Object.entries(p.feature_importance_weights).slice(0, 5).map(([feat, weight]) => (
+            <div key={feat} className="feature-bar-wrapper">
+              <div className="feature-bar-label">
+                <span>{feat.replace(/_/g, ' ')}</span>
+                <strong>{(Number(weight) * 100).toFixed(1)}%</strong>
+              </div>
+              <div className="feature-bar-track">
+                <div className="feature-bar-fill" style={{ width: `${Math.min(100, Number(weight) * 250)}%` }}></div>
+              </div>
             </div>
-            <div className="feature-bar-track">
-              <div className="feature-bar-fill" style={{ width: `${Math.min(100, Number(weight) * 250)}%` }}></div>
-            </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div style={{ fontSize: '13px', color: 'var(--text-dim)' }}>No feature contribution data available.</div>
+        )}
       </div>
 
       {/* GKMS SOP Agromet Advisory Bulletin */}
       <div className="glass-panel" style={{ padding: '18px', borderLeft: '4px solid #0284c7' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-          <h4 style={{ fontSize: '15px', fontWeight: '700', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <FileText size={16} color="#38bdf8" /> GKMS Agromet Bulletin
-          </h4>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+          <div>
+            <h4 style={{ fontSize: '15px', fontWeight: '700', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <FileText size={16} color="#38bdf8" /> GKMS Agromet Bulletin
+            </h4>
+            <div style={{ fontSize: '10px', color: 'var(--text-dim)', marginTop: '2px' }}>
+              {adv.bulletin_header || 'GRAMIN KRISHI MAUSAM SEWA (GKMS)'}
+            </div>
+          </div>
 
           {/* Bilingual Toggle */}
           <div className="toggle-group" style={{ padding: '2px' }}>
@@ -181,18 +233,33 @@ export default function ExplainabilityPanel({
           </div>
         </div>
 
-        <div style={{ marginBottom: '10px' }}>
-          <span className={`badge ${adv.alert_level === 'WARNING' ? 'badge-red' : adv.alert_level === 'ADVISORY' ? 'badge-yellow' : 'badge-green'}`}>
-            {lang === 'mr' ? adv.alert_level_mr || adv.alert_level : adv.alert_level || 'NORMAL'}
-          </span>
-          <span style={{ fontSize: '12px', color: 'var(--text-muted)', marginLeft: '8px' }}>
-            Crop: <strong>{lang === 'mr' ? adv.marathi_crop_name || adv.dominant_crop : adv.dominant_crop}</strong> ({adv.crop_stage?.replace(/_/g, ' ')})
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', flexWrap: 'wrap', gap: '6px' }}>
+          <div>
+            <span className={`badge ${adv.alert_level === 'WARNING' ? 'badge-red' : adv.alert_level === 'ADVISORY' ? 'badge-yellow' : 'badge-green'}`}>
+              {lang === 'mr' ? adv.alert_level_mr || adv.alert_level : adv.alert_level || 'NORMAL'}
+            </span>
+            <span style={{ fontSize: '12px', color: 'var(--text-muted)', marginLeft: '8px' }}>
+              Crop: <strong>{lang === 'mr' ? adv.marathi_crop_name || adv.dominant_crop : adv.dominant_crop}</strong> ({adv.crop_stage?.replace(/_/g, ' ')})
+            </span>
+          </div>
+          {adv.valid_until && (
+            <span style={{ fontSize: '11px', color: 'var(--text-dim)' }}>
+              Valid: <strong>{adv.valid_until}</strong>
+            </span>
+          )}
         </div>
 
         <p style={{ fontSize: '13px', lineHeight: '1.6', color: '#e2e8f0', marginBottom: '12px' }}>
           {lang === 'mr' ? adv.weather_summary_mr : adv.weather_summary_en}
         </p>
+
+        {/* Pest & Disease Warning Box */}
+        {(lang === 'mr' ? adv.pest_disease_warning_mr : adv.pest_disease_warning_en) && (
+          <div style={{ background: 'rgba(239, 68, 68, 0.12)', border: '1px solid rgba(239, 68, 68, 0.3)', padding: '12px', borderRadius: '8px', marginBottom: '10px', fontSize: '12px', lineHeight: '1.5' }}>
+            <div style={{ color: '#f87171', fontWeight: '700', marginBottom: '4px' }}>🛡️ {lang === 'mr' ? 'रोग व कीड इशारा' : 'Pest & Disease Risk Alert'}:</div>
+            <div style={{ color: '#fecaca' }}>{lang === 'mr' ? adv.pest_disease_warning_mr : adv.pest_disease_warning_en}</div>
+          </div>
+        )}
 
         {/* Actionable Rules */}
         <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px', borderRadius: '8px', marginBottom: '10px', fontSize: '12px', lineHeight: '1.5' }}>

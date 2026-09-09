@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { CheckCircle, AlertCircle, X, ShieldAlert, FileEdit, Send } from 'lucide-react';
 
 export default function OfficerReviewModal({ advisory, onClose, onSaveReview }) {
-  const [officerId, setOfficerId] = useState('DAMU_OFFICER_NASHIK_01');
+  const districtName = advisory?.district_name || 'Nashik';
+  const [officerId, setOfficerId] = useState(`DAMU_OFFICER_${districtName.toUpperCase()}_01`);
   const [actionType, setActionType] = useState('APPROVE'); // 'APPROVE' | 'EDIT_ADVISORY' | 'OVERRIDE_FORECAST'
   const [editedText, setEditedText] = useState(advisory?.agromet_advisory_en || '');
-  const [overrideRain, setOverrideRain] = useState(advisory?.downscaled_weather?.rainfall_mm || 22.5);
-  const [reason, setReason] = useState('Verified against DAMU KVK Nashik automatic weather gauge network.');
+  const [overrideRain, setOverrideRain] = useState(advisory?.downscaled_weather?.rainfall_mm ?? 22.5);
+  const [reason, setReason] = useState(`Verified against DAMU KVK ${districtName} automatic weather gauge network.`);
   const [submitting, setSubmitting] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
 

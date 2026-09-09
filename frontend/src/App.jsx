@@ -19,43 +19,67 @@ export default function App() {
   const [reviewModalAdvisory, setReviewModalAdvisory] = useState(null);
   const [disseminatePanchayatId, setDisseminatePanchayatId] = useState(null);
 
-  // Fetch GeoJSON layer when district changes
+  const [retryNotice, setRetryNotice] = useState(null);
+
+  // Fetch GeoJSON layer when district changes (with auto-retry if backend is booting)
   useEffect(() => {
-    setGeojsonLayer(null);
-    setExplainData(null);
-    setSelectedPanchayatId(null);
-    setGeojsonLoading(true);
-    setForecastMeta(null);
-    // Refresh the IMD forecast and downscaled result before loading map values.
-    fetch(`/api/forecast/${selectedDistrict.toLowerCase()}`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(`Live forecast not available for ${selectedDistrict}`);
-        }
-        return res.json();
-      })
-      .then(forecast => {
-        setForecastMeta(forecast);
-        return fetch(`/api/panchayats/geojson/${selectedDistrict.toLowerCase()}`);
-      })
-      .then(res => {
-        if (!res.ok) throw new Error(`GeoJSON not available for ${selectedDistrict}`);
-        return res.json();
-      })
-      .then(data => {
-        setGeojsonLayer(data);
-        setGeojsonLoading(false);
-        // Auto-select first panchayat
-        if (data.features && data.features.length > 0) {
-          const firstId = data.features[0].properties.panchayat_id;
-          handleSelectPanchayat(firstId);
-        }
-      })
-      .catch(err => {
-        console.error('Failed to load GeoJSON layer:', err);
-        setGeojsonLayer(null);
-        setGeojsonLoading(false);
-      });
+    let timer = null;
+    let isMounted = true;
+
+    const loadData = () => {
+      setGeojsonLayer(null);
+      setExplainData(null);
+      setSelectedPanchayatId(null);
+      setGeojsonLoading(true);
+      setForecastMeta(null);
+
+      fetch(`/api/forecast/${selectedDistrict.toLowerCase()}`)
+        .then(res => {
+          if (res.status === 503) {
+            throw new Error('Backend initializing');
+          }
+          if (!res.ok) {
+            throw new Error(`Live forecast not available for ${selectedDistrict}`);
+          }
+          return res.json();
+        })
+        .then(forecast => {
+          if (!isMounted) return;
+          setForecastMeta(forecast);
+          setRetryNotice(null);
+          return fetch(`/api/panchayats/geojson/${selectedDistrict.toLowerCase()}`);
+        })
+        .then(res => {
+          if (!res || !isMounted) return;
+          if (!res.ok) throw new Error(`GeoJSON not available for ${selectedDistrict}`);
+          return res.json();
+        })
+        .then(data => {
+          if (!data || !isMounted) return;
+          setGeojsonLayer(data);
+          setGeojsonLoading(false);
+          setRetryNotice(null);
+          if (data.features && data.features.length > 0) {
+            const firstId = data.features[0].properties.panchayat_id;
+            handleSelectPanchayat(firstId);
+          }
+        })
+        .catch(err => {
+          if (!isMounted) return;
+          console.warn('Backend connection pending:', err.message);
+          setRetryNotice('Backend server initializing on port 8000... Retrying in 2s');
+          timer = setTimeout(() => {
+            if (isMounted) loadData();
+          }, 2500);
+        });
+    };
+
+    loadData();
+
+    return () => {
+      isMounted = false;
+      if (timer) clearTimeout(timer);
+    };
   }, [selectedDistrict]);
 
 
@@ -90,6 +114,11 @@ export default function App() {
             <span className="nav-badge-live">
               <span className="live-dot"></span> IMD Live Feed
             </span>
+            {retryNotice && (
+              <span style={{ fontSize: '11px', color: '#f59e0b', display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(245,158,11,0.15)', padding: '3px 8px', borderRadius: '4px', border: '1px solid rgba(245,158,11,0.4)' }}>
+                <RefreshCw size={11} className="animate-spin" /> {retryNotice}
+              </span>
+            )}
           </div>
 
           {/* District Switcher */}

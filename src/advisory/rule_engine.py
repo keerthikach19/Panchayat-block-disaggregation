@@ -57,8 +57,12 @@ class GKMSAdvisoryEngine:
             forecast_date = datetime.now().strftime("%Y-%m-%d")
         valid_until = (datetime.strptime(forecast_date, "%Y-%m-%d") + timedelta(days=5)).strftime("%Y-%m-%d")
 
-        # Determine dominant crop & stage
-        crop_name, crop_stage = get_dominant_crop_for_panchayat(b_name)
+        # Determine dominant crop & stage dynamically using forecast_date month
+        try:
+            f_month = datetime.strptime(forecast_date, "%Y-%m-%d").month
+        except Exception:
+            f_month = datetime.now().month
+        crop_name, crop_stage = get_dominant_crop_for_panchayat(b_name, current_month=f_month)
         crop_meta = CROP_CALENDARS.get(crop_name, {})
         marathi_crop = crop_meta.get("marathi_name", crop_name)
 
@@ -80,13 +84,11 @@ class GKMSAdvisoryEngine:
         if rain_pred >= 64.5:
             alert_level = "WARNING"
             alert_mr = "दक्षता इशारा (ORANGE WARNING - HEAVY RAIN)"
-        elif rain_pred >= 20.0 or (crop_name == "Grape" and rh >= 85.0):
+        elif rain_pred >= 20.0 or (crop_name == "Grape" and rh >= 85.0) or (crop_name == "Sugarcane" and rain_pred >= 35.0):
             alert_level = "ADVISORY"
             alert_mr = "सल्ला (YELLOW ADVISORY)"
 
         # 3. Crop-Specific Agronomic Rules
-        advisory_en = []
-        advisory_mr = []
         spray_en = ""
         spray_mr = ""
         irrig_en = ""
@@ -112,7 +114,7 @@ class GKMSAdvisoryEngine:
             if rain_pred >= 15.0:
                 pest_en = "Risk of Purple Blotch (जांभळा करपा) and bulb rotting in waterlogged fields."
                 pest_mr = "पाणी साचल्यास कांद्यामध्ये जांभळा करपा आणि मुळकुजव्या रोगाचा धोका संभवतो."
-                spray_en = "Avoid pesticide spraying today. Clear drainage channels across onion beds."
+                spray_en = "Avoid pesticide spraying today. Clear drainage channels across onion beds to prevent water stagnation."
                 spray_mr = "आज कीटकनाशक फवारणी टाळावी. कांदा वाफ्यांमधून पावसाचे पाणी वाहून जाण्यासाठी चर मोकळे करावेत."
                 irrig_en = "Withhold irrigation until soil dries to field capacity."
                 irrig_mr = "जमीन वापशावर येईपर्यंत कांदा पिकाला पाणी देऊ नये."
@@ -122,17 +124,69 @@ class GKMSAdvisoryEngine:
                 irrig_en = "Provide regular scheduled furrow irrigation."
                 irrig_mr = "कांदा पिकास आवश्यकतेनुसार नियमित पाटाने पाणी द्यावे."
 
-        else: # Bajra / Cereal
+        elif crop_name == "Sugarcane":
+            if rain_pred >= 20.0:
+                pest_en = "Risk of waterlogging in cane furrows and favorable microclimate for White Grub (हुमणी अळी) and red rot."
+                pest_mr = "ऊस पिकात सरींमध्ये पाणी साचल्यास हुमणी अळी (White grub) आणि तांबेरा/लाल कुजव्या रोगाचा धोका वाढू शकतो."
+                spray_en = "Avoid chemical sprays during rains. Ensure broad drainage trenches across cane furrows to evacuate excess runoff."
+                spray_mr = "पावसादरम्यान फवारणी करू नये. अतिरिक्त पाण्याचा निचरा होण्यासाठी शेतात चर खोदावेत."
+                irrig_en = "Suspend all cane irrigation until field soil drains to field capacity."
+                irrig_mr = "वाफसा येईपर्यंत ऊस पिकाचे पाणी देणे पूर्णपणे बंद ठेवावे."
+            else:
+                pest_en = "Low pest pressure. Monitor for early shoot borer in young ratoon/planted crops."
+                pest_mr = "किडींचा उपद्रव कमी आहे. बाळ उसात खोडकिडीच्या प्रादुर्भावावर लक्ष ठेवावे."
+                spray_en = "For early shoot borer / white grub management, apply Chlorpyrifos 20 EC @ 2.5 ml/L near root zone during earthing up."
+                spray_mr = "खोडकिडी व हुमणी नियंत्रणासाठी क्लोरपायरीफॉस २० ईसी २.५ मिली प्रति लिटर पाण्यात मिसळून मुळांजवळ आळवणी करावी."
+                irrig_en = "Provide alternate furrow irrigation at 8-10 day intervals to optimize water use."
+                irrig_mr = "पाणी बचतीसाठी ८ ते १० दिवसांच्या अंतराने एकाआड एक सरी पद्धतीने पाणी द्यावे."
+
+        elif crop_name == "Soybean":
+            if rain_pred >= 15.0:
+                pest_en = "Risk of Soybean Rust (तांबेरा) and collar rot due to wet canopy and persistent high humidity."
+                pest_mr = "पाऊस आणि अधिक आर्द्रतेमुळे सोयाबीन पिकावर तांबेरा (Rust) आणि कॉलर रॉट रोगाचा प्रादुर्भाव वाढण्याची शक्यता."
+                spray_en = "Postpone insecticide/fungicide sprays until foliage is dry. Open furrow ends for quick drainage."
+                spray_mr = "पाने सुकेपर्यंत कोणतीही फवारणी करू नये. शेतातील पाणी निघण्यासाठी चरांचे तोंड मोकळे करावे."
+                irrig_en = "No supplemental irrigation required; rainfall is sufficient for current crop needs."
+                irrig_mr = "पाऊस पुरेसा असल्याने कोणत्याही अतिरिक्त सिंचनाची आवश्यकता नाही."
+            else:
+                pest_en = "Scout for Spodoptera / leaf caterpillar during dry spells."
+                pest_mr = "कोरड्या हवामानात पाने खाणाऱ्या अळीच्या (Spodoptera) प्रादुर्भावाचे निरीक्षण करावे."
+                spray_en = "For leaf caterpillar management, spray Chlorantraniliprole 18.5 SC @ 0.3 ml/L with sticker in clear weather."
+                spray_mr = "पाने खाणाऱ्या अळीच्या नियंत्रणासाठी स्वच्छ वातावरणात कोराजन ०.३ मिली प्रति लिटर पाण्यात मिसळून फवारावे."
+                irrig_en = "Apply protective irrigation during pod development if dry spell exceeds 7 days."
+                irrig_mr = "शेंगा भरण्याच्या अवस्थेत ७ दिवसांपेक्षा जास्त पावसाचा खंड पडल्यास संरक्षक पाणी द्यावे."
+
+        elif crop_name == "Tomato":
+            if rain_pred >= 15.0 or rh >= 80.0:
+                pest_en = "High risk of Early Blight (करपा) and fruit rot from wet canopy and soil splash."
+                pest_mr = "हवेतील दमटपणामुळे टोमॅटो पिकावर करपा (Early Blight) आणि फळकुज रोगाचा मोठा धोका संभवतो."
+                spray_en = "Hold spraying during showers. Immediately after rain, spray Copper Oxychloride 50 WP @ 2.5 g/L."
+                spray_mr = "पाऊस थांबल्यानंतर तातडीने कॉपर ऑक्सिक्लोराईड २.५ ग्रॅम प्रति लिटर पाण्यात मिसळून प्रतिबंधात्मक फवारणी करावी."
+                irrig_en = "Stop drip irrigation and drain standing water to protect tomato feeder roots."
+                irrig_mr = "ठिबक सिंचन बंद ठेवावे आणि साचलेले पाणी तातडीने बाहेर काढून निचरा करावा."
+            else:
+                pest_en = "Conditions favorable for normal vegetative growth and flowering."
+                pest_mr = "टोमॅटो पिकाच्या शाकीय वाढीसाठी व फुलोऱ्यासाठी हवामान अनुकूल आहे."
+                spray_en = "Spray Azoxystrobin 23 SC @ 1 ml/L for preventive protection against fungal blights."
+                spray_mr = "बुरशीजन्य करपा रोगाच्या प्रतिबंधासाठी अझॉक्सिस्ट्रॉबिन १ मिली प्रति लिटर पाण्यात मिसळून फवारावे."
+                irrig_en = "Maintain scheduled drip irrigation for 1.5 to 2 hours daily in the morning."
+                irrig_mr = "सकाळच्या वेळी ठिबक सिंचनाद्वारे १.५ ते २ तास नियमित पाणी द्यावे."
+
+        else: # Bajra / Pearl Millet
             if rain_pred >= 10.0:
-                spray_en = "Hold spraying. Ensure drainage in low-lying crop patches."
-                spray_mr = "फवारणी टाळावी. शेतातील पाण्याचा निचरा करावा."
-                irrig_en = "Rainfall is sufficient; no supplemental irrigation required."
+                pest_en = "Heavy moisture during grain filling may induce Ergot or downy mildew in dense stands."
+                pest_mr = "दाणे भरण्याच्या अवस्थेत जास्त पावसामुळे अर्गट आणि गोसावी रोगाचा धोका वाढू शकतो."
+                spray_en = "Hold spraying. Ensure adequate field runoff drainage in low-lying patches."
+                spray_mr = "फवारणी टाळावी. सखल भागातील पाण्याचा त्वरित निचरा करावा."
+                irrig_en = "Rainfall is sufficient; suspend all supplemental irrigation."
                 irrig_mr = "पाऊस पुरेसा असल्याने बाजरी पिकास वेगळे पाणी देण्याची गरज नाही."
             else:
+                pest_en = "Low disease pressure under current dry conditions."
+                pest_mr = "सध्याच्या कोरड्या हवामानात रोगांचा प्रादुर्भाव कमी आहे."
                 spray_en = "No immediate chemical intervention required."
                 spray_mr = "रासायनिक फवारणीची तातडीची गरज नाही."
                 irrig_en = "Apply protective irrigation during grain filling stage if dry spell exceeds 5 days."
-                irrig_mr = "दाना भरण्याच्या अवस्थेत ५ दिवसांपेक्षा जास्त पावसाचा खंड पडल्यास संरक्षक पाणी द्यावे."
+                irrig_mr = "दाणे भरण्याच्या अवस्थेत ५ दिवसांपेक्षा जास्त पावसाचा खंड पडल्यास संरक्षक पाणी द्यावे."
 
         # Compile GKMS Structured Bulletin
         weather_summary_en = (

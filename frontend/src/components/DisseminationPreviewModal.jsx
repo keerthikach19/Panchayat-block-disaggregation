@@ -6,6 +6,7 @@ export default function DisseminationPreviewModal({ panchayatId, onClose }) {
   const [language, setLanguage] = useState('mr'); // 'mr' | 'en'
   const [previewText, setPreviewText] = useState('Loading farmer advisory preview...');
   const [panchayatName, setPanchayatName] = useState('Gram Panchayat');
+  const [districtName, setDistrictName] = useState('Nashik');
 
   useEffect(() => {
     if (!panchayatId) return;
@@ -23,6 +24,7 @@ export default function DisseminationPreviewModal({ panchayatId, onClose }) {
       .then(data => {
         setPreviewText(data.rendered_preview);
         setPanchayatName(data.panchayat_name);
+        if (data.district_name) setDistrictName(data.district_name);
       })
       .catch(err => console.error(err));
   }, [panchayatId, channel, language]);
@@ -78,7 +80,7 @@ export default function DisseminationPreviewModal({ panchayatId, onClose }) {
         }}>
           {channel === 'WhatsApp' && (
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px', color: '#dcf8c6', fontSize: '12px' }}>
-              <MessageSquare size={14} /> <strong>IMD DAMU KVK Nashik Official Broadcast</strong>
+              <MessageSquare size={14} /> <strong>IMD DAMU KVK {districtName} Official Broadcast</strong>
             </div>
           )}
 

@@ -262,13 +262,34 @@ def get_panchayat_explainability(panchayat_id: str):
             forecast_val = float(fm.iloc[0]["downscaled_rain_pred"])
             dev_val = float(fm.iloc[0]["layer_b_deviation"])
 
-    # Load Feature Importance from Layer B
+    # Compute per-panchayat local feature contributions via LightGBM TreeSHAP
+    # (replaces static global feature importance with dynamic local explanations)
     model_path = DATA_DIR / "models" / "layer_b_models.pkl"
     feature_imp = {}
+    local_contributions = {}
     if model_path.exists():
         with open(model_path, "rb") as f:
             m = pickle.load(f)
             feature_imp = m.get("rain_feature_importance", {})
+            rain_model = m.get("rain_model")
+
+        if rain_model is not None:
+            from src.modeling.layer_b_deviation import FEATURE_COLS
+            X_local = pd.DataFrame(
+                [[p_row.get(c, 0.0) for c in FEATURE_COLS]],
+                columns=FEATURE_COLS,
+            )
+            contribs = rain_model.predict(X_local, pred_contrib=True)[0]
+            # contribs has len(FEATURE_COLS) + 1 (last element is bias)
+            raw = dict(zip(FEATURE_COLS, contribs[:-1]))
+            abs_sum = max(1e-8, sum(abs(v) for v in raw.values()))
+            # Sort by absolute contribution descending
+            for feat, val in sorted(raw.items(), key=lambda x: abs(x[1]), reverse=True):
+                local_contributions[feat] = {
+                    "contribution_mm": round(float(val), 3),
+                    "pct_of_total": round(abs(float(val)) / abs_sum * 100, 1),
+                    "direction": "increases" if val > 0 else "decreases" if val < 0 else "neutral",
+                }
 
     # Calculate distance to nearest station
     st_file = DATA_DIR / "stations" / "maharashtra_stations_metadata.csv"
@@ -322,6 +343,7 @@ def get_panchayat_explainability(panchayat_id: str):
             "dominant_physical_factor": p_row.get("dominant_factor", "Orographic Sahyadri Gradient")
         },
         "feature_importance_weights": feature_imp,
+        "local_feature_contributions": local_contributions,
         "advisory_bulletin": bulletin
     }
 

@@ -34,16 +34,39 @@ class LiveDataUnavailable(RuntimeError):
 class IMDLiveData:
     """Fetch, parse, and cache IMD public feeds without using credentials."""
 
-    def __init__(self, cache_dir: Path = CACHE_DIR, timeout_seconds: int = 30):
+    def __init__(self, cache_dir: Path = CACHE_DIR, timeout_seconds: int = 10):
         self.cache_dir = Path(cache_dir)
         self.timeout_seconds = timeout_seconds
 
-    def fetch_forecast(self, district: str, target_date: Optional[str] = None) -> Dict[str, Any]:
+    def _is_fresh(self, cached: Optional[Dict[str, Any]], max_age_hours: float = 6.0) -> bool:
+        """Check if cached feed data exists and was fetched recently."""
+        if not cached or "fetched_at" not in cached:
+            return False
+        try:
+            fetched_str = cached["fetched_at"]
+            # Remove any trailing Z or parse standard ISO format
+            fetched = datetime.fromisoformat(fetched_str.replace("Z", "+00:00"))
+            if fetched.tzinfo is None:
+                fetched = fetched.replace(tzinfo=timezone.utc)
+            now = datetime.now(timezone.utc)
+            return (now - fetched).total_seconds() < (max_age_hours * 3600)
+        except Exception:
+            return False
+
+    def fetch_forecast(self, district: str, target_date: Optional[str] = None, force_refresh: bool = False) -> Dict[str, Any]:
         """Return the current five-day district forecast and its selected day."""
         district_name = self._district_name(district)
         state = DISTRICT_STATES.get(district_name.lower())
         if not state:
             raise LiveDataUnavailable(f"No IMD agromet state mapping configured for {district_name}.")
+
+        # Fast path: Serve fresh cache if available
+        if not force_refresh:
+            cached = self._read_cache("agromet", district_name)
+            if self._is_fresh(cached):
+                if not target_date or any(day.get("date") == target_date for day in cached.get("forecast_days", [])):
+                    cached["status"] = "LIVE_CACHED"
+                    return cached
 
         params = urlencode({"state": state, "district": district_name, "language": "English"})
         source_url = f"{AGROMET_BULLETIN_URL}?{params}"
@@ -62,9 +85,17 @@ class IMDLiveData:
                 return cached
             raise LiveDataUnavailable(f"Unable to obtain a live IMD forecast for {district_name}: {exc}") from exc
 
-    def fetch_recent_observation(self, district: str) -> Dict[str, Any]:
+    def fetch_recent_observation(self, district: str, force_refresh: bool = False) -> Dict[str, Any]:
         """Return realized 24-hour rainfall only for advisory context, never forecasting."""
         district_name = self._district_name(district)
+
+        # Fast path: Serve fresh cache if available
+        if not force_refresh:
+            cached = self._read_cache("observed", district_name)
+            if self._is_fresh(cached):
+                cached["status"] = "LIVE_CACHED"
+                return cached
+
         try:
             raw = self._get_bytes(MAUSAM_REALIZED_URL).decode("utf-8", errors="replace")
             parsed = self.parse_realized_rainfall_html(raw, district_name)
