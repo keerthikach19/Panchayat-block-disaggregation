@@ -21,5 +21,413 @@
     "name": "Pune"
   },
   "bbox_buffer_degrees": 0.15,
-  "crs": "EPSG:4326"
+  "crs": "EPSG:4326",
+  "talukas": {
+    "Yeola": {
+      "district": "Nashik",
+      "taluka_code": 52112,
+      "centroid": {
+        "lat": 20.08263,
+        "lon": 74.51137
+      },
+      "bbox": {
+        "lon_min": 74.26568,
+        "lat_min": 19.94634,
+        "lon_max": 74.73592,
+        "lat_max": 20.2159
+      }
+    },
+    "Igatpuri": {
+      "district": "Nashik",
+      "taluka_code": 52102,
+      "centroid": {
+        "lat": 19.74378,
+        "lon": 73.65902
+      },
+      "bbox": {
+        "lon_min": 73.48497,
+        "lat_min": 19.58421,
+        "lon_max": 73.83963,
+        "lat_max": 19.89206
+      }
+    },
+    "Trimbakeshwar": {
+      "district": "Nashik",
+      "taluka_code": 52103,
+      "centroid": {
+        "lat": 20.01777,
+        "lon": 73.45679
+      },
+      "bbox": {
+        "lon_min": 73.24903,
+        "lat_min": 19.75838,
+        "lon_max": 73.65101,
+        "lat_max": 20.21317
+      }
+    },
+    "Nashik": {
+      "district": "Nashik",
+      "taluka_code": 52101,
+      "centroid": {
+        "lat": 20.03646,
+        "lon": 73.87465
+      },
+      "bbox": {
+        "lon_min": 73.51811,
+        "lat_min": 19.67985,
+        "lon_max": 74.71131,
+        "lat_max": 20.61198
+      }
+    },
+    "Sinnar": {
+      "district": "Nashik",
+      "taluka_code": 52110,
+      "centroid": {
+        "lat": 19.81609,
+        "lon": 74.08475
+      },
+      "bbox": {
+        "lon_min": 73.815,
+        "lat_min": 19.64077,
+        "lon_max": 74.37414,
+        "lat_max": 19.98463
+      }
+    },
+    "Peth": {
+      "district": "Nashik",
+      "taluka_code": 52104,
+      "centroid": {
+        "lat": 20.25862,
+        "lon": 73.51716
+      },
+      "bbox": {
+        "lon_min": 73.40676,
+        "lat_min": 20.11086,
+        "lon_max": 73.62573,
+        "lat_max": 20.40936
+      }
+    },
+    "Dindori": {
+      "district": "Nashik",
+      "taluka_code": 52108,
+      "centroid": {
+        "lat": 20.26481,
+        "lon": 73.78435
+      },
+      "bbox": {
+        "lon_min": 73.56924,
+        "lat_min": 20.06132,
+        "lon_max": 74.02282,
+        "lat_max": 20.4487
+      }
+    },
+    "Niphad": {
+      "district": "Nashik",
+      "taluka_code": 52109,
+      "centroid": {
+        "lat": 20.0785,
+        "lon": 74.11759
+      },
+      "bbox": {
+        "lon_min": 73.9115,
+        "lat_min": 19.92656,
+        "lon_max": 74.32991,
+        "lat_max": 20.24521
+      }
+    },
+    "Surgana": {
+      "district": "Nashik",
+      "taluka_code": 52105,
+      "centroid": {
+        "lat": 20.52197,
+        "lon": 73.57726
+      },
+      "bbox": {
+        "lon_min": 73.37933,
+        "lat_min": 20.3599,
+        "lon_max": 73.82698,
+        "lat_max": 20.72212
+      }
+    },
+    "Chandwad": {
+      "district": "Nashik",
+      "taluka_code": 52111,
+      "centroid": {
+        "lat": 20.2873,
+        "lon": 74.21114
+      },
+      "bbox": {
+        "lon_min": 73.94764,
+        "lat_min": 20.1611,
+        "lon_max": 74.4704,
+        "lat_max": 20.40094
+      }
+    },
+    "Kalwan": {
+      "district": "Nashik",
+      "taluka_code": 52106,
+      "centroid": {
+        "lat": 20.52097,
+        "lon": 73.94367
+      },
+      "bbox": {
+        "lon_min": 73.76359,
+        "lat_min": 20.35842,
+        "lon_max": 74.1418,
+        "lat_max": 20.70217
+      }
+    },
+    "Deola": {
+      "district": "Nashik",
+      "taluka_code": 52107,
+      "centroid": {
+        "lat": 20.44241,
+        "lon": 74.23658
+      },
+      "bbox": {
+        "lon_min": 74.00971,
+        "lat_min": 20.32699,
+        "lon_max": 74.4086,
+        "lat_max": 20.56534
+      }
+    },
+    "Nandgaon": {
+      "district": "Nashik",
+      "taluka_code": 52113,
+      "centroid": {
+        "lat": 20.30423,
+        "lon": 74.68113
+      },
+      "bbox": {
+        "lon_min": 74.40841,
+        "lat_min": 20.15456,
+        "lon_max": 74.93488,
+        "lat_max": 20.5112
+      }
+    },
+    "Baglan": {
+      "district": "Nashik",
+      "taluka_code": 52115,
+      "centroid": {
+        "lat": 20.70788,
+        "lon": 74.1591
+      },
+      "bbox": {
+        "lon_min": 73.85249,
+        "lat_min": 20.51303,
+        "lon_max": 74.40409,
+        "lat_max": 20.86434
+      }
+    },
+    "Malegaon": {
+      "district": "Nashik",
+      "taluka_code": 52114,
+      "centroid": {
+        "lat": 20.59305,
+        "lon": 74.5421
+      },
+      "bbox": {
+        "lon_min": 74.31038,
+        "lat_min": 20.34439,
+        "lon_max": 74.81282,
+        "lat_max": 20.83643
+      }
+    },
+    "Bhor": {
+      "district": "Pune",
+      "taluka_code": 52513,
+      "centroid": {
+        "lat": 18.17121,
+        "lon": 73.80968
+      },
+      "bbox": {
+        "lon_min": 73.59398,
+        "lat_min": 18.02033,
+        "lon_max": 74.05571,
+        "lat_max": 18.39495
+      }
+    },
+    "Velhe": {
+      "district": "Pune",
+      "taluka_code": 52514,
+      "centroid": {
+        "lat": 18.29631,
+        "lon": 73.62346
+      },
+      "bbox": {
+        "lon_min": 73.4174,
+        "lat_min": 18.17728,
+        "lon_max": 73.84318,
+        "lat_max": 18.42306
+      }
+    },
+    "Daund": {
+      "district": "Pune",
+      "taluka_code": 52512,
+      "centroid": {
+        "lat": 18.45439,
+        "lon": 74.45172
+      },
+      "bbox": {
+        "lon_min": 74.14516,
+        "lat_min": 18.29229,
+        "lon_max": 74.84676,
+        "lat_max": 18.67151
+      }
+    },
+    "Purandar": {
+      "district": "Pune",
+      "taluka_code": 52509,
+      "centroid": {
+        "lat": 18.29686,
+        "lon": 74.11627
+      },
+      "bbox": {
+        "lon_min": 73.88167,
+        "lat_min": 18.09744,
+        "lon_max": 74.30858,
+        "lat_max": 18.44656
+      }
+    },
+    "Haveli": {
+      "district": "Pune",
+      "taluka_code": 52502,
+      "centroid": {
+        "lat": 18.51096,
+        "lon": 73.94201
+      },
+      "bbox": {
+        "lon_min": 73.36779,
+        "lat_min": 18.09496,
+        "lon_max": 75.08376,
+        "lat_max": 19.2229
+      }
+    },
+    "Baramati": {
+      "district": "Pune",
+      "taluka_code": 52510,
+      "centroid": {
+        "lat": 18.20756,
+        "lon": 74.45978
+      },
+      "bbox": {
+        "lon_min": 74.21156,
+        "lat_min": 18.0437,
+        "lon_max": 74.71766,
+        "lat_max": 18.37559
+      }
+    },
+    "Khed": {
+      "district": "Pune",
+      "taluka_code": 52507,
+      "centroid": {
+        "lat": 18.87571,
+        "lon": 73.80992
+      },
+      "bbox": {
+        "lon_min": 73.51456,
+        "lat_min": 18.61252,
+        "lon_max": 74.0514,
+        "lat_max": 19.08235
+      }
+    },
+    "Indapur": {
+      "district": "Pune",
+      "taluka_code": 52511,
+      "centroid": {
+        "lat": 18.11577,
+        "lon": 74.886
+      },
+      "bbox": {
+        "lon_min": 74.65493,
+        "lat_min": 17.89495,
+        "lon_max": 75.16423,
+        "lat_max": 18.33172
+      }
+    },
+    "Junnar": {
+      "district": "Pune",
+      "taluka_code": 52505,
+      "centroid": {
+        "lat": 19.20978,
+        "lon": 73.95162
+      },
+      "bbox": {
+        "lon_min": 73.63242,
+        "lat_min": 19.01271,
+        "lon_max": 74.31663,
+        "lat_max": 19.39526
+      }
+    },
+    "Mulshi": {
+      "district": "Pune",
+      "taluka_code": 52503,
+      "centroid": {
+        "lat": 18.51001,
+        "lon": 73.54902
+      },
+      "bbox": {
+        "lon_min": 73.32278,
+        "lat_min": 18.35109,
+        "lon_max": 73.79167,
+        "lat_max": 18.67575
+      }
+    },
+    "Maval": {
+      "district": "Pune",
+      "taluka_code": 52504,
+      "centroid": {
+        "lat": 18.75896,
+        "lon": 73.55575
+      },
+      "bbox": {
+        "lon_min": 73.3314,
+        "lat_min": 18.5786,
+        "lon_max": 73.78588,
+        "lat_max": 18.98463
+      }
+    },
+    "Ambegaon": {
+      "district": "Pune",
+      "taluka_code": 52506,
+      "centroid": {
+        "lat": 19.05078,
+        "lon": 73.86251
+      },
+      "bbox": {
+        "lon_min": 73.51141,
+        "lat_min": 18.86019,
+        "lon_max": 74.1696,
+        "lat_max": 19.21649
+      }
+    },
+    "Shirur": {
+      "district": "Pune",
+      "taluka_code": 52508,
+      "centroid": {
+        "lat": 18.74287,
+        "lon": 74.26205
+      },
+      "bbox": {
+        "lon_min": 74.0041,
+        "lat_min": 18.4969,
+        "lon_max": 74.57826,
+        "lat_max": 19.03941
+      }
+    },
+    "Pune City": {
+      "district": "Pune",
+      "taluka_code": 52501,
+      "centroid": {
+        "lat": 18.52799,
+        "lon": 73.95639
+      },
+      "bbox": {
+        "lon_min": 73.94388,
+        "lat_min": 18.51577,
+        "lon_max": 73.96868,
+        "lat_max": 18.53727
+      }
+    }
+  }
 }

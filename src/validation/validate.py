@@ -12,6 +12,9 @@ Evaluates:
   5. Spatial Plausibility Check (Elevation-Rainfall Orographic Gradient Consistency)
   6. Layer D Ensemble Reliability & Spread-Skill Dispersion Index
 
+Block granularity: block_col='taluka' (SIH PS 26074 compliant).
+Legacy district-level grouping available via block_col='district'.
+
 Saves validation report artifact to data/validation_report.json and prints human-readable summary.
 """
 
@@ -41,10 +44,14 @@ DATA_DIR = PROJECT_ROOT / "data"
 STATIONS_DIR = DATA_DIR / "stations"
 
 
-def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
+def run_full_validation(
+    min_stations_for_disaggregation_eval: int = 2,
+    block_col: str = "taluka",
+):
     logger.info("=" * 75)
     logger.info("       RUNNING DYNAMIC SEGMENTED STATISTICAL & AGROMET VALIDATION")
     logger.info("=" * 75)
+    logger.info("Block grouping column: '%s'", block_col)
 
     meta_df = pd.read_csv(STATIONS_DIR / "maharashtra_stations_metadata.csv")
     if "id" in meta_df.columns and "station_id" not in meta_df.columns:
@@ -52,12 +59,17 @@ def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
     obs_df = pd.read_csv(STATIONS_DIR / "maharashtra_station_observations.csv")
     cov_df = pd.read_csv(DATA_DIR / "panchayat_covariates.csv")
 
-    decomposed = decompose_station_observations(meta_df, obs_df)
+    decomposed = decompose_station_observations(meta_df, obs_df, block_col=block_col)
 
-    # Compute station density per district dynamically
-    st_counts_by_district = meta_df.groupby("district")["station_id"].nunique().to_dict()
-    multi_st_districts = [
-        dist for dist, count in st_counts_by_district.items()
+    # Determine block column present in decomposed output
+    effective_block_col = block_col if block_col in decomposed.columns else "district"
+
+    # Compute station density per block (taluka or district) dynamically
+    st_counts_by_block = meta_df.groupby(effective_block_col)["station_id"].nunique().to_dict() \
+        if effective_block_col in meta_df.columns \
+        else meta_df.groupby("district")["station_id"].nunique().to_dict()
+    multi_st_blocks = [
+        blk for blk, count in st_counts_by_block.items()
         if count >= min_stations_for_disaggregation_eval
     ]
 
@@ -66,8 +78,14 @@ def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
     # Tracking records for evaluation
     eval_records = []
 
-    logger.info(f"Executing Leave-Station-Out Cross-Validation on {len(stations_list)} stations across {len(st_counts_by_district)} districts...")
-    logger.info(f"Disaggregation Skill Sub-cohort (>= {min_stations_for_disaggregation_eval} stations/district): {multi_st_districts}")
+    logger.info(
+        "Executing Leave-Station-Out Cross-Validation on %d stations across %d %ss ...",
+        len(stations_list), len(st_counts_by_block), effective_block_col,
+    )
+    logger.info(
+        "Disaggregation Skill Sub-cohort (>= %d stations/%s): %s",
+        min_stations_for_disaggregation_eval, effective_block_col, multi_st_blocks,
+    )
 
     from src.modeling.layer_b_deviation import FEATURE_COLS
 
@@ -98,10 +116,11 @@ def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
             eval_records.append({
                 "station_id": row["station_id"],
                 "district": row["district"],
+                "block": row.get(effective_block_col, row["district"]),
                 "y_true": true_val,
                 "y_pred_model": downscaled_val,
                 "y_pred_naive": block_val,
-                "is_multi_station": row["district"] in multi_st_districts
+                "is_multi_station": row.get(effective_block_col, row["district"]) in multi_st_blocks
             })
 
     eval_df = pd.DataFrame(eval_records)
@@ -191,12 +210,14 @@ def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
     # Compile Structured Multi-Segment Validation Report
     results = {
         "evaluation_protocol": "Segmented Leave-Station-Out Cross-Validation (LOOCV)",
+        "block_col_used": effective_block_col,
         "metadata": {
+            "block_col": effective_block_col,
             "min_stations_threshold_used": min_stations_for_disaggregation_eval,
             "segment_1_sample_size": seg1_results["sample_size"],
             "segment_2_sample_size": seg2_results["sample_size"],
-            "segment_2_districts_included": multi_st_districts,
-            "segment_2_station_count_by_district": {d: st_counts_by_district[d] for d in multi_st_districts}
+            "segment_2_blocks_included": multi_st_blocks,
+            "segment_2_station_count_by_block": {b: st_counts_by_block[b] for b in multi_st_blocks}
         },
         "segment_1_footprint_generalization": {
             "description": "Full statewide LOOCV across all stations (checks if Layer B learns generalizable physics across all 4 physiographic zones).",
@@ -241,12 +262,12 @@ def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
     print("\n" + "=" * 80)
     print("        DYNAMIC SEGMENTED VALIDATION AUDIT RESULTS (LOOCV)")
     print("=" * 80)
-    print(" [METHODOLOGY NOTE] Single-station districts cause baseline leakage where block-mean == station reading (0mm error).")
-    print(f" Evaluation is dynamically segmented: Statewide Generalization (all {len(stations_list)} stns) vs Disaggregation Skill ({len(multi_st_districts)} districts, >= {min_stations_for_disaggregation_eval} stns).\n")
+    print(f" [METHODOLOGY NOTE] Single-station {effective_block_col}s cause baseline leakage where block-mean == station reading (0mm error).")
+    print(f" Evaluation is dynamically segmented: Statewide Generalization (all {len(stations_list)} stns) vs Disaggregation Skill ({len(multi_st_blocks)} {effective_block_col}s, >= {min_stations_for_disaggregation_eval} stns).\n")
 
     print("-" * 80)
     print(" SEGMENT 1: STATEWIDE FOOTPRINT GENERALIZATION CHECK (All 4 Physiographic Zones)")
-    print(f" Sample Size: {seg1_results['sample_size']} station-days across {len(st_counts_by_district)} districts")
+    print(f" Sample Size: {seg1_results['sample_size']} station-days across {len(st_counts_by_block)} {effective_block_col}s")
     print("-" * 80)
     print(f" • Downscaled Model RMSE:      {h1['downscaled_model_rmse_mm']:.2f} mm  (vs Naive Block: {h1['naive_baseline_rmse_mm']:.2f} mm)")
     print(f" • Statewide RMSE Improvement: +{h1['rmse_improvement_percent']:.1f}%")
@@ -255,7 +276,7 @@ def run_full_validation(min_stations_for_disaggregation_eval: int = 2):
     print(f" • Orographic Plausibility:    {'PASSED (r=' + str(round(orographic_corr,2)) + ')' if orographic_physically_sound else 'CHECK'}\n")
 
     print("-" * 80)
-    print(f" SEGMENT 2: DISAGGREGATION SKILL BENCHMARK (Districts with >= {min_stations_for_disaggregation_eval} Stations: {', '.join(multi_st_districts)})")
+    print(f" SEGMENT 2: DISAGGREGATION SKILL BENCHMARK ({effective_block_col.upper()}s with >= {min_stations_for_disaggregation_eval} Stations: {', '.join(multi_st_blocks)})")
     print(f" Sample Size: {seg2_results['sample_size']} station-days (True spatial disaggregation testbed)")
     print("-" * 80)
     print(f" • Downscaled Model RMSE:      {h2['downscaled_model_rmse_mm']:.2f} mm  (vs Naive Block: {h2['naive_baseline_rmse_mm']:.2f} mm)")

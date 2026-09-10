@@ -8,8 +8,9 @@ Integrates:
   Layer C: Local Geostatistical Residual Correction (Universal Kriging / IDW)
   Layer D: 30-Member Ensemble Uncertainty Propagation (IPED)
 
-Executes for the Target District (Nashik) or any Scalability District (Pune).
-Outputs comprehensive downscaled forecasts with confidence bounds and explainability tokens.
+Supports both district-level (legacy) and block/taluka-level (SIH PS 26074) framing.
+When taluka-level weather is supplied, each panchayat's block mean is anchored to its
+enclosing taluka's observed/forecast value rather than a single uniform district value.
 """
 
 import os
@@ -26,7 +27,11 @@ from pathlib import Path
 SRC_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(SRC_DIR.parent))
 
-from src.modeling.layer_a_decomposition import decompose_station_observations, reconstruct_panchayat_prediction
+from src.modeling.layer_a_decomposition import (
+    decompose_station_observations,
+    apply_taluka_climatology,
+    reconstruct_panchayat_prediction,
+)
 from src.modeling.layer_b_deviation import FootprintDeviationModel, FEATURE_COLS
 from src.modeling.layer_c_kriging import LocalResidualCorrector
 from src.modeling.layer_d_ensemble import EnsembleUncertaintyPropagator
@@ -48,6 +53,15 @@ class DownscalingPipeline:
         self.layer_c = None
         self.layer_d = EnsembleUncertaintyPropagator(num_members=30)
         self.is_trained = False
+
+        # Load taluka climatology ratios for per-taluka block value scaling
+        _ratios_path = PROJECT_ROOT / "data" / "corrections" / "taluka_climatology_ratios.json"
+        try:
+            with open(_ratios_path) as _f:
+                self._taluka_ratios = json.load(_f)
+        except FileNotFoundError:
+            self._taluka_ratios = {}
+            logger.warning("taluka_climatology_ratios.json not found; per-taluka scaling disabled.")
 
         # Auto-load pre-trained model from disk if available.
         # This enables live inference on a fresh GitHub clone without
@@ -90,6 +104,7 @@ class DownscalingPipeline:
         """
         Step 1: Train Layer B model ONCE across the full Maharashtra footprint.
         Precomputes out-of-sample Leave-One-Station-Out (LOSO) predictions for Layer C.
+        Uses taluka-level block decomposition (block_col='taluka') as the primary grouping.
         """
         logger.info("=" * 70)
         logger.info(f"TRAINING DOWNSCALING PIPELINE ON FOOTPRINT: {self.footprint_name}")
@@ -100,8 +115,8 @@ class DownscalingPipeline:
         obs_df = pd.read_csv(STATIONS_DIR / "maharashtra_station_observations.csv")
         cov_df = pd.read_csv(DATA_DIR / "panchayat_covariates.csv")
 
-        # Layer A: Spatial Decomposition
-        decomposed_obs = decompose_station_observations(meta_df, obs_df)
+        # Layer A: Taluka-level Spatial Decomposition (SIH PS 26074)
+        decomposed_obs = decompose_station_observations(meta_df, obs_df, block_col="taluka")
 
         # Layer B: Footprint Deviation Training
         self.layer_b = FootprintDeviationModel()
@@ -124,16 +139,40 @@ class DownscalingPipeline:
         logger.info("Pipeline Footprint Training Complete.")
         return self
 
-    def run_district_downscaling(self, district_name="Nashik", input_block_weather=None):
+    def run_district_downscaling(
+        self,
+        district_name: str = "Nashik",
+        input_block_weather=None,
+        target_taluka: str = None,
+    ):
         """
         Step 2: Apply trained pipeline to downscale weather for a target district.
-        input_block_weather: dict with block-level rainfall and temperature values.
+
+        Parameters
+        ----------
+        district_name : str
+            District to downscale (e.g. 'Nashik', 'Pune').
+        input_block_weather : dict | None
+            Block-level weather values.  May be either:
+
+            • *District-level* (legacy):
+              ``{"rainfall_mm": 22.5, "temp_max_c": 29.5, "temp_min_c": 21.0}``
+
+            • *Taluka-level* (preferred, SIH PS 26074):
+              ``{"talukas": {"Igatpuri": {"rainfall_mm": 38.0, ...},
+                             "Niphad":   {"rainfall_mm": 14.0, ...}, ...}}``
+              Each panchayat's block mean is then taken from its enclosing taluka's
+              value instead of a single uniform district number.
+
+        target_taluka : str | None
+            Optional taluka filter — if supplied, only panchayats in this taluka
+            are returned (useful for single-taluka API endpoints).
         """
         if not self.is_trained:
             self.train_footprint_pipeline()
 
         logger.info("=" * 70)
-        logger.info(f"DOWNSCALING DISTRICT FORECAST: {district_name}")
+        logger.info(f"DOWNSCALING {'TALUKA ' + target_taluka.upper() if target_taluka else 'DISTRICT'} FORECAST: {district_name}")
         logger.info("=" * 70)
 
         # Load district panchayat covariates
@@ -144,18 +183,74 @@ class DownscalingPipeline:
             logger.warning(f"District {district_name} not found, using all available records in dataset.")
             district_covs = cov_df.copy()
 
+        # Optional taluka filter (Phase 3: per-taluka API endpoint support)
+        if target_taluka:
+            mask = district_covs["block_name"].str.strip().str.lower() == target_taluka.lower()
+            if mask.sum() > 0:
+                district_covs = district_covs[mask].copy()
+                logger.info(f"Filtered to taluka '{target_taluka}': {len(district_covs)} panchayats.")
+            else:
+                logger.warning(f"Taluka '{target_taluka}' not found in covariates; using full district.")
+
         logger.info(f"Target District {district_name}: {len(district_covs)} panchayats found.")
 
-        # The serving layer supplies the current IMD forecast. These defaults
-        # remain only for explicit local/demo execution without an input.
-        block_rain_val = input_block_weather.get("rainfall_mm", 22.5) if input_block_weather else 22.5
-        block_tmax_val = input_block_weather.get("temp_max_c", 29.5) if input_block_weather else 29.5
-        block_tmin_val = input_block_weather.get("temp_min_c", 21.0) if input_block_weather else 21.0
+        # ------------------------------------------------------------------
+        # Resolve block weather — district-level or per-taluka
+        # ------------------------------------------------------------------
+        taluka_weather_map: dict = {}  # taluka_name → {rainfall_mm, temp_max_c, temp_min_c}
+
+        if input_block_weather and "talukas" in input_block_weather:
+            # Taluka-level input (preferred)
+            taluka_weather_map = input_block_weather["talukas"]
+            # Compute district-level fallback as average across supplied talukas
+            all_rain = [v.get("rainfall_mm", 0) for v in taluka_weather_map.values() if v.get("rainfall_mm") is not None]
+            block_rain_val = float(np.mean(all_rain)) if all_rain else 0.0
+            block_tmax_val = float(np.mean([v.get("temp_max_c", 29.5) for v in taluka_weather_map.values()]))
+            block_tmin_val = float(np.mean([v.get("temp_min_c", 21.0) for v in taluka_weather_map.values()]))
+            logger.info(
+                "Using per-taluka block weather for %d talukas (district avg: %.1f mm).",
+                len(taluka_weather_map), block_rain_val,
+            )
+        else:
+            # District-level input (legacy / fallback)
+            # The serving layer supplies the current IMD forecast. These defaults
+            # remain only for explicit local/demo execution without an input.
+            block_rain_val = input_block_weather.get("rainfall_mm", 22.5) if input_block_weather else 22.5
+            block_tmax_val = input_block_weather.get("temp_max_c", 29.5) if input_block_weather else 29.5
+            block_tmin_val = input_block_weather.get("temp_min_c", 21.0) if input_block_weather else 21.0
 
         # Layer B: Predict Physical Deviations
         b_results = self.layer_b.predict_panchayat_deviations(district_covs)
         pred_rain_dev = b_results["pred_rain_deviation"].values
         pred_temp_dev = b_results["pred_temp_deviation"].values
+
+        # ------------------------------------------------------------------
+        # Resolve per-panchayat block means from taluka weather map
+        # ------------------------------------------------------------------
+        if taluka_weather_map and "block_name" in district_covs.columns:
+            panchayat_block_rain = np.array([
+                taluka_weather_map.get(
+                    row["block_name"],
+                    {"rainfall_mm": apply_taluka_climatology(
+                        block_rain_val, row["block_name"], self._taluka_ratios
+                    )}
+                ).get("rainfall_mm", block_rain_val)
+                for _, row in district_covs.iterrows()
+            ], dtype=float)
+            panchayat_block_tmax = np.array([
+                taluka_weather_map.get(row["block_name"], {}).get("temp_max_c", block_tmax_val)
+                for _, row in district_covs.iterrows()
+            ], dtype=float)
+            panchayat_block_tmin = np.array([
+                taluka_weather_map.get(row["block_name"], {}).get("temp_min_c", block_tmin_val)
+                for _, row in district_covs.iterrows()
+            ], dtype=float)
+            logger.info("Per-panchayat block means resolved from taluka weather map.")
+        else:
+            # Legacy: uniform district value for all panchayats
+            panchayat_block_rain = np.full(len(district_covs), block_rain_val)
+            panchayat_block_tmax = np.full(len(district_covs), block_tmax_val)
+            panchayat_block_tmin = np.full(len(district_covs), block_tmin_val)
 
         # Layer C: Geostatistical Residual Correction
         meta_df = pd.read_csv(STATIONS_DIR / "maharashtra_stations_metadata.csv")
@@ -165,7 +260,7 @@ class DownscalingPipeline:
         district_stations = meta_df[meta_df["district"].str.lower() == district_name.lower()].copy()
 
         if len(district_stations) > 0:
-            decomp = decompose_station_observations(meta_df, obs_df)
+            decomp = decompose_station_observations(meta_df, obs_df, block_col="taluka")
             dist_decomp = decomp[decomp["district"].str.lower() == district_name.lower()]
             # Station mean observed deviation
             st_avg_dev = dist_decomp.groupby("station_id")["rainfall_deviation"].mean().reset_index()
@@ -204,14 +299,14 @@ class DownscalingPipeline:
         # Layer D: 30-Member Ensemble Uncertainty Propagation
         topo_var = (district_covs["elevation_std"].values / 10.0) + (district_covs["slope_mean"].values / 5.0)
         ensemble_stats = self.layer_d.propagate_ensemble(
-            block_rain_val, pred_rain_dev, layer_c_res, topo_var
+            panchayat_block_rain, pred_rain_dev, layer_c_res, topo_var
         )
 
         # Assemble Final Disaggregated Panchayat Dataset
         final_df = district_covs.copy()
-        final_df["block_rain_mean"] = block_rain_val
-        final_df["block_temp_max"] = block_tmax_val
-        final_df["block_temp_min"] = block_tmin_val
+        final_df["block_rain_mean"] = panchayat_block_rain  # per-panchayat taluka block value
+        final_df["block_temp_max"] = panchayat_block_tmax
+        final_df["block_temp_min"] = panchayat_block_tmin
         final_df["layer_b_deviation"] = pred_rain_dev
         final_df["layer_c_residual"] = layer_c_res
         final_df["downscaled_rain_pred"] = ensemble_stats["ensemble_mean"]
@@ -230,10 +325,10 @@ class DownscalingPipeline:
             if input_block_weather and field in input_block_weather:
                 final_df[field] = input_block_weather[field]
 
-        # Downscaled temperatures (elevation lapse rate adjusted)
+        # Downscaled temperatures (elevation lapse rate adjusted, per-panchayat block anchored)
         t_lapse = (district_covs["elevation_mean"].values - 550.0) * (6.5 / 1000.0)
-        final_df["downscaled_tmax_pred"] = np.round(block_tmax_val - t_lapse + pred_temp_dev * 0.5, 1)
-        final_df["downscaled_tmin_pred"] = np.round(block_tmin_val - t_lapse + pred_temp_dev * 0.5, 1)
+        final_df["downscaled_tmax_pred"] = np.round(panchayat_block_tmax - t_lapse + pred_temp_dev * 0.5, 1)
+        final_df["downscaled_tmin_pred"] = np.round(panchayat_block_tmin - t_lapse + pred_temp_dev * 0.5, 1)
         final_df["downscaled_rh_pred"] = np.round(np.clip(60.0 + final_df["downscaled_rain_pred"] * 0.4, 30.0, 98.0), 1)
 
         # Save output
