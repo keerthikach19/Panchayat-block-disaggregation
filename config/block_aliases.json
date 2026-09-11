@@ -1,0 +1,16 @@
+{
+  "Nashik": {
+    "Chandvad": "Chandwad",
+    "Peint": "Peth",
+    "Yevla": "Yeola",
+    "Trimbakeshwar": "Trimbak"
+  },
+  "evidence": [
+    "Source CSV titles and repository village subdistrict labels; explicit spelling correspondences only.",
+    "https://nashik.gov.in/en/about-district/talukawise-map/",
+    "https://dilrmp.gov.in/dilrmpold/PhyscialComponent/mapDigitization/tehsil-level/516"
+  ],
+  "unresolved": [
+    "Central"
+  ]
+}

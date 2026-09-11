@@ -1,0 +1,77 @@
+{
+  "schema_version": "nashik-admin-v1",
+  "districts": [
+    {
+      "id": "internal:district:nashik",
+      "name": "Nashik",
+      "enabled": true,
+      "blocks": [
+        {
+          "id": "internal:block:nashik:baglan",
+          "name": "Baglan"
+        },
+        {
+          "id": "internal:block:nashik:chandwad",
+          "name": "Chandwad"
+        },
+        {
+          "id": "internal:block:nashik:deola",
+          "name": "Deola"
+        },
+        {
+          "id": "internal:block:nashik:dindori",
+          "name": "Dindori"
+        },
+        {
+          "id": "internal:block:nashik:igatpuri",
+          "name": "Igatpuri"
+        },
+        {
+          "id": "internal:block:nashik:kalwan",
+          "name": "Kalwan"
+        },
+        {
+          "id": "internal:block:nashik:malegaon",
+          "name": "Malegaon"
+        },
+        {
+          "id": "internal:block:nashik:nandgaon",
+          "name": "Nandgaon"
+        },
+        {
+          "id": "internal:block:nashik:nashik",
+          "name": "Nashik"
+        },
+        {
+          "id": "internal:block:nashik:niphad",
+          "name": "Niphad"
+        },
+        {
+          "id": "internal:block:nashik:peth",
+          "name": "Peth"
+        },
+        {
+          "id": "internal:block:nashik:sinnar",
+          "name": "Sinnar"
+        },
+        {
+          "id": "internal:block:nashik:surgana",
+          "name": "Surgana"
+        },
+        {
+          "id": "internal:block:nashik:trimbak",
+          "name": "Trimbak"
+        },
+        {
+          "id": "internal:block:nashik:yeola",
+          "name": "Yeola"
+        }
+      ]
+    }
+  ],
+  "identity_note": "Explicit internal IDs, not official administrative codes.",
+  "evidence": [
+    "https://nashik.gov.in/en/about-district/administrative-setup/tehsil/",
+    "https://nashik.gov.in/en/about-district/talukawise-map/"
+  ]
+}
