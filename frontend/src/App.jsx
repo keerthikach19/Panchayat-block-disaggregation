@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MapDashboard from './components/MapDashboard';
 import ExplainabilityPanel from './components/ExplainabilityPanel';
 import ValidationView from './components/ValidationView';
+import ComparisonView from './components/ComparisonView';
 import './hybrid.css';
 
 async function get(path, signal) {
@@ -11,6 +12,7 @@ async function get(path, signal) {
   return body;
 }
 export default function App() {
+  const [tab, setTab] = useState('map');
   const [mode, setMode] = useState('block');
   const [runs, setRuns] = useState([]);
   const [run, setRun] = useState('');
@@ -72,7 +74,8 @@ export default function App() {
   const chosenDay = date || forecast?.valid_date || '';
   return <main className="hybrid">
     <header className="hybrid-header"><div><span className="eyebrow">NASHIK · IMD FORECAST INPUTS</span><h1>Weather Downscaling Dashboard</h1></div><span className="method-chip">{forecast ? (forecast.model_version.startsWith('terrain-') ? 'Experimental terrain model' : 'Parent forecast baseline') : 'Loading model…'}</span></header>
-    <section className="controls" aria-label="Forecast selection">
+    <nav className="view-tabs" aria-label="Dashboard views"><button aria-pressed={tab==='map'} onClick={()=>setTab('map')}>Forecast map</button><button aria-pressed={tab==='comparison'} onClick={()=>setTab('comparison')}>Same-day comparison</button></nav>
+    {tab === 'comparison' ? <ComparisonView/> : <><section className="controls" aria-label="Forecast selection">
       <label>District<select value="Nashik" onChange={() => {}}><option>Nashik</option></select></label>
       <label>Forecast source<select value={mode} onChange={e => { setMode(e.target.value); setBlock(''); }}><option value="block">Official block forecasts</option><option value="district">Live district forecast</option></select></label>
       <label>Forecast day<select value={chosenDay} onChange={e => setDate(e.target.value)} disabled={!availableDates.length}>{!chosenDay && <option value="">Selecting date…</option>}{availableDates.map(d => <option key={d}>{d}</option>)}</select></label>
@@ -96,5 +99,5 @@ export default function App() {
       <details><summary>Source and processing record</summary><p>Dataset: {forecast.dataset_version}<br/>Run: {forecast.run_id}<br/>Method: {forecast.model_version}</p>{forecast.source_semantics?.length > 0 && <p>Import-stage notes below describe unchanged source normalization. Experimental adjustments use the separate model assumptions above.</p>}<ul>{forecast.source_semantics?.map(s => <li key={s}>{s}</li>)}</ul></details></section>
       <ValidationView modelVersion={forecast.model_version}/>
     </>}
-  </main>;
+    </>}</main>;
 }

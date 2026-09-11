@@ -9,9 +9,11 @@ from src.ingestion.forecast_schema import ROOT
 from src.ingestion.imd_live import LiveDataUnavailable
 from src.services.forecast_service import ForecastService, MODEL, advisory
 from src.modeling.terrain_model import load_terrain_model
+from src.services.comparison import ComparisonService
 
 app = FastAPI(title="Nashik hybrid weather forecasts", version="2.0.0")
 service = ForecastService()
+comparison_service = ComparisonService(service)
 
 def selection(mode: Literal["block", "district"] = "block", district: str = "Nashik",
               run_id: str | None = None, valid_date: str | None = None, block: str | None = None):
@@ -68,6 +70,11 @@ def blocks(district: str = "Nashik"):
 @app.get("/api/forecast")
 def forecast(params=Depends(selection)):
     return call(service.forecast, **params)
+
+@app.get("/api/comparison")
+def compare(valid_date: str | None = None, block: str | None = None,
+            block_run_id: str | None = None, district_run_id: str | None = None):
+    return call(comparison_service.compare, valid_date, block, block_run_id, district_run_id)
 
 @app.get("/api/panchayats/geojson")
 def geojson(params=Depends(selection)):

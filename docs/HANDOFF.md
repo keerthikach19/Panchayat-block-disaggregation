@@ -212,3 +212,23 @@ Prior runs remain accessible through `/api/forecast/runs?mode=block` and
 as requested. To change the default, rerun the documented build/activation command
 for a retained dataset and method. Activation records the previous default.
 Never edit immutable output or normalized-source JSON in place.
+
+## Same-day comparison extension
+
+The comparison tab and `/api/comparison` pair exact village IDs on intersecting
+forecast dates, pin both runs, and separate parent-input and reference-factor
+contributions algebraically. It includes equal-village/area-weighted statistics,
+date/block/village tables, a paired scatter plot and advisory-trigger sensitivity.
+Non-overlapping dates, duplicate IDs, incompatible models and unavailable variables
+fail explicitly. Ordinary map startup does not fetch comparison/district data.
+
+The detailed report and complete 7,664-row frozen comparison are in
+`reports/comparison-1ba7a9427fa1b01026b3.md` and its companion JSON. See README for
+the cache-only report generator. The report compares block issue 10 September
+against district issue 11 September for 12–15 September; only rainfall is available
+on both current paths. Findings measure disagreement, not observational accuracy.
+
+Eight targeted comparison and API tests passed, including the five new comparison
+tests; the prior 53-test baseline remains recorded above. The production frontend
+build and running API/report snapshot match passed. No forecast/model/input assets
+were modified for this comparison.

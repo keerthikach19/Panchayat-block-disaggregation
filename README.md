@@ -117,6 +117,29 @@ unavailable in district mode. No humidity or temperature is fabricated.
 
 ## Verification
 
+The **Same-day comparison** view pairs block-derived and district-derived rainfall
+by exact village ID and overlapping validity dates. Date/block changes pin both
+runs; **Compare latest sources** starts a new pairing. It reports signed and absolute
+disagreement, area-weighted means, per-block/village results, source/reference
+decomposition and advisory-threshold sensitivity. This is not an accuracy test.
+Only rainfall is currently available on both paths. The comparison is loaded only
+when its view is opened, so the default map retains offline block behavior.
+
+API: `/api/comparison?valid_date=2026-09-14&block=Igatpuri`, with optional
+`block_run_id` and `district_run_id` to pin a pair. Mismatched model versions and
+non-overlapping dates fail explicitly. A server restart requires fetching district
+runs again; the packaged written report remains reproducible from its frozen source.
+
+Generate a detailed Markdown report and complete JSON snapshot from the current
+local district cache, without external requests:
+
+```powershell
+.venv\Scripts\python scripts/report_forecast_comparison.py
+```
+
+The report is in `docs/reports/comparison-1ba7a9427fa1b01026b3.md`, with a companion
+JSON containing the full district bulletin and 7,664 paired village-date rows.
+
 ```powershell
 .venv\Scripts\python -m pip install -r requirements-dev.txt
 .venv\Scripts\python -m pytest tests -q
