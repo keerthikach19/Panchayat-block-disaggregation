@@ -1,0 +1,45 @@
+{
+  "evaluation_kind": "Experimental proxy-climatology reconstruction; NOT forecast accuracy",
+  "source_audit": {
+    "legacy_label": "IMD_AWS_NASA_POWER_Blended",
+    "actual_acquisition": "NASA POWER gridded meteorology per scripts/07_assemble_stations.py; no AWS join in that code path",
+    "rows": 6120,
+    "station_labels": 40,
+    "independent_profile_groups": 28,
+    "nashik_profile_groups": 5
+  },
+  "protocol": "Candidate choice: leave-one-profile-group-out using June–July targets and August validation. Frozen winner tested with June–August training and September–October held out, still leaving out each spatial group.",
+  "candidate_scores": {
+    "unchanged_parent": {
+      "validation_rmse_mm_per_day": 10.538801607810464,
+      "validation_mae_mm_per_day": 10.275101231396842
+    },
+    "ridge": {
+      "validation_rmse_mm_per_day": 9.142456561712839,
+      "validation_mae_mm_per_day": 8.314170008001295
+    },
+    "random_forest": {
+      "validation_rmse_mm_per_day": 12.062080536568642,
+      "validation_mae_mm_per_day": 10.218752640690715
+    },
+    "distance_weighted": {
+      "validation_rmse_mm_per_day": 9.42574266674581,
+      "validation_mae_mm_per_day": 8.188211319557363
+    }
+  },
+  "selected_candidate": "ridge",
+  "rainfall_transfer_enabled": true,
+  "test": {
+    "selected_rmse_mm_per_day": 4.731465674634866,
+    "unchanged_regional_mean_rmse_mm_per_day": 5.925961979340816,
+    "selected_mae_mm_per_day": 4.185179105363984
+  },
+  "limitations": [
+    "Targets are gridded proxies, not independent station observations.",
+    "Predicts seasonal spatial climatology, not daily forecast skill or within-block accuracy.",
+    "Training location elevations are station-catalog values; local elevations use Copernicus DSM.",
+    "Only June–October 2023 is available. No lead-time forecast/observation pairs.",
+    "Local rainfall factors transfer a coarse climatology into smaller polygons; experimental and unvalidated."
+  ],
+  "training_sha256": "77eb16afd5ebb753c571ad55d67d93e29bb6d5e7abb79707258d44da28102c8d"
+}

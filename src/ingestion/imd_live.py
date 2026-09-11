@@ -15,7 +15,8 @@ import ssl
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urljoin, urlparse
+from src.ingestion.forecast_schema import atomic_json, select_date, freshness
 from urllib.request import Request, urlopen
 
 
@@ -60,30 +61,54 @@ class IMDLiveData:
         if not state:
             raise LiveDataUnavailable(f"No IMD agromet state mapping configured for {district_name}.")
 
-        # Fast path: Serve fresh cache if available
+        # Cache the complete source series; select a day on every response.
         if not force_refresh:
             cached = self._read_cache("agromet", district_name)
             if self._is_fresh(cached):
-                if not target_date or any(day.get("date") == target_date for day in cached.get("forecast_days", [])):
-                    cached["status"] = "LIVE_CACHED"
-                    return cached
+                return self.select_forecast(cached, target_date, cached=True)
 
         params = urlencode({"state": state, "district": district_name, "language": "English"})
         source_url = f"{AGROMET_BULLETIN_URL}?{params}"
         try:
-            bulletin = self._get_bytes(source_url)
-            parsed = self.parse_bulletin_pdf(bulletin, district_name, source_url, target_date)
-            parsed["status"] = "LIVE_OK"
+            bulletin, resolved_url = self._get_bulletin(source_url)
+            parsed = self.parse_bulletin_pdf(bulletin, district_name, resolved_url)
             parsed["fetched_at"] = self._now_iso()
             self._write_cache("agromet", district_name, parsed)
-            return parsed
         except Exception as exc:
             cached = self._read_cache("agromet", district_name)
             if cached:
-                cached["status"] = "LIVE_CACHED"
                 cached["live_error"] = str(exc)
-                return cached
+                return self.select_forecast(cached, target_date, cached=True)
             raise LiveDataUnavailable(f"Unable to obtain a live IMD forecast for {district_name}: {exc}") from exc
+        return self.select_forecast(parsed, target_date, cached=False)
+
+    @staticmethod
+    def select_forecast(series, target_date=None, cached=False, today=None):
+        result = dict(series)
+        dates = [day["date"] for day in series["forecast_days"]]
+        selected_date = select_date(dates, target_date, today)
+        selected = next(day for day in series["forecast_days"] if day["date"] == selected_date)
+        result.update(selected_forecast_date=selected_date, selected_rainfall_mm=selected["rainfall_mm"],
+                      freshness=freshness(dates, today), cache_status="cached" if cached else "downloaded")
+        result["status"] = "ARCHIVED" if result["freshness"] == "archived" else ("LIVE_CACHED" if cached else "LIVE_OK")
+        return result
+
+    def _get_bulletin(self, url):
+        content = self._get_bytes(url)
+        if content.lstrip().startswith(b"%PDF-"):
+            return content, url
+        text = content.decode("utf-8", errors="replace")
+        links = re.findall(r'(?:href|src)=[\"\']([^\"\']+)[\"\']', text, re.I)
+        for link in links:
+            target = urljoin(url, html.unescape(link))
+            parsed = urlparse(target)
+            if parsed.scheme == "https" and parsed.hostname in {"imdagrimet.gov.in", "mausam.imd.gov.in"} and (".pdf" in parsed.path.lower() or "DistrictBulletin.php" in parsed.path):
+                if target == url:
+                    continue
+                pdf = self._get_bytes(target)
+                if pdf.lstrip().startswith(b"%PDF-"):
+                    return pdf, target
+        raise ValueError("IMD response is not a PDF or a supported HTML page linking to a PDF")
 
     def fetch_recent_observation(self, district: str, force_refresh: bool = False) -> Dict[str, Any]:
         """Return realized 24-hour rainfall only for advisory context, never forecasting."""
@@ -117,6 +142,8 @@ class IMDLiveData:
 
     @classmethod
     def parse_bulletin_pdf(cls, pdf_bytes: bytes, district: str, source_url: str, target_date: Optional[str] = None) -> Dict[str, Any]:
+        if not pdf_bytes.lstrip().startswith(b"%PDF-"):
+            raise ValueError("Response does not contain PDF content")
         try:
             from pypdf import PdfReader
             reader = PdfReader(io.BytesIO(pdf_bytes))
@@ -155,10 +182,8 @@ class IMDLiveData:
             raise ValueError("Could not determine the forecast-valid dates from the IMD bulletin.")
 
         daily = [{"date": forecast_day.isoformat(), "rainfall_mm": rainfall} for forecast_day, rainfall in zip(forecast_dates, rainfall_values)]
-        requested = date.fromisoformat(target_date) if target_date else date.today()
-        selected = next((entry for entry in daily if date.fromisoformat(entry["date"]) >= requested), None)
-        if selected is None:
-            raise ValueError(f"The latest IMD bulletin ends on {daily[-1]['date']}; no forecast is available for {requested.isoformat()}.")
+        selected_date = select_date([entry["date"] for entry in daily], target_date)
+        selected = next(entry for entry in daily if entry["date"] == selected_date)
         return {"district": district, "source": "IMD GKMS district agromet advisory forecast", "source_url": source_url, "issued_date": issued_date.isoformat() if issued_date else None, "forecast_days": daily, "selected_forecast_date": selected["date"], "selected_rainfall_mm": selected["rainfall_mm"]}
 
     @staticmethod
@@ -205,18 +230,36 @@ class IMDLiveData:
         with urlopen(request, timeout=self.timeout_seconds, context=ssl.create_default_context()) as response:
             if response.status != 200:
                 raise RuntimeError(f"IMD returned HTTP {response.status}")
-            return response.read()
+            kind = response.headers.get("Content-Type", "").split(";")[0].lower()
+            if kind not in ("application/pdf", "text/html", "application/octet-stream", "text/plain"):
+                raise ValueError(f"Unexpected IMD content type: {kind}")
+            content = response.read(20_000_001)
+            if len(content) > 20_000_000:
+                raise ValueError("IMD response exceeds 20 MB limit")
+            return content
 
     def _cache_path(self, feed_name: str, district: str) -> Path:
         return self.cache_dir / f"{feed_name}_{district.lower()}.json"
 
     def _write_cache(self, feed_name: str, district: str, payload: Dict[str, Any]) -> None:
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
-        self._cache_path(feed_name, district).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        atomic_json(self._cache_path(feed_name, district), payload)
 
     def _read_cache(self, feed_name: str, district: str) -> Optional[Dict[str, Any]]:
         path = self._cache_path(feed_name, district)
-        return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+        try:
+            value = json.loads(path.read_text(encoding="utf-8"))
+            if feed_name == "agromet":
+                days = value["forecast_days"]
+                if not days or len({d["date"] for d in days}) != len(days):
+                    return None
+                import math
+                for day in days:
+                    date.fromisoformat(day["date"])
+                    if not math.isfinite(day["rainfall_mm"]) or day["rainfall_mm"] < 0:
+                        return None
+            return value
+        except (OSError, ValueError, KeyError, TypeError):
+            return None
 
     @staticmethod
     def _now_iso() -> str:

@@ -1,0 +1,88 @@
+{
+  "dataset_version": "imd-2e3bc1b0c762bd8e15a6",
+  "schema_version": "block-csv-v2",
+  "registry_version": "7cc9ee3bf0154c5d",
+  "district": "Nashik",
+  "imported_at": "2026-09-10T18:28:14.261457+00:00",
+  "sources": [
+    {
+      "filename": "Nashik_Baglan_2026-09-10.csv",
+      "sha256": "4b6a379dcbdbcf23e97a7dc891dad31f8e8281fd5b8ca5677d2302ea48f523d9"
+    },
+    {
+      "filename": "Nashik_Chandwad_2026-09-10 - Sheet1.csv",
+      "sha256": "ecc6a5730166fefe7e7260a3b1040b7b6070528aceabc36be0b26c07fc0e7fbe"
+    },
+    {
+      "filename": "Nashik_Deola_2026-09-10 - Sheet1.csv",
+      "sha256": "2ed55fb9cc327db9cbf75d0c2708af2cb3dbbebaa6f19169a0a45ffa8c9aa3f3"
+    },
+    {
+      "filename": "Nashik_Dindori_2026-09-10 - Sheet1.csv",
+      "sha256": "1287c671efd13c0bb8492172d3e2754167c0ea3f0027cbad7f90361598716aa3"
+    },
+    {
+      "filename": "Nashik_Igatpuri_2026-09-10.csv",
+      "sha256": "f8d49c06317821ea9965f5acc26d5847e302db26e6a350c2a048fcdb348b1516"
+    },
+    {
+      "filename": "Nashik_Kalwan_2026-09-10 - Sheet1.csv",
+      "sha256": "6917aef10616fa62506e8d9a08da9b8e94a0a1822a7d2059ea6535b0db3a4b2d"
+    },
+    {
+      "filename": "Nashik_Malegaon_2026-09-10 - Sheet1.csv",
+      "sha256": "dcb0223e6311184eb77066849830253370a2427c89fe75b4af764d1cf45eef3f"
+    },
+    {
+      "filename": "Nashik_Nandgaon_2026-09-10 - Sheet1.csv",
+      "sha256": "0899716262d0d53f44f4a19e7810cc2548642a64986e819790dc9641c1fd5e1f"
+    },
+    {
+      "filename": "Nashik_Nashik_2026-09-10 - Sheet1.csv",
+      "sha256": "01b7faabc518d8c3b34d29d23292380e66f2e6a4dc7fadb23c98324837347d76"
+    },
+    {
+      "filename": "Nashik_Niphad_2026-09-10 - Sheet1.csv",
+      "sha256": "d596434c7b274881e0f9ebb4ec3fa3e3ada30f52dc2d9a4893dc0f4ff1f73084"
+    },
+    {
+      "filename": "Nashik_Peth_2026-09-10 - Sheet1.csv",
+      "sha256": "dcf47aede9ec978e4ef4d5bb4702aee16379ad5fb3060074fb4cc441242fe283"
+    },
+    {
+      "filename": "Nashik_Sinnar_2026-09-10 - Sheet1.csv",
+      "sha256": "facc822f751775d0387594814348f2ba505a56281d21d32d7ac141bd455773a7"
+    },
+    {
+      "filename": "Nashik_Surgana_2026-09-10 - Sheet1.csv",
+      "sha256": "4ba9d7dba8fea5c6006b1715b3a33203f839b6747d42133aeb90bf309d2537ab"
+    },
+    {
+      "filename": "Nashik_Trimbak_2026-09-10 - Sheet1.csv",
+      "sha256": "a26ee70da61c21f0b959a66de7c662be179c9dd509491eac7489d34473fda670"
+    },
+    {
+      "filename": "Nashik_Yeola_2026-09-10 - Sheet1.csv",
+      "sha256": "b90353e5bfa9317aa55ac85162e16b14b1b5cd61440b80b82a2010b3ed795eeb"
+    }
+  ],
+  "issue_dates": [
+    "2026-09-10"
+  ],
+  "valid_dates": [
+    "2026-09-11",
+    "2026-09-12",
+    "2026-09-13",
+    "2026-09-14",
+    "2026-09-15"
+  ],
+  "record_count": 75,
+  "records_checksum": "4995f6efb919068b83d36fe642cc2977bb5fc4692acf9e552989b6a412871776",
+  "valid": true,
+  "unresolved_semantics": [
+    "Issue time unavailable; date only.",
+    "Rainfall accumulation interval undocumented.",
+    "Published block forecast spatial interpretation unverified; no area-mean assumption or redistribution.",
+    "Manual export provenance is retained; provider authenticity is not cryptographically verified."
+  ]
+}

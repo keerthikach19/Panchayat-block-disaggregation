@@ -1,0 +1,136 @@
+{
+  "run_id": "block-8ed619637d1bb7d52fa99ed6",
+  "dataset_version": "imd-2e3bc1b0c762bd8e15a6",
+  "model_version": "terrain-631e5f007f8d4bca7a85",
+  "model": {
+    "model_version": "terrain-631e5f007f8d4bca7a85",
+    "training_input_level": "regional_gridded_proxy",
+    "compatible_input_levels": [
+      "block",
+      "district"
+    ],
+    "target_definition": "seasonal rainfall climatology with parent-normalized experimental transfer; DEM lapse-rate temperature adjustment",
+    "feature_schema_version": "lat-lon-elevation-v1",
+    "training_data_version": "77eb16afd5ebb753c571ad55d67d93e29bb6d5e7abb79707258d44da28102c8d",
+    "training_period": "2023-06-01/2023-08-31",
+    "validation_report_id": "terrain-631e5f007f8d4bca7a85",
+    "status": "Experimental local estimates. Proxy benchmark only; village forecast accuracy is unverified.",
+    "uncertainty": "omitted; not calibrated",
+    "config": {
+      "algorithm_version": "terrain-proxy-v2",
+      "lapse_rate_c_per_km": -6.5,
+      "reference": "Area-weighted elevation of linked village footprints in each parent",
+      "rainfall_method": "ridge",
+      "rainfall_reference_assumption": "For experimental redistribution only, assume the official parent input is an area mean over linked village footprints. This spatial interpretation is NOT verified by IMD.",
+      "temperature_reference_assumption": "Assume the source temperature refers to the linked-footprint area-weighted elevation, because IMD reference elevation is unavailable. Constant lapse rate may fail under inversions."
+    },
+    "terrain_sources": [
+      {
+        "filename": "Copernicus_DSM_COG_10_N19_00_E073_00_DEM.tif",
+        "sha256": "9e2f952a8d5b1a880382a4e440bd44637c6f0011edf59ca35a4e352c7f4bfceb"
+      },
+      {
+        "filename": "Copernicus_DSM_COG_10_N19_00_E074_00_DEM.tif",
+        "sha256": "1a87e49fcf230eb043cc54988d7b0d911aa011edf597774abb0b367d2deb43d1"
+      },
+      {
+        "filename": "Copernicus_DSM_COG_10_N20_00_E073_00_DEM.tif",
+        "sha256": "4fc2ff36a7a830233e5fb86b8a33a8ad2ed4824fb6e247a7fc45e28f284aa3af"
+      },
+      {
+        "filename": "Copernicus_DSM_COG_10_N20_00_E074_00_DEM.tif",
+        "sha256": "ecb3e8f7398ab8fe3a21aff8c77aa843cf8d6a8ddeaa62d7d6b97cdc9ff4dd3d"
+      }
+    ],
+    "adjustments_checksum": "54b55ceb2615dc19f1a9a1d542776255ee17f1a521f98aebce3a85e5e3b7eec3",
+    "report_checksum": "fee6b389f038e2a832590370051e12e15fcd7f40c288a0c6ceee4b96b7120de8",
+    "registry_version": "7cc9ee3bf0154c5d",
+    "fitted_estimator": {
+      "type": "ridge",
+      "features": [
+        "lat",
+        "lon",
+        "elevation_m"
+      ],
+      "feature_mean": [
+        19.32570892857143,
+        75.24039583333332,
+        419.3041666666667
+      ],
+      "feature_scale": [
+        1.4374459114771119,
+        2.205789567115893,
+        307.74537595410095
+      ],
+      "coefficients": [
+        -0.12435964698780536,
+        -0.1171542918595633,
+        -0.06385285317277346
+      ],
+      "intercept": 2.331382187396553,
+      "target_transform": "log1p seasonal rainfall",
+      "alpha": 10.0
+    }
+  },
+  "mode": "block",
+  "input_level": "block",
+  "provider": "IMD",
+  "ingestion_method": "manual_csv_import",
+  "district": "Nashik",
+  "issue_date": "2026-09-10",
+  "valid_dates": [
+    "2026-09-11",
+    "2026-09-12",
+    "2026-09-13",
+    "2026-09-14",
+    "2026-09-15"
+  ],
+  "coverage": {
+    "available_blocks": 15,
+    "expected_blocks": 15,
+    "missing_blocks": [],
+    "linked_villages": 1916,
+    "excluded_features": 37,
+    "by_block": {
+      "Baglan": 170,
+      "Chandwad": 111,
+      "Deola": 50,
+      "Dindori": 157,
+      "Igatpuri": 117,
+      "Kalwan": 151,
+      "Malegaon": 142,
+      "Nandgaon": 100,
+      "Nashik": 73,
+      "Niphad": 133,
+      "Peth": 145,
+      "Sinnar": 129,
+      "Surgana": 189,
+      "Trimbak": 125,
+      "Yeola": 124
+    }
+  },
+  "geography_version": "ba870f636c6a2085203e512c824471f4ca2bad4d1d292a3017b671c80e6195a5",
+  "geographic_limitation": "Village polygons; no verified village-to-gram-panchayat crosswalk. Parent associations use matching source labels, not verified development-block boundary containment.",
+  "source_semantics": [
+    "Issue time unavailable; date only.",
+    "Rainfall accumulation interval undocumented.",
+    "Published block forecast spatial interpretation unverified; no area-mean assumption or redistribution.",
+    "Manual export provenance is retained; provider authenticity is not cryptographically verified."
+  ],
+  "import_warnings": [
+    {
+      "file": "Nashik_Baglan_2026-09-10.csv",
+      "message": "temp_max_c: unreadable source unit '?'; interpreted as Celsius from the IMD table schema, pending owner verification"
+    },
+    {
+      "file": "Nashik_Baglan_2026-09-10.csv",
+      "message": "temp_min_c: unreadable source unit '?'; interpreted as Celsius from the IMD table schema, pending owner verification"
+    },
+    {
+      "file": "Nashik_Niphad_2026-09-10 - Sheet1.csv",
+      "message": "relative_humidity_max_pct: summary 93 differs from calculated 92.40"
+    }
+  ],
+  "outputs_checksum": "b3bea7cca7a0817cc876ca6f5334d36af2dd0843c0161fdf6e9f3c1d4a4a2d4c",
+  "geometry_checksum": "ba870f636c6a2085203e512c824471f4ca2bad4d1d292a3017b671c80e6195a5"
+}

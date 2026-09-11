@@ -1,0 +1,5 @@
+fastapi==0.141.1
+uvicorn==0.52.4
+pypdf==6.18.0
+shapely==2.1.2
+tzdata==2026.3

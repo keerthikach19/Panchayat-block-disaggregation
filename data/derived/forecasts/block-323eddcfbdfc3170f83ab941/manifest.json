@@ -1,0 +1,81 @@
+{
+  "run_id": "block-323eddcfbdfc3170f83ab941",
+  "dataset_version": "imd-2e3bc1b0c762bd8e15a6",
+  "model_version": "parent-inheritance-v1",
+  "model": {
+    "model_version": "parent-inheritance-v1",
+    "training_input_level": "not_trained",
+    "compatible_input_levels": [
+      "block",
+      "district"
+    ],
+    "target_definition": "unchanged parent forecast",
+    "feature_schema_version": "weather-v1",
+    "training_data_version": null,
+    "training_period": null,
+    "validation_report_id": null,
+    "status": "Baseline only; no supported local adjustment or independent skill evaluation",
+    "uncertainty": "omitted; not calibrated"
+  },
+  "mode": "block",
+  "input_level": "block",
+  "provider": "IMD",
+  "ingestion_method": "manual_csv_import",
+  "district": "Nashik",
+  "issue_date": "2026-09-10",
+  "valid_dates": [
+    "2026-09-11",
+    "2026-09-12",
+    "2026-09-13",
+    "2026-09-14",
+    "2026-09-15"
+  ],
+  "coverage": {
+    "available_blocks": 15,
+    "expected_blocks": 15,
+    "missing_blocks": [],
+    "linked_villages": 1916,
+    "excluded_features": 37,
+    "by_block": {
+      "Baglan": 170,
+      "Chandwad": 111,
+      "Deola": 50,
+      "Dindori": 157,
+      "Igatpuri": 117,
+      "Kalwan": 151,
+      "Malegaon": 142,
+      "Nandgaon": 100,
+      "Nashik": 73,
+      "Niphad": 133,
+      "Peth": 145,
+      "Sinnar": 129,
+      "Surgana": 189,
+      "Trimbak": 125,
+      "Yeola": 124
+    }
+  },
+  "geography_version": "ba870f636c6a2085203e512c824471f4ca2bad4d1d292a3017b671c80e6195a5",
+  "geographic_limitation": "Village polygons; no verified village-to-gram-panchayat crosswalk. Parent associations use matching source labels, not verified development-block boundary containment.",
+  "source_semantics": [
+    "Issue time unavailable; date only.",
+    "Rainfall accumulation interval undocumented.",
+    "Published block forecast spatial interpretation unverified; no area-mean assumption or redistribution.",
+    "Manual export provenance is retained; provider authenticity is not cryptographically verified."
+  ],
+  "import_warnings": [
+    {
+      "file": "Nashik_Baglan_2026-09-10.csv",
+      "message": "temp_max_c: unreadable source unit '?'; interpreted as Celsius from the IMD table schema, pending owner verification"
+    },
+    {
+      "file": "Nashik_Baglan_2026-09-10.csv",
+      "message": "temp_min_c: unreadable source unit '?'; interpreted as Celsius from the IMD table schema, pending owner verification"
+    },
+    {
+      "file": "Nashik_Niphad_2026-09-10 - Sheet1.csv",
+      "message": "relative_humidity_max_pct: summary 93 differs from calculated 92.40"
+    }
+  ],
+  "outputs_checksum": "9a18a298d3ae2063e1b09ae1a52fdf98cfaf92885f5cd26288f002eb2fff0947",
+  "geometry_checksum": "ba870f636c6a2085203e512c824471f4ca2bad4d1d292a3017b671c80e6195a5"
+}

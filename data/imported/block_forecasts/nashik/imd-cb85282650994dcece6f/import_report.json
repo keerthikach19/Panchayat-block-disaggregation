@@ -1,0 +1,129 @@
+{
+  "accepted_files": [
+    "Nashik_Chandwad_2026-09-10 - Sheet1.csv",
+    "Nashik_Deola_2026-09-10 - Sheet1.csv",
+    "Nashik_Dindori_2026-09-10 - Sheet1.csv",
+    "Nashik_Igatpuri_2026-09-10.csv",
+    "Nashik_Kalwan_2026-09-10 - Sheet1.csv",
+    "Nashik_Malegaon_2026-09-10 - Sheet1.csv",
+    "Nashik_Nandgaon_2026-09-10 - Sheet1.csv",
+    "Nashik_Nashik_2026-09-10 - Sheet1.csv",
+    "Nashik_Niphad_2026-09-10 - Sheet1.csv",
+    "Nashik_Peth_2026-09-10 - Sheet1.csv",
+    "Nashik_Sinnar_2026-09-10 - Sheet1.csv",
+    "Nashik_Surgana_2026-09-10 - Sheet1.csv",
+    "Nashik_Trimbak_2026-09-10 - Sheet1.csv",
+    "Nashik_Yeola_2026-09-10 - Sheet1.csv"
+  ],
+  "rejected_files": [
+    {
+      "file": "Nashik_Baglan_2026-09-10.csv",
+      "error": "Missing required rows: ['temp_max_c', 'temp_min_c']"
+    }
+  ],
+  "duplicate_files": [],
+  "conflicts": [],
+  "warnings": [
+    {
+      "file": "Nashik_Niphad_2026-09-10 - Sheet1.csv",
+      "message": "relative_humidity_max_pct: summary 93 differs from calculated 92.40"
+    }
+  ],
+  "alias_resolutions": [
+    {
+      "filename": "Nashik_Chandwad_2026-09-10 - Sheet1.csv",
+      "source_name": "CHANDWAD",
+      "canonical": "Chandwad"
+    },
+    {
+      "filename": "Nashik_Deola_2026-09-10 - Sheet1.csv",
+      "source_name": "DEOLA",
+      "canonical": "Deola"
+    },
+    {
+      "filename": "Nashik_Dindori_2026-09-10 - Sheet1.csv",
+      "source_name": "DINDORI",
+      "canonical": "Dindori"
+    },
+    {
+      "filename": "Nashik_Igatpuri_2026-09-10.csv",
+      "source_name": "IGATPURI",
+      "canonical": "Igatpuri"
+    },
+    {
+      "filename": "Nashik_Kalwan_2026-09-10 - Sheet1.csv",
+      "source_name": "KALWAN",
+      "canonical": "Kalwan"
+    },
+    {
+      "filename": "Nashik_Malegaon_2026-09-10 - Sheet1.csv",
+      "source_name": "MALEGAON",
+      "canonical": "Malegaon"
+    },
+    {
+      "filename": "Nashik_Nandgaon_2026-09-10 - Sheet1.csv",
+      "source_name": "NANDGAON",
+      "canonical": "Nandgaon"
+    },
+    {
+      "filename": "Nashik_Nashik_2026-09-10 - Sheet1.csv",
+      "source_name": "NASHIK",
+      "canonical": "Nashik"
+    },
+    {
+      "filename": "Nashik_Niphad_2026-09-10 - Sheet1.csv",
+      "source_name": "NIPHAD",
+      "canonical": "Niphad"
+    },
+    {
+      "filename": "Nashik_Peth_2026-09-10 - Sheet1.csv",
+      "source_name": "PETH",
+      "canonical": "Peth"
+    },
+    {
+      "filename": "Nashik_Sinnar_2026-09-10 - Sheet1.csv",
+      "source_name": "SINNAR",
+      "canonical": "Sinnar"
+    },
+    {
+      "filename": "Nashik_Surgana_2026-09-10 - Sheet1.csv",
+      "source_name": "SURGANA",
+      "canonical": "Surgana"
+    },
+    {
+      "filename": "Nashik_Trimbak_2026-09-10 - Sheet1.csv",
+      "source_name": "TRIMBAK",
+      "canonical": "Trimbak"
+    },
+    {
+      "filename": "Nashik_Yeola_2026-09-10 - Sheet1.csv",
+      "source_name": "YEOLA",
+      "canonical": "Yeola"
+    }
+  ],
+  "dataset_version": "imd-cb85282650994dcece6f",
+  "issue_dates": [
+    "2026-09-10"
+  ],
+  "blocks": [
+    "Chandwad",
+    "Deola",
+    "Dindori",
+    "Igatpuri",
+    "Kalwan",
+    "Malegaon",
+    "Nandgaon",
+    "Nashik",
+    "Niphad",
+    "Peth",
+    "Sinnar",
+    "Surgana",
+    "Trimbak",
+    "Yeola"
+  ],
+  "missing_blocks_by_issue": {
+    "2026-09-10": [
+      "Baglan"
+    ]
+  }
+}

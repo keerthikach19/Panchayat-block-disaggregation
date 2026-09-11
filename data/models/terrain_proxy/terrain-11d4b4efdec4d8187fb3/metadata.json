@@ -1,0 +1,43 @@
+{
+  "model_version": "terrain-11d4b4efdec4d8187fb3",
+  "training_input_level": "regional_gridded_proxy",
+  "compatible_input_levels": [
+    "block",
+    "district"
+  ],
+  "target_definition": "seasonal rainfall climatology with parent-normalized experimental transfer; DEM lapse-rate temperature adjustment",
+  "feature_schema_version": "lat-lon-elevation-v1",
+  "training_data_version": "77eb16afd5ebb753c571ad55d67d93e29bb6d5e7abb79707258d44da28102c8d",
+  "training_period": "2023-06-01/2023-08-31",
+  "validation_report_id": "terrain-11d4b4efdec4d8187fb3",
+  "status": "Experimental local estimates. Proxy benchmark only; village forecast accuracy is unverified.",
+  "uncertainty": "omitted; not calibrated",
+  "config": {
+    "lapse_rate_c_per_km": -6.5,
+    "reference": "Area-weighted elevation of linked village footprints in each parent",
+    "rainfall_method": "ridge",
+    "rainfall_reference_assumption": "For experimental redistribution only, assume the official parent input is an area mean over linked village footprints. This spatial interpretation is NOT verified by IMD.",
+    "temperature_reference_assumption": "Assume the source temperature refers to the linked-footprint area-weighted elevation, because IMD reference elevation is unavailable. Constant lapse rate may fail under inversions."
+  },
+  "terrain_sources": [
+    {
+      "filename": "Copernicus_DSM_COG_10_N19_00_E073_00_DEM.tif",
+      "sha256": "9e2f952a8d5b1a880382a4e440bd44637c6f0011edf59ca35a4e352c7f4bfceb"
+    },
+    {
+      "filename": "Copernicus_DSM_COG_10_N19_00_E074_00_DEM.tif",
+      "sha256": "1a87e49fcf230eb043cc54988d7b0d911aa011edf597774abb0b367d2deb43d1"
+    },
+    {
+      "filename": "Copernicus_DSM_COG_10_N20_00_E073_00_DEM.tif",
+      "sha256": "4fc2ff36a7a830233e5fb86b8a33a8ad2ed4824fb6e247a7fc45e28f284aa3af"
+    },
+    {
+      "filename": "Copernicus_DSM_COG_10_N20_00_E074_00_DEM.tif",
+      "sha256": "ecb3e8f7398ab8fe3a21aff8c77aa843cf8d6a8ddeaa62d7d6b97cdc9ff4dd3d"
+    }
+  ],
+  "adjustments_checksum": "54b55ceb2615dc19f1a9a1d542776255ee17f1a521f98aebce3a85e5e3b7eec3",
+  "report_checksum": "fee6b389f038e2a832590370051e12e15fcd7f40c288a0c6ceee4b96b7120de8",
+  "registry_version": "7cc9ee3bf0154c5d"
+}

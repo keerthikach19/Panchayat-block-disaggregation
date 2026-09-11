@@ -130,7 +130,7 @@ class DownscalingPipeline:
         input_block_weather: dict with block-level rainfall and temperature values.
         """
         if not self.is_trained:
-            self.train_footprint_pipeline()
+            raise ValueError("No compatible pretrained district artifact; train explicitly offline")
 
         logger.info("=" * 70)
         logger.info(f"DOWNSCALING DISTRICT FORECAST: {district_name}")
@@ -141,8 +141,7 @@ class DownscalingPipeline:
         district_covs = cov_df[cov_df["district_name"].str.strip().str.lower() == district_name.lower()].copy()
 
         if len(district_covs) == 0:
-            logger.warning(f"District {district_name} not found, using all available records in dataset.")
-            district_covs = cov_df.copy()
+            raise ValueError(f"Unknown district or empty selection: {district_name}")
 
         logger.info(f"Target District {district_name}: {len(district_covs)} panchayats found.")
 
@@ -236,10 +235,8 @@ class DownscalingPipeline:
         final_df["downscaled_tmin_pred"] = np.round(block_tmin_val - t_lapse + pred_temp_dev * 0.5, 1)
         final_df["downscaled_rh_pred"] = np.round(np.clip(60.0 + final_df["downscaled_rain_pred"] * 0.4, 30.0, 98.0), 1)
 
-        # Save output
-        out_csv = DATA_DIR / f"downscaled_forecast_{district_name.lower()}.csv"
-        final_df.to_csv(out_csv, index=False)
-        logger.info(f"  ✓ Saved {len(final_df)} downscaled panchayat forecasts to {out_csv}")
+        # Legacy research inference returns data only. Serving uses the versioned
+        # forecast service; filters must never overwrite district-wide artifacts.
 
         # Summary of rainfall gradient across district
         min_p = final_df.loc[final_df["downscaled_rain_pred"].idxmin()]

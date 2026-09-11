@@ -92,6 +92,10 @@ class FootprintDeviationModel:
         Train footprint-wide LightGBM deviation models for rainfall and temperature.
         If save_artifact=True, persists the model dictionary to data/models/layer_b_models.pkl.
         """
+        for target in ("rainfall_deviation", "temp_deviation"):
+            values = df_train[target].to_numpy(dtype=float)
+            if not len(values) or not np.isfinite(values).all() or np.var(values) < 1e-12:
+                raise ValueError(f"Cannot train on empty, invalid or zero-variance targets: {target}")
         MODELS_DIR.mkdir(parents=True, exist_ok=True)
         logger.info(f"Training Layer B Footprint Deviation Models on {len(df_train)} training records...")
 

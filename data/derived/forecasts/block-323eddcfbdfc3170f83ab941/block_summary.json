@@ -1,0 +1,527 @@
+[
+  {
+    "block_id": "internal:block:nashik:baglan",
+    "block_name": "Baglan",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 0.6,
+    "linked_villages": 170
+  },
+  {
+    "block_id": "internal:block:nashik:baglan",
+    "block_name": "Baglan",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 3.1,
+    "linked_villages": 170
+  },
+  {
+    "block_id": "internal:block:nashik:baglan",
+    "block_name": "Baglan",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 20.7,
+    "linked_villages": 170
+  },
+  {
+    "block_id": "internal:block:nashik:baglan",
+    "block_name": "Baglan",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 23.8,
+    "linked_villages": 170
+  },
+  {
+    "block_id": "internal:block:nashik:baglan",
+    "block_name": "Baglan",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 8.1,
+    "linked_villages": 170
+  },
+  {
+    "block_id": "internal:block:nashik:chandwad",
+    "block_name": "Chandwad",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.4,
+    "linked_villages": 111
+  },
+  {
+    "block_id": "internal:block:nashik:chandwad",
+    "block_name": "Chandwad",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 3.9,
+    "linked_villages": 111
+  },
+  {
+    "block_id": "internal:block:nashik:chandwad",
+    "block_name": "Chandwad",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 26.6,
+    "linked_villages": 111
+  },
+  {
+    "block_id": "internal:block:nashik:chandwad",
+    "block_name": "Chandwad",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 15.5,
+    "linked_villages": 111
+  },
+  {
+    "block_id": "internal:block:nashik:chandwad",
+    "block_name": "Chandwad",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 4.5,
+    "linked_villages": 111
+  },
+  {
+    "block_id": "internal:block:nashik:deola",
+    "block_name": "Deola",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 0.8,
+    "linked_villages": 50
+  },
+  {
+    "block_id": "internal:block:nashik:deola",
+    "block_name": "Deola",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 3.4,
+    "linked_villages": 50
+  },
+  {
+    "block_id": "internal:block:nashik:deola",
+    "block_name": "Deola",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 24.4,
+    "linked_villages": 50
+  },
+  {
+    "block_id": "internal:block:nashik:deola",
+    "block_name": "Deola",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 17.5,
+    "linked_villages": 50
+  },
+  {
+    "block_id": "internal:block:nashik:deola",
+    "block_name": "Deola",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 4.5,
+    "linked_villages": 50
+  },
+  {
+    "block_id": "internal:block:nashik:dindori",
+    "block_name": "Dindori",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.0,
+    "linked_villages": 157
+  },
+  {
+    "block_id": "internal:block:nashik:dindori",
+    "block_name": "Dindori",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 2.3,
+    "linked_villages": 157
+  },
+  {
+    "block_id": "internal:block:nashik:dindori",
+    "block_name": "Dindori",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 27.0,
+    "linked_villages": 157
+  },
+  {
+    "block_id": "internal:block:nashik:dindori",
+    "block_name": "Dindori",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 27.6,
+    "linked_villages": 157
+  },
+  {
+    "block_id": "internal:block:nashik:dindori",
+    "block_name": "Dindori",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 6.6,
+    "linked_villages": 157
+  },
+  {
+    "block_id": "internal:block:nashik:igatpuri",
+    "block_name": "Igatpuri",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 3.3,
+    "linked_villages": 117
+  },
+  {
+    "block_id": "internal:block:nashik:igatpuri",
+    "block_name": "Igatpuri",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 1.6,
+    "linked_villages": 117
+  },
+  {
+    "block_id": "internal:block:nashik:igatpuri",
+    "block_name": "Igatpuri",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 38.2,
+    "linked_villages": 117
+  },
+  {
+    "block_id": "internal:block:nashik:igatpuri",
+    "block_name": "Igatpuri",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 33.1,
+    "linked_villages": 117
+  },
+  {
+    "block_id": "internal:block:nashik:igatpuri",
+    "block_name": "Igatpuri",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 16.8,
+    "linked_villages": 117
+  },
+  {
+    "block_id": "internal:block:nashik:kalwan",
+    "block_name": "Kalwan",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 0.8,
+    "linked_villages": 151
+  },
+  {
+    "block_id": "internal:block:nashik:kalwan",
+    "block_name": "Kalwan",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 3.2,
+    "linked_villages": 151
+  },
+  {
+    "block_id": "internal:block:nashik:kalwan",
+    "block_name": "Kalwan",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 22.8,
+    "linked_villages": 151
+  },
+  {
+    "block_id": "internal:block:nashik:kalwan",
+    "block_name": "Kalwan",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 25.8,
+    "linked_villages": 151
+  },
+  {
+    "block_id": "internal:block:nashik:kalwan",
+    "block_name": "Kalwan",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 7.4,
+    "linked_villages": 151
+  },
+  {
+    "block_id": "internal:block:nashik:malegaon",
+    "block_name": "Malegaon",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.2,
+    "linked_villages": 142
+  },
+  {
+    "block_id": "internal:block:nashik:malegaon",
+    "block_name": "Malegaon",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 3.6,
+    "linked_villages": 142
+  },
+  {
+    "block_id": "internal:block:nashik:malegaon",
+    "block_name": "Malegaon",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 28.0,
+    "linked_villages": 142
+  },
+  {
+    "block_id": "internal:block:nashik:malegaon",
+    "block_name": "Malegaon",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 13.8,
+    "linked_villages": 142
+  },
+  {
+    "block_id": "internal:block:nashik:malegaon",
+    "block_name": "Malegaon",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 3.7,
+    "linked_villages": 142
+  },
+  {
+    "block_id": "internal:block:nashik:nandgaon",
+    "block_name": "Nandgaon",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.4,
+    "linked_villages": 100
+  },
+  {
+    "block_id": "internal:block:nashik:nandgaon",
+    "block_name": "Nandgaon",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 2.2,
+    "linked_villages": 100
+  },
+  {
+    "block_id": "internal:block:nashik:nandgaon",
+    "block_name": "Nandgaon",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 49.2,
+    "linked_villages": 100
+  },
+  {
+    "block_id": "internal:block:nashik:nandgaon",
+    "block_name": "Nandgaon",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 15.8,
+    "linked_villages": 100
+  },
+  {
+    "block_id": "internal:block:nashik:nandgaon",
+    "block_name": "Nandgaon",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 7.7,
+    "linked_villages": 100
+  },
+  {
+    "block_id": "internal:block:nashik:nashik",
+    "block_name": "Nashik",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.0,
+    "linked_villages": 73
+  },
+  {
+    "block_id": "internal:block:nashik:nashik",
+    "block_name": "Nashik",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 2.3,
+    "linked_villages": 73
+  },
+  {
+    "block_id": "internal:block:nashik:nashik",
+    "block_name": "Nashik",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 27.3,
+    "linked_villages": 73
+  },
+  {
+    "block_id": "internal:block:nashik:nashik",
+    "block_name": "Nashik",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 28.3,
+    "linked_villages": 73
+  },
+  {
+    "block_id": "internal:block:nashik:nashik",
+    "block_name": "Nashik",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 7.4,
+    "linked_villages": 73
+  },
+  {
+    "block_id": "internal:block:nashik:niphad",
+    "block_name": "Niphad",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.4,
+    "linked_villages": 133
+  },
+  {
+    "block_id": "internal:block:nashik:niphad",
+    "block_name": "Niphad",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 1.0,
+    "linked_villages": 133
+  },
+  {
+    "block_id": "internal:block:nashik:niphad",
+    "block_name": "Niphad",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 33.8,
+    "linked_villages": 133
+  },
+  {
+    "block_id": "internal:block:nashik:niphad",
+    "block_name": "Niphad",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 25.2,
+    "linked_villages": 133
+  },
+  {
+    "block_id": "internal:block:nashik:niphad",
+    "block_name": "Niphad",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 4.1,
+    "linked_villages": 133
+  },
+  {
+    "block_id": "internal:block:nashik:peth",
+    "block_name": "Peth",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.0,
+    "linked_villages": 145
+  },
+  {
+    "block_id": "internal:block:nashik:peth",
+    "block_name": "Peth",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 1.9,
+    "linked_villages": 145
+  },
+  {
+    "block_id": "internal:block:nashik:peth",
+    "block_name": "Peth",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 23.7,
+    "linked_villages": 145
+  },
+  {
+    "block_id": "internal:block:nashik:peth",
+    "block_name": "Peth",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 20.2,
+    "linked_villages": 145
+  },
+  {
+    "block_id": "internal:block:nashik:peth",
+    "block_name": "Peth",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 4.5,
+    "linked_villages": 145
+  },
+  {
+    "block_id": "internal:block:nashik:sinnar",
+    "block_name": "Sinnar",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 0.8,
+    "linked_villages": 129
+  },
+  {
+    "block_id": "internal:block:nashik:sinnar",
+    "block_name": "Sinnar",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 2.2,
+    "linked_villages": 129
+  },
+  {
+    "block_id": "internal:block:nashik:sinnar",
+    "block_name": "Sinnar",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 21.5,
+    "linked_villages": 129
+  },
+  {
+    "block_id": "internal:block:nashik:sinnar",
+    "block_name": "Sinnar",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 14.2,
+    "linked_villages": 129
+  },
+  {
+    "block_id": "internal:block:nashik:sinnar",
+    "block_name": "Sinnar",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 2.8,
+    "linked_villages": 129
+  },
+  {
+    "block_id": "internal:block:nashik:surgana",
+    "block_name": "Surgana",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 2.2,
+    "linked_villages": 189
+  },
+  {
+    "block_id": "internal:block:nashik:surgana",
+    "block_name": "Surgana",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 1.2,
+    "linked_villages": 189
+  },
+  {
+    "block_id": "internal:block:nashik:surgana",
+    "block_name": "Surgana",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 67.0,
+    "linked_villages": 189
+  },
+  {
+    "block_id": "internal:block:nashik:surgana",
+    "block_name": "Surgana",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 88.1,
+    "linked_villages": 189
+  },
+  {
+    "block_id": "internal:block:nashik:surgana",
+    "block_name": "Surgana",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 26.4,
+    "linked_villages": 189
+  },
+  {
+    "block_id": "internal:block:nashik:trimbak",
+    "block_name": "Trimbak",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 3.0,
+    "linked_villages": 125
+  },
+  {
+    "block_id": "internal:block:nashik:trimbak",
+    "block_name": "Trimbak",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 2.1,
+    "linked_villages": 125
+  },
+  {
+    "block_id": "internal:block:nashik:trimbak",
+    "block_name": "Trimbak",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 34.1,
+    "linked_villages": 125
+  },
+  {
+    "block_id": "internal:block:nashik:trimbak",
+    "block_name": "Trimbak",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 33.5,
+    "linked_villages": 125
+  },
+  {
+    "block_id": "internal:block:nashik:trimbak",
+    "block_name": "Trimbak",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 13.0,
+    "linked_villages": 125
+  },
+  {
+    "block_id": "internal:block:nashik:yeola",
+    "block_name": "Yeola",
+    "valid_date": "2026-09-11",
+    "source_rainfall_mm": 1.7,
+    "linked_villages": 124
+  },
+  {
+    "block_id": "internal:block:nashik:yeola",
+    "block_name": "Yeola",
+    "valid_date": "2026-09-12",
+    "source_rainfall_mm": 4.1,
+    "linked_villages": 124
+  },
+  {
+    "block_id": "internal:block:nashik:yeola",
+    "block_name": "Yeola",
+    "valid_date": "2026-09-13",
+    "source_rainfall_mm": 29.5,
+    "linked_villages": 124
+  },
+  {
+    "block_id": "internal:block:nashik:yeola",
+    "block_name": "Yeola",
+    "valid_date": "2026-09-14",
+    "source_rainfall_mm": 11.4,
+    "linked_villages": 124
+  },
+  {
+    "block_id": "internal:block:nashik:yeola",
+    "block_name": "Yeola",
+    "valid_date": "2026-09-15",
+    "source_rainfall_mm": 3.8,
+    "linked_villages": 124
+  }
+]
