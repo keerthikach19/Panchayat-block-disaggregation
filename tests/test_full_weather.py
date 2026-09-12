@@ -59,7 +59,8 @@ def test_weather_propagation_comparison_and_printable_pinned_bulletin():
     assert comparison['weather_summary']['cloud_cover_oktas']['count'] == 0
     html = render_bulletin(service, p['panchayat_id'], 'district', forecast['run_id'])
     assert '2026-09-12' in html and '2026-09-16' in html and 'Maximum temperature' in html
-    assert 'not an official IMD/GKMS advisory' in html and 'Cloudy' in html
+    assert 'not an official IMD/GKMS advisory' in html
+    assert 'Cloud cover' not in html and 'Cloud description' not in html and 'Wind direction' not in html
     assert forecast['run_id'] in html
     live.fetch_forecast.side_effect = AssertionError('offline')
     block = service.forecast()['data'][0]

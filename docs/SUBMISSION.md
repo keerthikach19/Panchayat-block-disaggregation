@@ -19,11 +19,10 @@ artifacts are already packaged; training is not required to start the app.
 |---|---|
 | Open Forecast map | Official block source, 15 blocks and 1,916 linked villages; source validity and archive status shown |
 | Change forecast day or block | Map and village details use that exact date/filter; unavailable selections are not substituted |
-| Select each weather layer | Rain, maximum/minimum temperature, maximum/minimum humidity, wind speed/direction, cloud oktas |
-| Toggle Before / After | Source and local estimates share a color scale; rain/temperature may change; inherited variables stay equal |
+| Select each weather layer | Rain, maximum/minimum temperature, maximum/minimum humidity and wind speed |
+| Toggle Before / After | Available for rainfall/temperature; humidity and wind speed display source values with no local-adjustment toggle |
 | Click a village | Source/local values, units, model, elevation, provenance and advisory preview |
 | Switch to Live district forecast | Current public IMD bulletin, full available weather; cached retrieval and failures explicitly labelled |
-| Select district cloud/wind direction layers | Gray where numeric values are missing; textual cloud description in village details |
 | Open Same-day comparison | Exact shared village IDs/dates, rainfall differences and all-weather summary; source issues may differ |
 | Open Model & training | Completed Maharashtra benchmark, test results, limitations and explicit retain-model decision |
 | Open a village's bulletin link | Printable five-day GKMS-style draft, source/local weather, general guidance, missing field inputs, provenance |
@@ -75,3 +74,8 @@ After committing reviewed changes and building the frontend:
 The ZIP includes tracked project files, the built frontend, an available district
 source cache and a RELEASE.json file manifest. Each ZIP entry is read back and
 SHA-256 checked. A companion .sha256 file identifies the complete archive.
+
+Cloud cover and wind direction are omitted from the dashboard and draft bulletin.
+Humidity and wind speed are shown as source weather, without duplicate local
+estimates. District inputs are uniform over villages for a selected date; block
+inputs can differ between blocks. No local variation is invented.

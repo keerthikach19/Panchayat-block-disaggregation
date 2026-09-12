@@ -3,11 +3,11 @@ export default function ModelEvidence(){
   const [report,setReport]=useState(null),[error,setError]=useState('');
   useEffect(()=>{const c=new AbortController();fetch('/api/model-evidence',{signal:c.signal}).then(async r=>{if(!r.ok)throw Error('Model report unavailable');return r.json();}).then(setReport).catch(e=>{if(e.name!=='AbortError')setError(e.message);});return()=>c.abort();},[]);
   return <section className="comparison"><h2>Model training and release decision</h2>
-    <p>The release uses official parent weather forecasts, terrain-adjusted rainfall and temperature, and inherited humidity, wind and cloud. Training results below describe a separate historical benchmark.</p>
+    <p>The release uses official parent weather forecasts, terrain-adjusted rainfall and temperature, and inherited humidity and wind speed. Training results below describe a separate historical benchmark.</p>
     <section className="notes"><h3>Final serving method</h3><table><thead><tr><th>Weather variable</th><th>Method</th><th>Evidence boundary</th></tr></thead><tbody>
       <tr><th>Rainfall</th><td>Ridge climate pattern with area-normalized terrain factors</td><td>Proxy climatology evaluated; local forecast skill unverified</td></tr>
       <tr><th>Maximum / minimum temperature</th><td>Copernicus elevation and −6.5°C/km lapse rate</td><td>Physical assumption; not a locally calibrated temperature model</td></tr>
-      <tr><th>Humidity, wind, cloud</th><td>Official parent value inherited</td><td>No fabricated fine-scale variation</td></tr>
+      <tr><th>Humidity and wind speed</th><td>Official parent value inherited</td><td>No fabricated fine-scale variation</td></tr>
     </tbody></table></section>
     {error && <p role="alert">{error}</p>}{!report && !error && <p role="status">Loading training evidence…</p>}
     {report && <><section className="notes"><h3>Maharashtra training completed</h3><p>IMD daily 0.25° rainfall analyses, 2010–2024: {report.state_cells} state grid cells, {report.nashik_cells} Nashik test cells. Train: 2010–2018; validation: 2019–2021; Nashik test: 2022–2024. Nashik and its 0.25° buffer are excluded from training and validation. June–October only.</p><p>Four candidates per lead: persistence, monthly climatology, LightGBM absolute loss and Tweedie loss. Selection used validation MAE before examining the test set.</p>

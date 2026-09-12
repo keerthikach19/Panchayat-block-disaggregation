@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, GeoJSON, ZoomControl, useMap } from 'react-lea
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const WEATHER = {rainfall_mm:['Rainfall','mm'],temp_max_c:['Maximum temperature','°C'],temp_min_c:['Minimum temperature','°C'],relative_humidity_max_pct:['Maximum humidity','%'],relative_humidity_min_pct:['Minimum humidity','%'],wind_speed_kmph:['Wind speed','km/h'],wind_direction_deg:['Wind direction','°'],cloud_cover_oktas:['Cloud cover','oktas']};
+const WEATHER = {rainfall_mm:['Rainfall','mm'],temp_max_c:['Maximum temperature','°C'],temp_min_c:['Minimum temperature','°C'],relative_humidity_max_pct:['Maximum humidity','%'],relative_humidity_min_pct:['Minimum humidity','%'],wind_speed_kmph:['Wind speed','km/h']};
 const COLORS = ['#7dd3fc', '#38bdf8', '#0284c7', '#4f46e5', '#1e1b4b'];
 function FitCoverage({ data }) {
   const map = useMap();
@@ -17,12 +17,17 @@ export default function MapDashboard({ geojsonLayer, onSelectPanchayat, selected
   const [view, setView] = useState('local');
   const [variable,setVariable] = useState('rainfall_mm');
   const [label,unit] = WEATHER[variable];
+  const inherited = !['rainfall_mm','temp_max_c','temp_min_c'].includes(variable);
   const [mapLabels, setMapLabels] = useState(false);
+  const uniformValue = useMemo(() => {
+    const values = (geojsonLayer?.features || []).map(f=>f.properties['source_'+variable]).filter(Number.isFinite);
+    return values.length && values.every(v=>v===values[0]) ? values[0] : null;
+  },[geojsonLayer,variable]);
   const thresholds = useMemo(() => {
     const values = (geojsonLayer?.features || []).flatMap(f => [f.properties['source_'+variable], f.properties['local_'+variable]]).filter(Number.isFinite).sort((a,b)=>a-b);
     return values.length ? [0.2,0.4,0.6,0.8].map(q=>values[Math.floor(q*(values.length-1))]) : [5,20,50,100];
   },[geojsonLayer,variable]);
-  const field = view + '_' + variable;
+  const field = (inherited ? 'source' : view) + '_' + variable;
   function color(value) {
     if (!Number.isFinite(value)) return '#64748b';
     const index = thresholds.findIndex(t=>value<=t);
@@ -42,9 +47,9 @@ export default function MapDashboard({ geojsonLayer, onSelectPanchayat, selected
     card.append(heading);
     for(const text of [
       'Block: '+(p.block_name || 'Unresolved'),
-      Number.isFinite(p['source_'+variable])?'Source input: '+p['source_'+variable]+' '+unit:(variable==='cloud_cover_oktas' && p.source_cloud_description ? 'Source cloud: '+p.source_cloud_description : 'Source value unavailable'),
+      Number.isFinite(p['source_'+variable])?'Source input: '+p['source_'+variable]+' '+unit:'Source value unavailable',
       Number.isFinite(p[field])?'Shown '+label+': '+p[field]+' '+unit:'No numeric estimate available',
-      Number.isFinite(p['local_'+variable]) && Number.isFinite(p['source_'+variable])?'Adjustment: '+(p['local_'+variable]-p['source_'+variable]).toFixed(2)+' '+unit:'',
+      !inherited && Number.isFinite(p['local_'+variable]) && Number.isFinite(p['source_'+variable])?'Adjustment: '+(p['local_'+variable]-p['source_'+variable]).toFixed(2)+' '+unit:'',
       p.available?'Click to view source and model details':''
     ]) {const line=document.createElement('div');line.textContent=text;card.append(line);}
     layer.bindTooltip(card,{sticky:true,direction:'top',offset:[0,-10],className:'custom-leaflet-tooltip'});
@@ -55,10 +60,11 @@ export default function MapDashboard({ geojsonLayer, onSelectPanchayat, selected
   return <div className="map-viewport-wrapper">
     <div className="map-floating-controls">
       <label className="weather-selector glass-panel">Weather variable <select value={variable} onChange={e=>setVariable(e.target.value)}>{Object.entries(WEATHER).map(([k,[n,u]])=><option value={k} key={k}>{n} ({u})</option>)}</select></label>
-      <div className="toggle-group glass-panel">
+      {!inherited && <div className="toggle-group glass-panel">
         <button className={'toggle-btn '+(view==='local'?'active':'')} aria-pressed={view==='local'} onClick={()=>setView('local')}>✨ Local estimates (After)</button>
         <button className={'toggle-btn '+(view==='source'?'active':'')} aria-pressed={view==='source'} onClick={()=>setView('source')}>📦 Source input (Before)</button>
-      </div>
+      </div>}
+      {inherited && <div className="state-a-subtext glass-panel" role="status">{label}: source forecast · no local adjustment</div>}
       <div className="state-a-subtext glass-panel">Forecast valid: {forecastMeta?.valid_date} · {forecastMeta?.mode==='block'?'Official block source':'District source'}</div>
       <label className="state-a-subtext glass-panel"><input type="checkbox" checked={mapLabels} onChange={e=>setMapLabels(e.target.checked)}/> Street map labels (online)</label>
     </div>
@@ -69,13 +75,13 @@ export default function MapDashboard({ geojsonLayer, onSelectPanchayat, selected
       {geojsonLayer && <GeoJSON key={variable+'|'+view+'|'+selectedPanchayatId} data={geojsonLayer} style={style} onEachFeature={onFeature}/>}
     </MapContainer>
     <div className="map-legend glass-panel">
-      <strong>{view==='source'?'Source':'Local'} {label.toLowerCase()} · {unit}</strong>
-      <div className="legend-bar"/>
+      <strong>{inherited || view==='source'?'Source':'Local'} {label.toLowerCase()} · {unit}</strong>
+      {inherited && uniformValue !== null ? <p className="scale-values">Same source value across this selection: {uniformValue} {unit}</p> : <><div className="legend-bar"/>
       <div className="legend-labels"><span>Lower value</span><span>Higher value</span></div>
-      <p className="scale-values">Shared breaks: {thresholds.map(v=>v.toFixed(1)).join(' / ')} {unit}</p>
+      <p className="scale-values">Shared breaks: {thresholds.map(v=>v.toFixed(1)).join(' / ')} {unit}</p></>}
       <p className="scale-values">Gray: unavailable · Village polygons</p>
       <p className="scale-values">{variable.startsWith('temp_')?'Temperature: experimental elevation adjustment.':variable!=='rainfall_mm'?'Inherited from parent; no validated local adjustment.':'Rainfall: experimental terrain adjustment.'}</p>
-      <p className="scale-values">Before view repeats each parent's forecast over its villages.</p>
+      <p className="scale-values">{inherited ? (forecastMeta?.mode==='district' ? 'One district forecast applies to every village on this date. Change source to block forecasts to see block-level inputs.' : 'Each village inherits its block forecast. Values may differ between blocks or dates.') : "Before view repeats each parent's forecast over its villages."}</p>
     </div>
   </div>;
 }

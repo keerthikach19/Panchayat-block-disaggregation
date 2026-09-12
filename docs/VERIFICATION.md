@@ -23,3 +23,11 @@ preserve original bytes, including their existing line endings.
 - Training: five lead models completed; reports include temporal/spatial holdouts and heavy-rain failures. Models were not promoted because evidence does not support operational use.
 
 These checks establish software behavior. Forecast accuracy is experimental. Docker is configured but was not executed because Docker is not installed on this machine. Two test dependency deprecation warnings do not affect current execution.
+## Weather display update
+
+Cloud cover and wind direction were removed from the displayed map choices,
+village details, comparison table and generated bulletin. Original inputs and API
+provenance are preserved. Wind speed and humidity are explicitly source forecasts;
+the Before/After toggle is hidden for them, and uniform selections show their
+single source value. Rainfall and temperature retain their local-adjustment views.
+Validation: production frontend build passed; all 9 full-weather tests passed.

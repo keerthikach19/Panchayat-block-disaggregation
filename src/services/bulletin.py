@@ -7,8 +7,7 @@ FIELDS = [("rainfall_mm", "Rainfall", "mm"), ("temp_max_c", "Maximum temperature
           ("temp_min_c", "Minimum temperature", "°C"),
           ("relative_humidity_max_pct", "Maximum humidity", "%"),
           ("relative_humidity_min_pct", "Minimum humidity", "%"),
-          ("wind_speed_kmph", "Wind speed", "km/h"), ("wind_direction_deg", "Wind direction", "°"),
-          ("cloud_cover_oktas", "Cloud cover", "oktas"), ("cloud_description", "Cloud description", "text")]
+          ("wind_speed_kmph", "Wind speed", "km/h")]
 SOP = "https://mausam.imd.gov.in/imd_latest/contents/pdf/gkms_sop.pdf"
 
 
@@ -20,9 +19,13 @@ def render_bulletin(service, village_id, mode="block", run_id=None):
     e = lambda value: escape(str(value), quote=True)
     def value(v):
         return "Unavailable" if v is None else e(f"{v:.2f}" if isinstance(v, (float, int)) else v)
+    def cell(day, key):
+        if key.startswith("relative_humidity_") or key == "wind_speed_kmph":
+            return f"<td>{value(day['source'].get(key))}<small>Source forecast; no local adjustment</small></td>"
+        return f"<td>{value(day.get(key))}<small>Source: {value(day['source'].get(key))}</small></td>"
     headers = "".join(f"<th>{e(d['valid_date'])}</th>" for d in days)
     table = "".join(f"<tr><th>{e(label)} ({unit})</th>" + "".join(
-        f"<td>{value(d.get(key))}<small>Source: {value(d['source'].get(key))}</small></td>" for d in days) + "</tr>"
+        cell(d, key) for d in days) + "</tr>"
         for key, label, unit in FIELDS)
     guidance = "".join(f"<tr><th>{e(d['valid_date'])}</th><td>{e(d['advisory']['text'])}</td></tr>" for d in days)
     names = first["source"].get("sources", [])
@@ -39,11 +42,11 @@ body{{font:14px/1.5 system-ui,sans-serif;color:#183044;max-width:1100px;margin:3
 </style><body><button onclick="window.print()">Print / Save as PDF</button>
 <h1>GKMS-style agrometeorological bulletin</h1><p class="notice"><strong>Academic draft — not an official IMD/GKMS advisory.</strong> Local estimates are experimental. Crop-specific decisions require verified crop stage, field observations and local agronomic review.</p>
 <p><strong>{e(first['panchayat_name'])}, {e(first['block_name'])} block, Nashik</strong><br>Village ID: {e(village_id)} · Source: {e(mode)} · Issued: {e(first['issue_date'])}<br>Valid: {e(period)} (Asia/Kolkata) · Status: {e(forecast['freshness'])}<br>Generated: {e(datetime.now(ZoneInfo('Asia/Kolkata')).isoformat(timespec='seconds'))}</p>
-<h2>Five-day weather forecast</h2><p>Each cell shows the local estimate and its parent source. Missing measurements remain unavailable.</p><table><thead><tr><th>Parameter</th>{headers}</tr></thead><tbody>{table}</tbody></table>
+<h2>Five-day weather forecast</h2><p>Rainfall and temperature show local estimates beside their parent source. Humidity and wind speed show unchanged source forecasts. Missing measurements remain unavailable.</p><table><thead><tr><th>Parameter</th>{headers}</tr></thead><tbody>{table}</tbody></table>
 <p>Total predicted rain across this source period: <strong>{total:.2f} mm</strong>. This is a forecast sum, not observed rainfall. Different source issues may disagree.</p>
 <h2>Weather-based general guidance</h2><table><tr><th>Date</th><th>Draft guidance</th></tr>{guidance}</table>
 <h2>Field information and official products</h2><table><tr><th>Past five-day observed weather</th><td>Not supplied as a verified local series; forecasts above must not be used as observations.</td></tr><tr><th>Crop, stage, soil moisture, pests</th><td>Not supplied. Crop-specific treatments, doses and pest predictions are not generated.</td></tr><tr><th>Official weather warnings</th><td>Not parsed. Check the current IMD bulletin and district warnings; absence here does not mean no warning.</td></tr><tr><th>Days 6–12 outlook</th><td>Not available in the five-day input. No extrapolated outlook is generated.</td></tr><tr><th>Local review / feedback</th><td>Reviewer: __________ Date: __________<br>Crop / stage / observed conditions / actions: ____________________</td></tr></table>
 <h2>Short-message preview</h2><p>{e(sms[:262])}</p><small>Preview only; no message has been sent.</small>
-<h2>Method and provenance</h2><p>Rainfall uses parent-normalized terrain factors. Temperature uses an assumed −6.5°C/km elevation adjustment. Humidity, wind and cloud inherit the parent source. Qualitative cloud descriptions are not converted to numeric oktas. Village polygons are not verified gram-panchayat boundaries.</p>
+<h2>Method and provenance</h2><p>Rainfall uses parent-normalized terrain factors. Temperature uses an assumed −6.5°C/km elevation adjustment. Humidity and wind speed inherit the parent source without local adjustment. Village polygons are not verified gram-panchayat boundaries.</p>
 <p class="wrap">Model: {e(first['model_version'])}<br>Dataset: {e(first['dataset_version'])}<br>Run: {e(first['run_id'])}</p><ul class="wrap">{provenance}</ul>
 <p>Bulletin organization follows the weather, field-context and advisory themes of <a href="{SOP}">IMD GKMS SOP, section 6</a>. This draft lacks the observational and expert inputs needed for an official bulletin.</p></body></html>'''

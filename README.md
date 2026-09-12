@@ -1,7 +1,7 @@
 # Nashik weather downscaling — final academic release
 
 See [submission guide](docs/SUBMISSION.md) for the demonstration checklist, training
-results and final model decision. The application includes eight weather map layers,
+results and final model decision. The application includes six weather map layers,
 a same-day comparison, training evidence and printable GKMS-style draft bulletins.
 
 
