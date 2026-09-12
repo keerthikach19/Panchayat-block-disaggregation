@@ -1,2 +1,6 @@
 "Block-level data/*.csv" -text
 *.pkl -text
+# Preserve byte-level benchmark evidence on Windows and Unix checkouts.
+data/research/** text eol=lf
+config/calibration_experiment.json text eol=lf
+scripts/benchmark_maharashtra_rainfall.py text eol=lf
