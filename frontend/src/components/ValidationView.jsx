@@ -13,7 +13,8 @@ export default function ValidationView({ modelVersion }) {
   const proxy=report?.proxy_report;
   return <section className="notes"><h2>Model evaluation</h2>
     {error && <p role="alert">{error}</p>}
-    {proxy ? <>
+    {!report && !error && <p role="status">Loading model evaluation…</p>}
+    {!report ? null : proxy ? <>
       <p><strong>Experimental terrain model · {proxy.selected_candidate.replaceAll('_',' ')}</strong></p>
       <p>{proxy.evaluation_kind}. No independent village forecast accuracy or calibrated prediction interval is claimed.</p>
       <details><summary>View model comparison and limitations</summary>

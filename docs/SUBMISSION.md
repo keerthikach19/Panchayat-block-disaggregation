@@ -63,3 +63,15 @@ Tests cover import conflicts, immutable source/model IDs, dates and missing data
 block/district independence, rainfall conservation, source comparisons, parser
 column alignment, full-weather propagation, bulletin generation and training leakage
 contracts. They establish software behavior, not observational forecast accuracy.
+
+## Recreate the submission ZIP
+
+After committing reviewed changes and building the frontend:
+
+```powershell
+.venv\Scripts\python scripts/package_submission.py
+```
+
+The ZIP includes tracked project files, the built frontend, an available district
+source cache and a RELEASE.json file manifest. Each ZIP entry is read back and
+SHA-256 checked. A companion .sha256 file identifies the complete archive.

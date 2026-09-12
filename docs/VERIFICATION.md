@@ -1,5 +1,16 @@
 # Release verification — 12 September 2026
 
+Final merged-main verification: **71 tests passed**. Production frontend built successfully;
+Start-Project.ps1 launched main on port 8000. Health reports block_demo_ready=true;
+model evidence endpoint serves the completed benchmark. Browser zoom/tab-switch
+regression was rechecked with no console errors. The test run reports two upstream
+deprecation warnings and one sandbox-only pytest cache-write warning.
+
+All 15 original CSVs, 13 indexed benchmark files and 15 archived migration blobs
+retain their original hashes in main. Benchmark files use Git -text attributes to
+preserve original bytes, including their existing line endings.
+
+
 - Full regression suite: 68 passed (two third-party deprecation warnings).
 - After the run-list optimization: API, hybrid service and full-weather subset, 15 passed.
 - After stricter rainfall-row parsing: district parser, full-weather and cache subset, 20 passed (includes three added malformed-rainfall cases).
