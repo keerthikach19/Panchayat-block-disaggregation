@@ -1,0 +1,57 @@
+{
+  "artifacts": {
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-1.json": {
+      "sha256": "dd03bf52d525ffbbdaae8be574169ff133036b2e63b4cd146bf77291cad8c6a8",
+      "bytes": 4101
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-1.txt": {
+      "sha256": "f6da6767d8de050f56ac7674f8eeb776be08e4f1ada23543db9b57aa9942cb99",
+      "bytes": 195859
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-2.json": {
+      "sha256": "f6c6de01e83bfd1b9d23bfdf2bb2d501f6b2b02a8140ee28efae0c43ab8fd59d",
+      "bytes": 4100
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-2.txt": {
+      "sha256": "15cc6067941f98c3d84939f814ea6f8e5db76b86d0dde273db355d6f63582ea4",
+      "bytes": 196255
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-3.json": {
+      "sha256": "0081c4869806c02584bfdb7466d8e73fdd25f9f60f4cbc0434ea71ca0499a14d",
+      "bytes": 4095
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-3.txt": {
+      "sha256": "781119ed8e08618220a1ee225a0ca52a5fe79ddfd61118548d47bc4054a432bf",
+      "bytes": 196225
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-4.json": {
+      "sha256": "c8a281d7d5dee0e67c74f68bc47cad507ab817067e347c8f0d5fad276c2bca6b",
+      "bytes": 4105
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-4.txt": {
+      "sha256": "1d029387e7553722b791a16f641aad74b46e6c9c4eb537e5387ab60e2f876a57",
+      "bytes": 196355
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-5.json": {
+      "sha256": "3da68f6c33f0818889b8bed2bf951ee8dd0ff92bc86d8abc044df79d66eca4a2",
+      "bytes": 4097
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/lead-5.txt": {
+      "sha256": "c329ec1f1b493a096ce7f1f1e5a8f2267b3c09a3df4e869d0520ff0776ed1227",
+      "bytes": 195687
+    },
+    "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/report.json": {
+      "sha256": "42128b189d7350a815cc2f5fcfb78514205c8b4c1e6ca3ca8f94445c31fca1e3",
+      "bytes": 25806
+    },
+    "config/calibration_experiment.json": {
+      "sha256": "b2c7eb6cc30edff4aa62b4866017e265f060a7d2455d43c897b539f5d669b13a",
+      "bytes": 1335
+    },
+    "scripts/benchmark_maharashtra_rainfall.py": {
+      "sha256": "649309e964e20e3005c4fbf0a40f7e88d26b33db1c3a2d1a601a1f0edabe5852",
+      "bytes": 6736
+    }
+  },
+  "purpose": "Frozen selected-model and benchmark evidence integrity"
+}

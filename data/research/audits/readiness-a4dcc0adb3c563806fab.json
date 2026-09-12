@@ -1,0 +1,74 @@
+{
+  "status": "NOT_READY_FOR_OFFICIAL_FORECAST_CALIBRATION",
+  "preserved_fallback_commit": "49ea992048522dcb389a2a1fbb6d171fa7be24b0",
+  "block_source_records": 75,
+  "block_issue_dates": [
+    "2026-09-10"
+  ],
+  "district_issue_dates": [
+    "2026-09-11"
+  ],
+  "district_source_records": 5,
+  "historical_observation_years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "exact_issued_forecast_observation_pairs": 0,
+  "blockers": [
+    "Existing block and district exports have issue dates, not verified issue timestamps.",
+    "Exact rainfall accumulation intervals and geographic support of parent inputs are unverified.",
+    "Historical IMD analyses end in 2024 for this experiment; preserved source forecasts are in 2026.",
+    "Legacy station-labelled CSV is NASA POWER proxy data, not an independently verified gauge archive.",
+    "No authenticated historical paired IMD forecast archive or independent Nashik gauge observations has been acquired."
+  ],
+  "next_data_contract": {
+    "forecast_required": [
+      "source",
+      "source_sha256",
+      "location_id",
+      "support_id",
+      "issued_at",
+      "available_at",
+      "valid_start",
+      "valid_end",
+      "rainfall_mm"
+    ],
+    "observation_required": [
+      "source_sha256",
+      "location_id",
+      "support_id",
+      "valid_start",
+      "valid_end",
+      "rainfall_mm",
+      "target_kind"
+    ],
+    "feature_required": [
+      "name",
+      "value",
+      "available_at"
+    ]
+  },
+  "allowed_now": [
+    "Retrospective grid-level lagged rainfall benchmark with spatial and temporal holdouts",
+    "Test interval alignment and reconciliation on explicitly labelled software fixtures"
+  ],
+  "not_allowed": [
+    "Production activation",
+    "Claiming village forecast skill",
+    "Fabricating past issued forecasts from observed rainfall",
+    "Forcing source agreement to a preset maximum difference"
+  ]
+}

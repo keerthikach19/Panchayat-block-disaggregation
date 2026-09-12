@@ -1,0 +1,137 @@
+{
+  "lead_days": 4,
+  "train_n": 524637,
+  "validation_n": 174879,
+  "test_n": 10098,
+  "selected": "lightgbm_absolute",
+  "validation": {
+    "persistence": {
+      "n": 174879,
+      "mae_mm": 11.423495292663574,
+      "rmse_mm": 23.397733688354492,
+      "bias_mm": -0.06274449825286865,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 38.010169982910156,
+      "heavy_20mm_csi": 0.15097440713782578,
+      "heavy_20mm_hits": 5787,
+      "heavy_20mm_misses": 16359,
+      "heavy_20mm_false_alarms": 16185
+    },
+    "regional_monthly_mean": {
+      "n": 174879,
+      "mae_mm": 9.691994085108298,
+      "rmse_mm": 19.035070206092115,
+      "bias_mm": -1.5710995768984488,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 37.81583645940634,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 22146,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 174879,
+      "mae_mm": 7.8803076833315835,
+      "rmse_mm": 19.031329069150573,
+      "bias_mm": -6.595795186317662,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 40.41351367139643,
+      "heavy_20mm_csi": 0.056559102069449314,
+      "heavy_20mm_hits": 1290,
+      "heavy_20mm_misses": 20856,
+      "heavy_20mm_false_alarms": 662
+    },
+    "lightgbm_tweedie": {
+      "n": 174879,
+      "mae_mm": 8.769782784738531,
+      "rmse_mm": 17.522761546350786,
+      "bias_mm": -1.6803255658069147,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 33.807813963567696,
+      "heavy_20mm_csi": 0.17256620452570737,
+      "heavy_20mm_hits": 4568,
+      "heavy_20mm_misses": 17578,
+      "heavy_20mm_false_alarms": 4325
+    }
+  },
+  "nashik_test": {
+    "persistence": {
+      "n": 10098,
+      "mae_mm": 9.454421997070312,
+      "rmse_mm": 19.621231079101562,
+      "bias_mm": 1.8132844559204386e-08,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 34.316219329833984,
+      "heavy_20mm_csi": 0.09380142622051563,
+      "heavy_20mm_hits": 171,
+      "heavy_20mm_misses": 826,
+      "heavy_20mm_false_alarms": 826
+    },
+    "regional_monthly_mean": {
+      "n": 10098,
+      "mae_mm": 8.36250224497533,
+      "rmse_mm": 14.768380143507985,
+      "bias_mm": 0.38166434859466286,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 33.32791006218347,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 997,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 10098,
+      "mae_mm": 6.179966284434371,
+      "rmse_mm": 14.766487941555539,
+      "bias_mm": -4.356243792510246,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 35.99498405524647,
+      "heavy_20mm_csi": 0.03288201160541586,
+      "heavy_20mm_hits": 34,
+      "heavy_20mm_misses": 963,
+      "heavy_20mm_false_alarms": 37
+    },
+    "lightgbm_tweedie": {
+      "n": 10098,
+      "mae_mm": 7.632725671034627,
+      "rmse_mm": 14.240810980454896,
+      "bias_mm": -0.08140029010999854,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 30.606952988011557,
+      "heavy_20mm_csi": 0.15061549601737872,
+      "heavy_20mm_hits": 208,
+      "heavy_20mm_misses": 789,
+      "heavy_20mm_false_alarms": 384
+    }
+  },
+  "monthly_baseline": {
+    "6": 6.855543613433838,
+    "7": 11.617210388183594,
+    "8": 8.540691375732422,
+    "9": 6.280285358428955,
+    "10": 1.980985403060913
+  },
+  "feature_names": [
+    "rain_last",
+    "rain_previous",
+    "rain_two_before",
+    "rain_six_before",
+    "rain_thirteen_before",
+    "mean3",
+    "mean7",
+    "mean14",
+    "latitude",
+    "longitude",
+    "season_sin",
+    "season_cos"
+  ],
+  "eligible_for_production": false
+}

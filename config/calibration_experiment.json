@@ -1,0 +1,30 @@
+{
+  "schema_version": "maharashtra-calibration-v1",
+  "fallback_commit": "49ea992",
+  "fallback_branch": "codex/nashik-hybrid",
+  "experiment_branch": "codex/maharashtra-calibrated",
+  "production_activation_allowed": false,
+  "target": "daily_rainfall_mm",
+  "historical_grid_benchmark": {
+    "train_years": [2010, 2018],
+    "validation_years": [2019, 2021],
+    "test_years": [2022, 2024],
+    "months": [6, 7, 8, 9, 10],
+    "held_out_district": "Nashik",
+    "spatial_exclusion_buffer_degrees": 0.25,
+    "lead_days": [1, 2, 3, 4, 5],
+    "observation_lag_days": 2,
+    "status": "research_only; retrospective lag-feature benchmark, not IMD forecast calibration"
+  },
+  "promotion_requirements": [
+    "Independent observations at the claimed output scale",
+    "Original issued forecast and observation pairs with exact accumulation intervals",
+    "Measured predictor availability before issue time",
+    "Temporal and spatial holdouts locked before candidate selection",
+    "Compare against unchanged-parent, persistence and climatology baselines",
+    "Check skill by lead time and rainfall intensity, including heavy rain",
+    "No agreement clipping or arbitrary 6-10 mm cap",
+    "Reconciliation weights estimated on development data, never test data",
+    "Explicit model review before any default serving change"
+  ]
+}

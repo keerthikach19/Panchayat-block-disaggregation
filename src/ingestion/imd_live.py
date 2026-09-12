@@ -64,7 +64,7 @@ class IMDLiveData:
         # Cache the complete source series; select a day on every response.
         if not force_refresh:
             cached = self._read_cache("agromet", district_name)
-            if self._is_fresh(cached):
+            if self._is_fresh(cached) and cached.get("parser_version") == 2:
                 return self.select_forecast(cached, target_date, cached=True)
 
         params = urlencode({"state": state, "district": district_name, "language": "English"})
@@ -161,14 +161,15 @@ class IMDLiveData:
 
     @classmethod
     def parse_bulletin_text(cls, text: str, district: str, source_url: str, target_date: Optional[str] = None) -> Dict[str, Any]:
-        """Parse the five forecast dates and rainfall values from IMD PDF text."""
+        """Read forecast columns after each label, never the preceding observations."""
         normalized = re.sub(r"[\u00a0\t]+", " ", text)
-        values_match = re.search(r"Rainfall\s*\(\s*mm\s*\)\s*((?:\d+(?:\.\d+)?\s+){4,8})", normalized, flags=re.IGNORECASE)
+        values_match = re.search(r"Rainfall\s*\(\s*mm\s*\)[ ]*([^\r\n]*)", normalized, flags=re.IGNORECASE)
         if not values_match:
             raise ValueError("Could not find the Weather Forecast rainfall row in the IMD bulletin.")
-        rainfall_values = [float(value) for value in re.findall(r"\d+(?:\.\d+)?", values_match.group(1))[:5]]
-        if len(rainfall_values) != 5:
+        rainfall_tokens = values_match.group(1).split()
+        if len(rainfall_tokens) != 5 or any(not re.fullmatch(r"\d+(?:\.\d+)?", t) for t in rainfall_tokens):
             raise ValueError("The IMD bulletin did not contain five daily rainfall values.")
+        rainfall_values = list(map(float, rainfall_tokens))
 
         issue_match = re.search(r"(?:meeting dated|Date\s*:)\s*(\d{1,2}\.\d{1,2}\.\d{4})", normalized, re.IGNORECASE)
         issued_date = cls._parse_dot_date(issue_match.group(1)) if issue_match else None
@@ -182,9 +183,39 @@ class IMDLiveData:
             raise ValueError("Could not determine the forecast-valid dates from the IMD bulletin.")
 
         daily = [{"date": forecast_day.isoformat(), "rainfall_mm": rainfall} for forecast_day, rainfall in zip(forecast_dates, rainfall_values)]
+        rows = {
+            "temp_max_c": (r"Max\.?\s*Temp\.?\s*\([^)]*\)", -60, 65),
+            "temp_min_c": (r"Min\.?\s*Temp\.?\s*\([^)]*\)", -60, 65),
+            "relative_humidity_max_pct": (r"Max\.?\s*RH\s*\(%\)", 0, 100),
+            "relative_humidity_min_pct": (r"Min\.?\s*RH\s*\(%\)", 0, 100),
+            "wind_speed_kmph": (r"Wind\s*Speed\s*\(km/(?:hr|h)\)", 0, 300),
+        }
+        for key, (label, low, high) in rows.items():
+            match = re.search(label + r"[ ]*([^\r\n]*)", normalized, re.I)
+            if not match:
+                continue
+            tokens = match.group(1).split()
+            if len(tokens) != 5 or any(not re.fullmatch(r"-?\d+(?:\.\d+)?", t) for t in tokens):
+                raise ValueError(f"Invalid five-day forecast row: {key}")
+            values = list(map(float, tokens))
+            if any(not low <= v <= high for v in values):
+                raise ValueError(f"Out-of-range forecast row: {key}")
+            for day, value in zip(daily, values):
+                day[key] = value
+        cloud = re.search(r"Cloud\s*Cover[ ]+([^\r\n]+)", normalized, re.I)
+        if cloud:
+            # Preserve qualitative source wording; 'Cloudy' is not a measured okta count.
+            words = cloud.group(1).strip().split()
+            if len(words) == 5 and all(w.lower() in {"cloudy", "clear", "overcast"} for w in words):
+                for day, word in zip(daily, words):
+                    day["cloud_description"] = word
+        for day in daily:
+            for lo, hi in (("temp_min_c", "temp_max_c"), ("relative_humidity_min_pct", "relative_humidity_max_pct")):
+                if lo in day and hi in day and day[lo] > day[hi]:
+                    raise ValueError(f"Inverted forecast range: {lo}/{hi}")
         selected_date = select_date([entry["date"] for entry in daily], target_date)
         selected = next(entry for entry in daily if entry["date"] == selected_date)
-        return {"district": district, "source": "IMD GKMS district agromet advisory forecast", "source_url": source_url, "issued_date": issued_date.isoformat() if issued_date else None, "forecast_days": daily, "selected_forecast_date": selected["date"], "selected_rainfall_mm": selected["rainfall_mm"]}
+        return {"parser_version": 2, "district": district, "source": "IMD GKMS district agromet advisory forecast", "source_url": source_url, "issued_date": issued_date.isoformat() if issued_date else None, "forecast_days": daily, "selected_forecast_date": selected["date"], "selected_rainfall_mm": selected["rainfall_mm"]}
 
     @staticmethod
     def parse_realized_rainfall_html(raw_html: str, district: str) -> Dict[str, Any]:

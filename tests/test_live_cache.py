@@ -6,7 +6,7 @@ from src.services.forecast_service import ForecastService
 from src.ingestion.forecast_schema import ROOT
 
 def series(live):
-    return {"issued_date":"2026-09-10","source_url":"https://imdagrimet.gov.in/example.pdf",
+    return {"parser_version":2,"issued_date":"2026-09-10","source_url":"https://imdagrimet.gov.in/example.pdf",
             "forecast_days":[{"date":f"2026-09-{d}","rainfall_mm":float(d)} for d in range(11,16)],
             "fetched_at":live._now_iso()}
 

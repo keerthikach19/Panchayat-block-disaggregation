@@ -13,6 +13,7 @@ COPY src/ ./src/
 COPY config/ ./config/
 COPY data/imported/ ./data/imported/
 COPY data/derived/ ./data/derived/
+COPY data/research/benchmarks/ ./data/research/benchmarks/
 COPY data/models/terrain_proxy/ ./data/models/terrain_proxy/
 COPY data/boundaries/nashik_panchayats_covariates.geojson ./data/boundaries/nashik_panchayats_covariates.geojson
 COPY data/panchayat_covariates.csv ./data/panchayat_covariates.csv

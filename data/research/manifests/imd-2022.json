@@ -1,0 +1,31 @@
+{
+  "provider": "IMD",
+  "source_page": "https://imdpune.gov.in/cmpg/Griddata/Rainfall_25_Bin.html",
+  "request_url": "https://imdpune.gov.in/cmpg/Griddata/rainfall.php",
+  "request_form": {
+    "rain": "2022"
+  },
+  "final_url": "https://imdpune.gov.in/cmpg/Griddata/rainfall.php",
+  "year": 2022,
+  "bytes": 25425900,
+  "sha256": "9cd1654631ed918f55fbe12e08ef7c0593019c4a3399e695f0b0398283fcbb3e",
+  "downloaded_at": "2026-09-12T04:43:46.871059+00:00",
+  "content_type": "application/octet-stream",
+  "target_kind": "gauge_based_gridded_analysis",
+  "not_independent_station_observations": true,
+  "grid": {
+    "latitude_start": 6.5,
+    "longitude_start": 66.5,
+    "spacing_degrees": 0.25,
+    "shape": [
+      365,
+      129,
+      135
+    ]
+  },
+  "finite_values": 1811860,
+  "missing_values": 4544615,
+  "max_rainfall_mm": 979.144775390625,
+  "accumulation_hours": "Not established from download page; do not assume alignment with forecast valid dates",
+  "citation": "Pai et al. (2014), MAUSAM 65(1), 1-18"
+}

@@ -71,6 +71,9 @@ def pair_rows(block_rows, district_rows):
             "block_local_mm": b["local_rainfall_mm"], "district_local_mm": d["local_rainfall_mm"],
             "difference_mm": delta, "percent_vs_district": 100*delta/d["local_rainfall_mm"] if d["local_rainfall_mm"] else None,
             "source_component_mm": source, "reference_component_mm": reference,
+            "weather": {k: {"block": b.get(k), "district": d.get(k),
+                "difference": b[k] - d[k] if b.get(k) is not None and d.get(k) is not None else None}
+                for k in WEATHER_FIELDS if k != "wind_direction_deg"},
             "rounding_residual_mm": delta-source-reference})
     return result, {"block_only_ids": sorted(left.keys()-right.keys()),
                     "district_only_ids": sorted(right.keys()-left.keys())}
@@ -100,6 +103,7 @@ class ComparisonService:
         blocks = [{"block": name, **statistics([r for r in rows if r["block"] == name])}
                   for name in sorted({r["block"] for r in rows})]
         return {**{k:v for k,v in snapshot.items() if k != "rows"}, "valid_date": selected,
+                "weather_summary": {k: weather_statistics(rows, k) for k in WEATHER_FIELDS if k != "wind_direction_deg"},
                 "selected_block": canonical, "summary": statistics(rows), "by_date": by_date,
                 "by_block": blocks, "rows": rows,
                 "top_disagreements": sorted(rows, key=lambda r: abs(r["difference_mm"]), reverse=True)[:10]}
@@ -137,3 +141,14 @@ class ComparisonService:
                 "interpretation":"Positive difference means block-derived rainfall is higher. This measures disagreement, not accuracy.",
                 "decomposition":"Symmetric algebra: source=(Sb-Sd)*(fb+fd)/2; reference=(Sb+Sd)*(fb-fd)/2; sum equals B-D before output rounding. Not causal attribution.",
                 "limitation":"Same validity date does not prove identical accumulation hours, issue time or forecast lead time. Village polygons are not verified gram-panchayat boundaries."}
+
+
+def weather_statistics(rows, key):
+    pairs = [r["weather"][key] for r in rows if r["weather"][key]["difference"] is not None]
+    if not pairs:
+        return {"count": 0}
+    n = len(pairs)
+    return {"count": n, "block_mean": sum(p["block"] for p in pairs)/n,
+            "district_mean": sum(p["district"] for p in pairs)/n,
+            "mean_absolute_difference": sum(abs(p["difference"]) for p in pairs)/n,
+            "max_absolute_difference": max(abs(p["difference"]) for p in pairs)}

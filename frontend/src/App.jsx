@@ -3,6 +3,7 @@ import MapDashboard from './components/MapDashboard';
 import ExplainabilityPanel from './components/ExplainabilityPanel';
 import ValidationView from './components/ValidationView';
 import ComparisonView from './components/ComparisonView';
+import ModelEvidence from './components/ModelEvidence';
 import './hybrid.css';
 
 async function get(path, signal) {
@@ -74,12 +75,13 @@ export default function App() {
   const chosenDay = date || forecast?.valid_date || '';
   return <main className="hybrid">
     <header className="hybrid-header"><div><span className="eyebrow">NASHIK · IMD FORECAST INPUTS</span><h1>Weather Downscaling Dashboard</h1></div><span className="method-chip">{forecast ? (forecast.model_version.startsWith('terrain-') ? 'Experimental terrain model' : 'Parent forecast baseline') : 'Loading model…'}</span></header>
-    <nav className="view-tabs" aria-label="Dashboard views"><button aria-pressed={tab==='map'} onClick={()=>setTab('map')}>Forecast map</button><button aria-pressed={tab==='comparison'} onClick={()=>setTab('comparison')}>Same-day comparison</button></nav>
-    {tab === 'comparison' ? <ComparisonView/> : <><section className="controls" aria-label="Forecast selection">
+    <nav className="view-tabs" aria-label="Dashboard views"><button aria-pressed={tab==='map'} onClick={()=>setTab('map')}>Forecast map</button><button aria-pressed={tab==='comparison'} onClick={()=>setTab('comparison')}>Same-day comparison</button><button aria-pressed={tab==='model'} onClick={()=>setTab('model')}>Model & training</button></nav>
+    {tab === 'model' ? <ModelEvidence/> : tab === 'comparison' ? <ComparisonView/> : <><section className="controls" aria-label="Forecast selection">
       <label>District<select value="Nashik" onChange={() => {}}><option>Nashik</option></select></label>
       <label>Forecast source<select value={mode} onChange={e => { setMode(e.target.value); setBlock(''); }}><option value="block">Official block forecasts</option><option value="district">Live district forecast</option></select></label>
       <label>Forecast day<select value={chosenDay} onChange={e => setDate(e.target.value)} disabled={!availableDates.length}>{!chosenDay && <option value="">Selecting date…</option>}{availableDates.map(d => <option key={d}>{d}</option>)}</select></label>
       <label>Block<select value={block} onChange={e => setBlock(e.target.value)}><option value="">All available blocks</option>{blocks.map(b => <option key={b.id} value={b.name}>{b.name}{forecast?.coverage.missing_blocks.includes(b.name) ? ' — unavailable' : ''}</option>)}</select></label>
+      <label>Village<select value={selected || ''} onChange={e=>setSelected(e.target.value || null)} disabled={!forecast}><option value="">Select a village…</option>{forecast?.data.map(p=><option key={p.panchayat_id} value={p.panchayat_id}>{p.panchayat_name} · {p.block_name}</option>)}</select></label>
       {mode === 'district' && <button onClick={() => setRefresh(x => x + 1)}>Fetch district bulletin</button>}
     </section>
     {error && <div role="alert" className="status warning"><strong>Forecast unavailable</strong><p>{error}</p><button onClick={() => setRefresh(x => x + 1)}>Retry</button></div>}

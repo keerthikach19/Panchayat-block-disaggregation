@@ -1,4 +1,9 @@
-# Nashik hybrid weather forecasts
+# Nashik weather downscaling — final academic release
+
+See [submission guide](docs/SUBMISSION.md) for the demonstration checklist, training
+results and final model decision. The application includes eight weather map layers,
+a same-day comparison, training evidence and printable GKMS-style draft bulletins.
+
 
 Official, manually imported IMD **block** tables are the default source. A separate
 **live district** mode fetches the public IMD district bulletin. Block mode works
@@ -21,7 +26,7 @@ The migration was reviewed, not merged. See [baseline evidence](docs/BASELINE.md
 
 ## Run locally
 
-From this checkout (`.worktrees/nashik-hybrid` when using the preserved original workspace):
+From the project checkout on `main` (or the isolated final-release branch):
 
 ```powershell
 python -m venv .venv
@@ -112,8 +117,9 @@ Operator refresh command:
 .venv\Scripts\python scripts/refresh_district_forecast.py --district Nashik
 ```
 
-The retained district adapter currently extracts rainfall; other variables are
-unavailable in district mode. No humidity or temperature is fabricated.
+The district adapter extracts rainfall, maximum/minimum temperature, maximum/minimum
+humidity, wind speed and qualitative cloud descriptions. Numeric cloud oktas and
+wind direction remain unavailable when the source does not supply them.
 
 ## Verification
 
@@ -122,7 +128,8 @@ by exact village ID and overlapping validity dates. Date/block changes pin both
 runs; **Compare latest sources** starts a new pairing. It reports signed and absolute
 disagreement, area-weighted means, per-block/village results, source/reference
 decomposition and advisory-threshold sensitivity. This is not an accuracy test.
-Only rainfall is currently available on both paths. The comparison is loaded only
+An all-weather summary also compares temperature, humidity and wind speed when both
+sources supply them. The comparison is loaded only
 when its view is opened, so the default map retains offline block behavior.
 
 API: `/api/comparison?valid_date=2026-09-14&block=Igatpuri`, with optional
@@ -161,7 +168,8 @@ docker run --rm -p 8000:8000 --read-only --tmpfs /tmp nashik-hybrid
 ```
 
 Alternatively build the frontend, install `requirements.txt`, package the source,
-configuration, imported/derived outputs, `data/models/terrain_proxy`, Nashik boundary GeoJSON and covariates,
+configuration, imported/derived outputs, `data/models/terrain_proxy`,
+`data/research/benchmarks`, Nashik boundary GeoJSON and covariates,
 then start `uvicorn src.api.main:app --host 0.0.0.0 --port 8000`.
 Configure the platform's port/reverse proxy and writable district-cache directory.
 

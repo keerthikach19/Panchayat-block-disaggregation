@@ -1,0 +1,137 @@
+{
+  "lead_days": 3,
+  "train_n": 524637,
+  "validation_n": 174879,
+  "test_n": 10098,
+  "selected": "lightgbm_absolute",
+  "validation": {
+    "persistence": {
+      "n": 174879,
+      "mae_mm": 11.30244255065918,
+      "rmse_mm": 23.112483978271484,
+      "bias_mm": -0.0358257070183754,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 37.4656867980957,
+      "heavy_20mm_csi": 0.15253618463945756,
+      "heavy_20mm_hits": 5849,
+      "heavy_20mm_misses": 16297,
+      "heavy_20mm_false_alarms": 16199
+    },
+    "regional_monthly_mean": {
+      "n": 174879,
+      "mae_mm": 9.691994085108298,
+      "rmse_mm": 19.035070206092115,
+      "bias_mm": -1.5710995768984488,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 37.81583645940634,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 22146,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 174879,
+      "mae_mm": 7.856162113968868,
+      "rmse_mm": 18.94394770640252,
+      "bias_mm": -6.512994760950862,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 40.15020618170998,
+      "heavy_20mm_csi": 0.06722762349043031,
+      "heavy_20mm_hits": 1542,
+      "heavy_20mm_misses": 20604,
+      "heavy_20mm_false_alarms": 791
+    },
+    "lightgbm_tweedie": {
+      "n": 174879,
+      "mae_mm": 8.781377661683774,
+      "rmse_mm": 17.446976318932336,
+      "bias_mm": -1.5634947421495204,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 33.590086933196794,
+      "heavy_20mm_csi": 0.177475947934352,
+      "heavy_20mm_hits": 4704,
+      "heavy_20mm_misses": 17442,
+      "heavy_20mm_false_alarms": 4359
+    }
+  },
+  "nashik_test": {
+    "persistence": {
+      "n": 10098,
+      "mae_mm": 9.286900520324707,
+      "rmse_mm": 19.350082397460938,
+      "bias_mm": -7.253137823681755e-08,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 34.17253494262695,
+      "heavy_20mm_csi": 0.09862258953168045,
+      "heavy_20mm_hits": 179,
+      "heavy_20mm_misses": 818,
+      "heavy_20mm_false_alarms": 818
+    },
+    "regional_monthly_mean": {
+      "n": 10098,
+      "mae_mm": 8.36250224497533,
+      "rmse_mm": 14.768380143507985,
+      "bias_mm": 0.38166434859466286,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 33.32791006218347,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 997,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 10098,
+      "mae_mm": 6.189993266315519,
+      "rmse_mm": 14.749924064152504,
+      "bias_mm": -4.321809404089545,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 35.9631846581605,
+      "heavy_20mm_csi": 0.031007751937984496,
+      "heavy_20mm_hits": 32,
+      "heavy_20mm_misses": 965,
+      "heavy_20mm_false_alarms": 35
+    },
+    "lightgbm_tweedie": {
+      "n": 10098,
+      "mae_mm": 7.652331452695874,
+      "rmse_mm": 14.182403619356185,
+      "bias_mm": -0.019254218763530527,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 30.487494556892138,
+      "heavy_20mm_csi": 0.1509433962264151,
+      "heavy_20mm_hits": 208,
+      "heavy_20mm_misses": 789,
+      "heavy_20mm_false_alarms": 381
+    }
+  },
+  "monthly_baseline": {
+    "6": 6.855543613433838,
+    "7": 11.617210388183594,
+    "8": 8.540691375732422,
+    "9": 6.280285358428955,
+    "10": 1.980985403060913
+  },
+  "feature_names": [
+    "rain_last",
+    "rain_previous",
+    "rain_two_before",
+    "rain_six_before",
+    "rain_thirteen_before",
+    "mean3",
+    "mean7",
+    "mean14",
+    "latitude",
+    "longitude",
+    "season_sin",
+    "season_cos"
+  ],
+  "eligible_for_production": false
+}

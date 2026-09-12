@@ -1,0 +1,137 @@
+{
+  "lead_days": 5,
+  "train_n": 524637,
+  "validation_n": 174879,
+  "test_n": 10098,
+  "selected": "lightgbm_absolute",
+  "validation": {
+    "persistence": {
+      "n": 174879,
+      "mae_mm": 11.483519554138184,
+      "rmse_mm": 23.403167724609375,
+      "bias_mm": -0.09004607796669006,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 37.903533935546875,
+      "heavy_20mm_csi": 0.1458750682935713,
+      "heavy_20mm_hits": 5607,
+      "heavy_20mm_misses": 16539,
+      "heavy_20mm_false_alarms": 16291
+    },
+    "regional_monthly_mean": {
+      "n": 174879,
+      "mae_mm": 9.691994085108298,
+      "rmse_mm": 19.035070206092115,
+      "bias_mm": -1.5710995768984488,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 37.81583645940634,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 22146,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 174879,
+      "mae_mm": 7.907373481631373,
+      "rmse_mm": 19.06929166452658,
+      "bias_mm": -6.595721247367399,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 40.50277334531605,
+      "heavy_20mm_csi": 0.0532526209588981,
+      "heavy_20mm_hits": 1214,
+      "heavy_20mm_misses": 20932,
+      "heavy_20mm_false_alarms": 651
+    },
+    "lightgbm_tweedie": {
+      "n": 174879,
+      "mae_mm": 8.777953428339618,
+      "rmse_mm": 17.56829040140563,
+      "bias_mm": -1.7153963154443912,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 33.91134404422899,
+      "heavy_20mm_csi": 0.16841547028296527,
+      "heavy_20mm_hits": 4446,
+      "heavy_20mm_misses": 17700,
+      "heavy_20mm_false_alarms": 4253
+    }
+  },
+  "nashik_test": {
+    "persistence": {
+      "n": 10098,
+      "mae_mm": 9.552502632141113,
+      "rmse_mm": 19.710718154907227,
+      "bias_mm": -8.461994127628714e-08,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 35.881385803222656,
+      "heavy_20mm_csi": 0.08369565217391305,
+      "heavy_20mm_hits": 154,
+      "heavy_20mm_misses": 843,
+      "heavy_20mm_false_alarms": 843
+    },
+    "regional_monthly_mean": {
+      "n": 10098,
+      "mae_mm": 8.36250224497533,
+      "rmse_mm": 14.768380143507985,
+      "bias_mm": 0.38166434859466286,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 33.32791006218347,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 997,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 10098,
+      "mae_mm": 6.177413524979812,
+      "rmse_mm": 14.773028606583722,
+      "bias_mm": -4.32262398196094,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 35.946724474330445,
+      "heavy_20mm_csi": 0.04251207729468599,
+      "heavy_20mm_hits": 44,
+      "heavy_20mm_misses": 953,
+      "heavy_20mm_false_alarms": 38
+    },
+    "lightgbm_tweedie": {
+      "n": 10098,
+      "mae_mm": 7.602061456940322,
+      "rmse_mm": 14.218967130490704,
+      "bias_mm": -0.13007139268005297,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 30.68642462918621,
+      "heavy_20mm_csi": 0.15250544662309368,
+      "heavy_20mm_hits": 210,
+      "heavy_20mm_misses": 787,
+      "heavy_20mm_false_alarms": 380
+    }
+  },
+  "monthly_baseline": {
+    "6": 6.855543613433838,
+    "7": 11.617210388183594,
+    "8": 8.540691375732422,
+    "9": 6.280285358428955,
+    "10": 1.980985403060913
+  },
+  "feature_names": [
+    "rain_last",
+    "rain_previous",
+    "rain_two_before",
+    "rain_six_before",
+    "rain_thirteen_before",
+    "mean3",
+    "mean7",
+    "mean14",
+    "latitude",
+    "longitude",
+    "season_sin",
+    "season_cos"
+  ],
+  "eligible_for_production": false
+}

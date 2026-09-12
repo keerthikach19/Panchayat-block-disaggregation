@@ -81,3 +81,10 @@ htmlcov/
 .pytest_cache/
 .system_generated/
 scratch/
+
+# Isolated calibration research inputs and large arrays (hashes/manifests tracked)
+data/research/raw/
+data/research/arrays/
+# Worktrees are isolated local checkouts, never submission contents.
+.worktrees/
+release-artifacts/

@@ -28,6 +28,9 @@ def local_record(place, source, mode, model=MODEL, terrain=None):
     values = {k: source.get(k) for k in WEATHER_FIELDS}
     status = {k: ("inherited " + mode + " forecast" if values[k] is not None else "unavailable") for k in WEATHER_FIELDS}
     details = None
+    if source.get("cloud_description"):
+        values["cloud_description"] = source["cloud_description"]
+        status["cloud_description"] = "inherited " + mode + " forecast"
     if terrain is not None:
         factor = terrain["rainfall_factor" if mode == "block" else "district_rainfall_factor"]
         delta = terrain["temperature_adjustment_c" if mode == "block" else "district_temperature_adjustment_c"]
@@ -41,6 +44,8 @@ def local_record(place, source, mode, model=MODEL, terrain=None):
                    "village_elevation_m": terrain["elevation_m"], "area_m2": terrain["area_m2"],
                    "block_reference_elevation_m": terrain["block_reference_elevation_m"],
                    "dem_pixel_count": terrain["dem_pixel_count"]}
+        if mode == "district":
+            details["parent_reference_elevation_m"] = terrain["elevation_m"] + delta / 0.0065
     return {**place, "mode": mode, "input_level": mode, "source": source,
             "source_rainfall_mm": source["rainfall_mm"], **values,
             "local_rainfall_mm": values["rainfall_mm"], "adjustment_mm": round(values["rainfall_mm"] - source["rainfall_mm"],4),
@@ -122,7 +127,15 @@ class ImportedBlockForecastProvider:
     def list_runs(self, district="Nashik"):
         Registry(self.root).district(district)
         active = self.active()
-        return [self.load(r)[0] for r in active["run_ids"]]
+        # Listing choices must not deserialize every archived 5-day village output.
+        # The selected run still receives full checksum validation in load().
+        runs = []
+        for run_id in active["run_ids"]:
+            meta = read_json(self.root / "data/derived/forecasts" / safe_id(run_id) / "manifest.json")
+            if meta["run_id"] != run_id or meta["mode"] != "block":
+                raise ValueError("Run identity mismatch")
+            runs.append(meta)
+        return runs
 
     @lru_cache(maxsize=12)
     def load(self, run_id):
@@ -205,6 +218,7 @@ class LiveDistrictForecastProvider:
             self.runs.pop(next(iter(self.runs)))
         day = next(x for x in days if x["date"] == selected)
         source = {**{k: day.get(k) for k in WEATHER_FIELDS}, "issue_date": forecast.get("issued_date"),
+                  "cloud_description": day.get("cloud_description"),
                   "valid_date": selected, "source_url": forecast.get("source_url"),
                   "provider": "IMD", "input_level": "district", "ingestion_method": "live_district_bulletin",
                   "district_id": d["id"], "dataset_version": dataset_version}
@@ -256,7 +270,9 @@ class ForecastService:
                 continue
             row = by_id.get(p["panchayat_id"]) if p["available"] else None
             if row:
-                p.update(source_rainfall_mm=row["source_rainfall_mm"], local_rainfall_mm=row["local_rainfall_mm"])
+                for field in (*WEATHER_FIELDS, "cloud_description"):
+                    p["source_" + field] = row["source"].get(field)
+                    p["local_" + field] = row.get(field)
             else:
                 p.update(available=False, source_rainfall_mm=None, local_rainfall_mm=None,
                          unavailable_reason=p.get("unavailable_reason") or "Parent block forecast missing")

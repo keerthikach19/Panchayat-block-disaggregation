@@ -2,7 +2,7 @@
 from pathlib import Path
 from typing import Literal
 from fastapi import FastAPI, Depends, HTTPException, Query
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from src.ingestion.forecast_schema import ROOT
@@ -10,8 +10,10 @@ from src.ingestion.imd_live import LiveDataUnavailable
 from src.services.forecast_service import ForecastService, MODEL, advisory
 from src.modeling.terrain_model import load_terrain_model
 from src.services.comparison import ComparisonService
+from src.services.bulletin import render_bulletin
+from src.ingestion.forecast_schema import read_json
 
-app = FastAPI(title="Nashik hybrid weather forecasts", version="2.0.0")
+app = FastAPI(title="Nashik hybrid weather forecasts", version="3.0.0")
 service = ForecastService()
 comparison_service = ComparisonService(service)
 
@@ -102,6 +104,14 @@ def validation(model_version: str = MODEL["model_version"]):
     return {"model_version": model_version, "status": "insufficient_evidence",
             "metrics": None, "uncertainty": "not calibrated; omitted",
             "message": "Unchanged parent forecast baseline. No independent evaluation of local predictive skill. Old district metrics do not evaluate this pipeline."}
+
+@app.get("/api/bulletin/{panchayat_id}", response_class=HTMLResponse)
+def bulletin(panchayat_id: str, mode: Literal["block", "district"] = "block", run_id: str | None = None):
+    return call(render_bulletin, service, panchayat_id, mode, run_id)
+
+@app.get("/api/model-evidence")
+def model_evidence():
+    return call(read_json, ROOT / "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/report.json")
 
 class DisseminationPreviewPayload(BaseModel):
     panchayat_id: str

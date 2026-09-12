@@ -29,7 +29,7 @@ def generate():
       f"Block issue **{first['block_source']['issue_date']}** versus district issue **{first['district_source']['issue_date']}**. Shared forecast dates: **{', '.join(first['overlap_dates'])}**.",
       '',f"Each date pairs {first['summary']['count']:,} villages by exact ID, parent and valid date. Across {len(reports)} dates there are {len(rows):,} village-date pairs. These are repeated forecasts, not independent observations.",
       '',f"Block-only dates: {', '.join(first['block_only_dates']) or 'none'}. District-only dates: {', '.join(first['district_only_dates']) or 'none'}. Dates outside the intersection are excluded; none are shifted or interpolated.",
-      '', 'Only rainfall can be compared. The district adapter currently extracts rainfall only; temperature, humidity, cloud and wind are missing on that path. This is a software extraction limitation, not proof that IMD never publishes them. The unit is mm for the source-labelled day; identical accumulation hours are not verified.',
+      '', 'This report focuses on rainfall. The all-weather section pairs available temperature, humidity and wind fields. Qualitative cloud wording is not converted to numeric oktas. The unit is mm for the source-labelled day; identical accumulation hours are not verified.',
       '', 'The geography consists of village polygons, not verified gram-panchayat boundaries. All 15 mapped blocks are represented. The 37 unresolved Central features are excluded from numerical pairs; no missing parent is guessed.',
       '', '## Main findings', '',
       f"Across all pairs, mean absolute disagreement is **{f(aggregate['mean_absolute_difference_mm'])} mm**, root-mean-square disagreement is **{f(aggregate['root_mean_square_difference_mm'])} mm**, and the largest absolute gap is **{f(aggregate['max_absolute_difference_mm'])} mm**.",
@@ -87,6 +87,11 @@ def generate():
       f"Model: `{first['block_source']['model_version']}`. Block run: `{first['block_source']['run_id']}`. District run: `{first['district_source']['run_id']}`.", '',
       f"The adjacent [{identity}.json]({identity}.json) contains the frozen district source bulletin, every paired village row, factor, component and summary. Block raw-source provenance remains in the named immutable run and imported dataset. Regenerate with `.venv\\Scripts\\python scripts/report_forecast_comparison.py`; this reads the current local district cache without a network request and creates a different snapshot if either run changes.", '',
       'The UI comparison view pins both runs while changing dates and blocks. Compare latest sources explicitly starts a new pairing. A missing overlap, mismatched model, unresolved village or unavailable variable is never replaced with a fabricated value.']
+    lines += ['', '## All-weather comparisons', '', '| Date | Variable | Pairs | Block mean | District mean | Mean absolute gap | Maximum gap |', '|---|---|---|---|---|---|---|']
+    for report in reports:
+        for key, scores in report['weather_summary'].items():
+            if scores['count']:
+                lines.append('| '+report['valid_date']+' | '+key+' | '+str(scores['count'])+' | '+' | '.join(f(scores[k]) for k in ['block_mean','district_mean','mean_absolute_difference','max_absolute_difference'])+' |')
     text='\n'.join(lines)+'\n'
     out=folder/(identity+'.md')
     if out.exists() and out.read_text(encoding='utf-8') != text:

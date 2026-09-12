@@ -1,0 +1,137 @@
+{
+  "lead_days": 2,
+  "train_n": 524637,
+  "validation_n": 174879,
+  "test_n": 10098,
+  "selected": "lightgbm_absolute",
+  "validation": {
+    "persistence": {
+      "n": 174879,
+      "mae_mm": 11.037500381469727,
+      "rmse_mm": 22.54380989074707,
+      "bias_mm": -0.016792459413409233,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 36.73041534423828,
+      "heavy_20mm_csi": 0.16484558068507937,
+      "heavy_20mm_hits": 6261,
+      "heavy_20mm_misses": 15885,
+      "heavy_20mm_false_alarms": 15835
+    },
+    "regional_monthly_mean": {
+      "n": 174879,
+      "mae_mm": 9.691994085108298,
+      "rmse_mm": 19.035070206092115,
+      "bias_mm": -1.5710995768984488,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 37.81583645940634,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 22146,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 174879,
+      "mae_mm": 7.814667231779513,
+      "rmse_mm": 18.84109409384261,
+      "bias_mm": -6.448199100393943,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 39.85068784955941,
+      "heavy_20mm_csi": 0.09387138541217091,
+      "heavy_20mm_hits": 2175,
+      "heavy_20mm_misses": 19971,
+      "heavy_20mm_false_alarms": 1024
+    },
+    "lightgbm_tweedie": {
+      "n": 174879,
+      "mae_mm": 8.793172865938233,
+      "rmse_mm": 17.404746991801794,
+      "bias_mm": -1.490935443173215,
+      "observed_mean_mm": 8.63240909576416,
+      "heavy_20mm_n": 22146,
+      "heavy_20mm_mae": 33.412445777815165,
+      "heavy_20mm_csi": 0.18533223462431642,
+      "heavy_20mm_hits": 4948,
+      "heavy_20mm_misses": 17198,
+      "heavy_20mm_false_alarms": 4552
+    }
+  },
+  "nashik_test": {
+    "persistence": {
+      "n": 10098,
+      "mae_mm": 9.245180130004883,
+      "rmse_mm": 19.141178131103516,
+      "bias_mm": 1.511070379933699e-08,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 34.491458892822266,
+      "heavy_20mm_csi": 0.09983452840595698,
+      "heavy_20mm_hits": 181,
+      "heavy_20mm_misses": 816,
+      "heavy_20mm_false_alarms": 816
+    },
+    "regional_monthly_mean": {
+      "n": 10098,
+      "mae_mm": 8.36250224497533,
+      "rmse_mm": 14.768380143507985,
+      "bias_mm": 0.38166434859466286,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 33.32791006218347,
+      "heavy_20mm_csi": 0.0,
+      "heavy_20mm_hits": 0,
+      "heavy_20mm_misses": 997,
+      "heavy_20mm_false_alarms": 0
+    },
+    "lightgbm_absolute": {
+      "n": 10098,
+      "mae_mm": 6.170680412170818,
+      "rmse_mm": 14.696348963977325,
+      "bias_mm": -4.2568834971660685,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 35.73070723684216,
+      "heavy_20mm_csi": 0.035576923076923075,
+      "heavy_20mm_hits": 37,
+      "heavy_20mm_misses": 960,
+      "heavy_20mm_false_alarms": 43
+    },
+    "lightgbm_tweedie": {
+      "n": 10098,
+      "mae_mm": 7.646520087280078,
+      "rmse_mm": 14.17679302344794,
+      "bias_mm": 0.003280146891044691,
+      "observed_mean_mm": 6.679645538330078,
+      "heavy_20mm_n": 997,
+      "heavy_20mm_mae": 30.427700149234244,
+      "heavy_20mm_csi": 0.1551849166062364,
+      "heavy_20mm_hits": 214,
+      "heavy_20mm_misses": 783,
+      "heavy_20mm_false_alarms": 382
+    }
+  },
+  "monthly_baseline": {
+    "6": 6.855543613433838,
+    "7": 11.617210388183594,
+    "8": 8.540691375732422,
+    "9": 6.280285358428955,
+    "10": 1.980985403060913
+  },
+  "feature_names": [
+    "rain_last",
+    "rain_previous",
+    "rain_two_before",
+    "rain_six_before",
+    "rain_thirteen_before",
+    "mean3",
+    "mean7",
+    "mean14",
+    "latitude",
+    "longitude",
+    "season_sin",
+    "season_cos"
+  ],
+  "eligible_for_production": false
+}
