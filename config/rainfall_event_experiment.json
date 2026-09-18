@@ -1,0 +1,28 @@
+{
+  "schema_version": "rainfall-event-v2",
+  "dataset_version": "imd-mh-34a5f8f7716669bf2297",
+  "original_experiment": "rain-benchmark-ad798db16fc9a58f9dc1",
+  "train_years": [2010, 2018],
+  "probability_calibration_years": [2019, 2019],
+  "selection_years": [2020, 2021],
+  "reused_test_years": [2022, 2024],
+  "fresh_test_year": 2025,
+  "months": [6, 7, 8, 9, 10],
+  "lead_days": [1, 2, 3, 4, 5],
+  "observation_lag_days": 2,
+  "event_threshold_mm": 20,
+  "alert_selection": {
+    "objective": "maximum CSI subject to recall, precision and false-positive-rate constraints; otherwise maximum CSI with unmet constraints reported",
+    "minimum_recall": 0.5,
+    "minimum_precision": 0.2,
+    "maximum_false_positive_rate": 0.25,
+    "probability_thresholds": [0.03, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7]
+  },
+  "amount_selection": "minimum RMSE among candidates with absolute bias <=20% of observed mean and MAE <= persistence; otherwise minimum RMSE with unmet constraints reported",
+  "model_parameters": {
+    "n_estimators": 220, "num_leaves": 31, "min_child_samples": 200,
+    "learning_rate": 0.04, "reg_lambda": 10.0, "verbosity": -1,
+    "n_jobs": 4, "random_state": 42, "deterministic": true, "force_col_wise": true
+  },
+  "production_activation_allowed": false
+}

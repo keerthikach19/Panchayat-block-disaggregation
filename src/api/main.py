@@ -11,7 +11,7 @@ from src.services.forecast_service import ForecastService, MODEL, advisory
 from src.modeling.terrain_model import load_terrain_model
 from src.services.comparison import ComparisonService
 from src.services.bulletin import render_bulletin
-from src.ingestion.forecast_schema import read_json
+from src.ingestion.forecast_schema import read_json, safe_id
 
 app = FastAPI(title="Nashik hybrid weather forecasts", version="3.0.0")
 service = ForecastService()
@@ -111,7 +111,20 @@ def bulletin(panchayat_id: str, mode: Literal["block", "district"] = "block", ru
 
 @app.get("/api/model-evidence")
 def model_evidence():
-    return call(read_json, ROOT / "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/report.json")
+    report = call(read_json, ROOT / "data/research/benchmarks/rain-benchmark-ad798db16fc9a58f9dc1/report.json")
+    for filename, key in [('event_evidence.json', 'revised_benchmark'), ('nwp_evidence.json', 'nwp_benchmark')]:
+        pointer = ROOT / 'data/research/benchmarks' / filename
+        if pointer.exists():
+            selected = call(read_json, pointer)
+            experiment = call(safe_id, selected.get('experiment_id', ''))
+            directory = ROOT / 'data/research/benchmarks' / experiment
+            if selected.get('evaluation_id'):
+                directory = directory / call(safe_id, selected['evaluation_id'])
+            evidence = call(read_json, directory / 'report.json')
+            if evidence.get('experiment_id') != experiment or evidence.get('evaluation_id') != selected.get('evaluation_id'):
+                raise HTTPException(422, 'Research evidence identity mismatch')
+            report[key] = evidence
+    return report
 
 class DisseminationPreviewPayload(BaseModel):
     panchayat_id: str

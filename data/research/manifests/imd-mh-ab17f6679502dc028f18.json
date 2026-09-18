@@ -1,0 +1,4195 @@
+{
+  "schema": "imd-mh-grid-v1",
+  "cells": [
+    {
+      "grid_id": "IMD025_37_29",
+      "iy": 37,
+      "ix": 29,
+      "lat": 15.75,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_37_30",
+      "iy": 37,
+      "ix": 30,
+      "lat": 15.75,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_37_31",
+      "iy": 37,
+      "ix": 31,
+      "lat": 15.75,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_38_28",
+      "iy": 38,
+      "ix": 28,
+      "lat": 16.0,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_38_29",
+      "iy": 38,
+      "ix": 29,
+      "lat": 16.0,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_38_30",
+      "iy": 38,
+      "ix": 30,
+      "lat": 16.0,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_38_31",
+      "iy": 38,
+      "ix": 31,
+      "lat": 16.0,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_39_28",
+      "iy": 39,
+      "ix": 28,
+      "lat": 16.25,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_39_29",
+      "iy": 39,
+      "ix": 29,
+      "lat": 16.25,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_39_30",
+      "iy": 39,
+      "ix": 30,
+      "lat": 16.25,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_39_31",
+      "iy": 39,
+      "ix": 31,
+      "lat": 16.25,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_40_28",
+      "iy": 40,
+      "ix": 28,
+      "lat": 16.5,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_40_29",
+      "iy": 40,
+      "ix": 29,
+      "lat": 16.5,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_40_30",
+      "iy": 40,
+      "ix": 30,
+      "lat": 16.5,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_40_31",
+      "iy": 40,
+      "ix": 31,
+      "lat": 16.5,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_41_28",
+      "iy": 41,
+      "ix": 28,
+      "lat": 16.75,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_41_29",
+      "iy": 41,
+      "ix": 29,
+      "lat": 16.75,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_41_30",
+      "iy": 41,
+      "ix": 30,
+      "lat": 16.75,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_41_31",
+      "iy": 41,
+      "ix": 31,
+      "lat": 16.75,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_41_32",
+      "iy": 41,
+      "ix": 32,
+      "lat": 16.75,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_41_33",
+      "iy": 41,
+      "ix": 33,
+      "lat": 16.75,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_28",
+      "iy": 42,
+      "ix": 28,
+      "lat": 17.0,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_29",
+      "iy": 42,
+      "ix": 29,
+      "lat": 17.0,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_30",
+      "iy": 42,
+      "ix": 30,
+      "lat": 17.0,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_31",
+      "iy": 42,
+      "ix": 31,
+      "lat": 17.0,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_32",
+      "iy": 42,
+      "ix": 32,
+      "lat": 17.0,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_33",
+      "iy": 42,
+      "ix": 33,
+      "lat": 17.0,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_34",
+      "iy": 42,
+      "ix": 34,
+      "lat": 17.0,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_35",
+      "iy": 42,
+      "ix": 35,
+      "lat": 17.0,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_42_36",
+      "iy": 42,
+      "ix": 36,
+      "lat": 17.0,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_27",
+      "iy": 43,
+      "ix": 27,
+      "lat": 17.25,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_28",
+      "iy": 43,
+      "ix": 28,
+      "lat": 17.25,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_29",
+      "iy": 43,
+      "ix": 29,
+      "lat": 17.25,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_30",
+      "iy": 43,
+      "ix": 30,
+      "lat": 17.25,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_31",
+      "iy": 43,
+      "ix": 31,
+      "lat": 17.25,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_32",
+      "iy": 43,
+      "ix": 32,
+      "lat": 17.25,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_33",
+      "iy": 43,
+      "ix": 33,
+      "lat": 17.25,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_34",
+      "iy": 43,
+      "ix": 34,
+      "lat": 17.25,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_35",
+      "iy": 43,
+      "ix": 35,
+      "lat": 17.25,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_43_36",
+      "iy": 43,
+      "ix": 36,
+      "lat": 17.25,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_27",
+      "iy": 44,
+      "ix": 27,
+      "lat": 17.5,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_28",
+      "iy": 44,
+      "ix": 28,
+      "lat": 17.5,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_29",
+      "iy": 44,
+      "ix": 29,
+      "lat": 17.5,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_30",
+      "iy": 44,
+      "ix": 30,
+      "lat": 17.5,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_31",
+      "iy": 44,
+      "ix": 31,
+      "lat": 17.5,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_32",
+      "iy": 44,
+      "ix": 32,
+      "lat": 17.5,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_33",
+      "iy": 44,
+      "ix": 33,
+      "lat": 17.5,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_34",
+      "iy": 44,
+      "ix": 34,
+      "lat": 17.5,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_35",
+      "iy": 44,
+      "ix": 35,
+      "lat": 17.5,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_36",
+      "iy": 44,
+      "ix": 36,
+      "lat": 17.5,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_37",
+      "iy": 44,
+      "ix": 37,
+      "lat": 17.5,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_38",
+      "iy": 44,
+      "ix": 38,
+      "lat": 17.5,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_44_39",
+      "iy": 44,
+      "ix": 39,
+      "lat": 17.5,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_27",
+      "iy": 45,
+      "ix": 27,
+      "lat": 17.75,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_28",
+      "iy": 45,
+      "ix": 28,
+      "lat": 17.75,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_29",
+      "iy": 45,
+      "ix": 29,
+      "lat": 17.75,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_30",
+      "iy": 45,
+      "ix": 30,
+      "lat": 17.75,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_31",
+      "iy": 45,
+      "ix": 31,
+      "lat": 17.75,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_32",
+      "iy": 45,
+      "ix": 32,
+      "lat": 17.75,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_33",
+      "iy": 45,
+      "ix": 33,
+      "lat": 17.75,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_34",
+      "iy": 45,
+      "ix": 34,
+      "lat": 17.75,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_35",
+      "iy": 45,
+      "ix": 35,
+      "lat": 17.75,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_36",
+      "iy": 45,
+      "ix": 36,
+      "lat": 17.75,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_37",
+      "iy": 45,
+      "ix": 37,
+      "lat": 17.75,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_38",
+      "iy": 45,
+      "ix": 38,
+      "lat": 17.75,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_39",
+      "iy": 45,
+      "ix": 39,
+      "lat": 17.75,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_45_40",
+      "iy": 45,
+      "ix": 40,
+      "lat": 17.75,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_27",
+      "iy": 46,
+      "ix": 27,
+      "lat": 18.0,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_28",
+      "iy": 46,
+      "ix": 28,
+      "lat": 18.0,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_29",
+      "iy": 46,
+      "ix": 29,
+      "lat": 18.0,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_30",
+      "iy": 46,
+      "ix": 30,
+      "lat": 18.0,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_31",
+      "iy": 46,
+      "ix": 31,
+      "lat": 18.0,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_32",
+      "iy": 46,
+      "ix": 32,
+      "lat": 18.0,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_33",
+      "iy": 46,
+      "ix": 33,
+      "lat": 18.0,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_34",
+      "iy": 46,
+      "ix": 34,
+      "lat": 18.0,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_35",
+      "iy": 46,
+      "ix": 35,
+      "lat": 18.0,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_36",
+      "iy": 46,
+      "ix": 36,
+      "lat": 18.0,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_37",
+      "iy": 46,
+      "ix": 37,
+      "lat": 18.0,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_38",
+      "iy": 46,
+      "ix": 38,
+      "lat": 18.0,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_39",
+      "iy": 46,
+      "ix": 39,
+      "lat": 18.0,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_40",
+      "iy": 46,
+      "ix": 40,
+      "lat": 18.0,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_46_41",
+      "iy": 46,
+      "ix": 41,
+      "lat": 18.0,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_26",
+      "iy": 47,
+      "ix": 26,
+      "lat": 18.25,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_27",
+      "iy": 47,
+      "ix": 27,
+      "lat": 18.25,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_28",
+      "iy": 47,
+      "ix": 28,
+      "lat": 18.25,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_29",
+      "iy": 47,
+      "ix": 29,
+      "lat": 18.25,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_30",
+      "iy": 47,
+      "ix": 30,
+      "lat": 18.25,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_31",
+      "iy": 47,
+      "ix": 31,
+      "lat": 18.25,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_32",
+      "iy": 47,
+      "ix": 32,
+      "lat": 18.25,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_33",
+      "iy": 47,
+      "ix": 33,
+      "lat": 18.25,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_34",
+      "iy": 47,
+      "ix": 34,
+      "lat": 18.25,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_35",
+      "iy": 47,
+      "ix": 35,
+      "lat": 18.25,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_36",
+      "iy": 47,
+      "ix": 36,
+      "lat": 18.25,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_37",
+      "iy": 47,
+      "ix": 37,
+      "lat": 18.25,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_38",
+      "iy": 47,
+      "ix": 38,
+      "lat": 18.25,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_39",
+      "iy": 47,
+      "ix": 39,
+      "lat": 18.25,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_40",
+      "iy": 47,
+      "ix": 40,
+      "lat": 18.25,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_41",
+      "iy": 47,
+      "ix": 41,
+      "lat": 18.25,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_47_42",
+      "iy": 47,
+      "ix": 42,
+      "lat": 18.25,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_26",
+      "iy": 48,
+      "ix": 26,
+      "lat": 18.5,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_27",
+      "iy": 48,
+      "ix": 27,
+      "lat": 18.5,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_28",
+      "iy": 48,
+      "ix": 28,
+      "lat": 18.5,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_29",
+      "iy": 48,
+      "ix": 29,
+      "lat": 18.5,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_30",
+      "iy": 48,
+      "ix": 30,
+      "lat": 18.5,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_31",
+      "iy": 48,
+      "ix": 31,
+      "lat": 18.5,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_32",
+      "iy": 48,
+      "ix": 32,
+      "lat": 18.5,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_33",
+      "iy": 48,
+      "ix": 33,
+      "lat": 18.5,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_34",
+      "iy": 48,
+      "ix": 34,
+      "lat": 18.5,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_35",
+      "iy": 48,
+      "ix": 35,
+      "lat": 18.5,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_36",
+      "iy": 48,
+      "ix": 36,
+      "lat": 18.5,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_37",
+      "iy": 48,
+      "ix": 37,
+      "lat": 18.5,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_38",
+      "iy": 48,
+      "ix": 38,
+      "lat": 18.5,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_39",
+      "iy": 48,
+      "ix": 39,
+      "lat": 18.5,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_40",
+      "iy": 48,
+      "ix": 40,
+      "lat": 18.5,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_41",
+      "iy": 48,
+      "ix": 41,
+      "lat": 18.5,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_42",
+      "iy": 48,
+      "ix": 42,
+      "lat": 18.5,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_43",
+      "iy": 48,
+      "ix": 43,
+      "lat": 18.5,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_48_44",
+      "iy": 48,
+      "ix": 44,
+      "lat": 18.5,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_26",
+      "iy": 49,
+      "ix": 26,
+      "lat": 18.75,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_27",
+      "iy": 49,
+      "ix": 27,
+      "lat": 18.75,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_28",
+      "iy": 49,
+      "ix": 28,
+      "lat": 18.75,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_29",
+      "iy": 49,
+      "ix": 29,
+      "lat": 18.75,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_30",
+      "iy": 49,
+      "ix": 30,
+      "lat": 18.75,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_31",
+      "iy": 49,
+      "ix": 31,
+      "lat": 18.75,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_32",
+      "iy": 49,
+      "ix": 32,
+      "lat": 18.75,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_33",
+      "iy": 49,
+      "ix": 33,
+      "lat": 18.75,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_34",
+      "iy": 49,
+      "ix": 34,
+      "lat": 18.75,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_35",
+      "iy": 49,
+      "ix": 35,
+      "lat": 18.75,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_36",
+      "iy": 49,
+      "ix": 36,
+      "lat": 18.75,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_37",
+      "iy": 49,
+      "ix": 37,
+      "lat": 18.75,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_38",
+      "iy": 49,
+      "ix": 38,
+      "lat": 18.75,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_39",
+      "iy": 49,
+      "ix": 39,
+      "lat": 18.75,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_40",
+      "iy": 49,
+      "ix": 40,
+      "lat": 18.75,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_41",
+      "iy": 49,
+      "ix": 41,
+      "lat": 18.75,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_42",
+      "iy": 49,
+      "ix": 42,
+      "lat": 18.75,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_43",
+      "iy": 49,
+      "ix": 43,
+      "lat": 18.75,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_44",
+      "iy": 49,
+      "ix": 44,
+      "lat": 18.75,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_45",
+      "iy": 49,
+      "ix": 45,
+      "lat": 18.75,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_49_55",
+      "iy": 49,
+      "ix": 55,
+      "lat": 18.75,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_26",
+      "iy": 50,
+      "ix": 26,
+      "lat": 19.0,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_27",
+      "iy": 50,
+      "ix": 27,
+      "lat": 19.0,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_28",
+      "iy": 50,
+      "ix": 28,
+      "lat": 19.0,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_29",
+      "iy": 50,
+      "ix": 29,
+      "lat": 19.0,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_30",
+      "iy": 50,
+      "ix": 30,
+      "lat": 19.0,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_31",
+      "iy": 50,
+      "ix": 31,
+      "lat": 19.0,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_32",
+      "iy": 50,
+      "ix": 32,
+      "lat": 19.0,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_33",
+      "iy": 50,
+      "ix": 33,
+      "lat": 19.0,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_34",
+      "iy": 50,
+      "ix": 34,
+      "lat": 19.0,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_35",
+      "iy": 50,
+      "ix": 35,
+      "lat": 19.0,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_36",
+      "iy": 50,
+      "ix": 36,
+      "lat": 19.0,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_37",
+      "iy": 50,
+      "ix": 37,
+      "lat": 19.0,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_38",
+      "iy": 50,
+      "ix": 38,
+      "lat": 19.0,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_39",
+      "iy": 50,
+      "ix": 39,
+      "lat": 19.0,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_40",
+      "iy": 50,
+      "ix": 40,
+      "lat": 19.0,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_41",
+      "iy": 50,
+      "ix": 41,
+      "lat": 19.0,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_42",
+      "iy": 50,
+      "ix": 42,
+      "lat": 19.0,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_43",
+      "iy": 50,
+      "ix": 43,
+      "lat": 19.0,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_44",
+      "iy": 50,
+      "ix": 44,
+      "lat": 19.0,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_45",
+      "iy": 50,
+      "ix": 45,
+      "lat": 19.0,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_54",
+      "iy": 50,
+      "ix": 54,
+      "lat": 19.0,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_50_55",
+      "iy": 50,
+      "ix": 55,
+      "lat": 19.0,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_26",
+      "iy": 51,
+      "ix": 26,
+      "lat": 19.25,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_27",
+      "iy": 51,
+      "ix": 27,
+      "lat": 19.25,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_28",
+      "iy": 51,
+      "ix": 28,
+      "lat": 19.25,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_29",
+      "iy": 51,
+      "ix": 29,
+      "lat": 19.25,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_30",
+      "iy": 51,
+      "ix": 30,
+      "lat": 19.25,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_31",
+      "iy": 51,
+      "ix": 31,
+      "lat": 19.25,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_32",
+      "iy": 51,
+      "ix": 32,
+      "lat": 19.25,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_33",
+      "iy": 51,
+      "ix": 33,
+      "lat": 19.25,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_34",
+      "iy": 51,
+      "ix": 34,
+      "lat": 19.25,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_35",
+      "iy": 51,
+      "ix": 35,
+      "lat": 19.25,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_36",
+      "iy": 51,
+      "ix": 36,
+      "lat": 19.25,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_37",
+      "iy": 51,
+      "ix": 37,
+      "lat": 19.25,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_38",
+      "iy": 51,
+      "ix": 38,
+      "lat": 19.25,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_39",
+      "iy": 51,
+      "ix": 39,
+      "lat": 19.25,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_40",
+      "iy": 51,
+      "ix": 40,
+      "lat": 19.25,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_41",
+      "iy": 51,
+      "ix": 41,
+      "lat": 19.25,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_42",
+      "iy": 51,
+      "ix": 42,
+      "lat": 19.25,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_43",
+      "iy": 51,
+      "ix": 43,
+      "lat": 19.25,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_44",
+      "iy": 51,
+      "ix": 44,
+      "lat": 19.25,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_45",
+      "iy": 51,
+      "ix": 45,
+      "lat": 19.25,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_54",
+      "iy": 51,
+      "ix": 54,
+      "lat": 19.25,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_51_55",
+      "iy": 51,
+      "ix": 55,
+      "lat": 19.25,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_25",
+      "iy": 52,
+      "ix": 25,
+      "lat": 19.5,
+      "lon": 72.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_26",
+      "iy": 52,
+      "ix": 26,
+      "lat": 19.5,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_27",
+      "iy": 52,
+      "ix": 27,
+      "lat": 19.5,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_28",
+      "iy": 52,
+      "ix": 28,
+      "lat": 19.5,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_52_29",
+      "iy": 52,
+      "ix": 29,
+      "lat": 19.5,
+      "lon": 73.75,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_52_30",
+      "iy": 52,
+      "ix": 30,
+      "lat": 19.5,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_52_31",
+      "iy": 52,
+      "ix": 31,
+      "lat": 19.5,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_52_32",
+      "iy": 52,
+      "ix": 32,
+      "lat": 19.5,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_33",
+      "iy": 52,
+      "ix": 33,
+      "lat": 19.5,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_34",
+      "iy": 52,
+      "ix": 34,
+      "lat": 19.5,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_35",
+      "iy": 52,
+      "ix": 35,
+      "lat": 19.5,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_36",
+      "iy": 52,
+      "ix": 36,
+      "lat": 19.5,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_37",
+      "iy": 52,
+      "ix": 37,
+      "lat": 19.5,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_38",
+      "iy": 52,
+      "ix": 38,
+      "lat": 19.5,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_39",
+      "iy": 52,
+      "ix": 39,
+      "lat": 19.5,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_40",
+      "iy": 52,
+      "ix": 40,
+      "lat": 19.5,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_41",
+      "iy": 52,
+      "ix": 41,
+      "lat": 19.5,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_42",
+      "iy": 52,
+      "ix": 42,
+      "lat": 19.5,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_43",
+      "iy": 52,
+      "ix": 43,
+      "lat": 19.5,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_44",
+      "iy": 52,
+      "ix": 44,
+      "lat": 19.5,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_45",
+      "iy": 52,
+      "ix": 45,
+      "lat": 19.5,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_46",
+      "iy": 52,
+      "ix": 46,
+      "lat": 19.5,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_47",
+      "iy": 52,
+      "ix": 47,
+      "lat": 19.5,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_54",
+      "iy": 52,
+      "ix": 54,
+      "lat": 19.5,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_55",
+      "iy": 52,
+      "ix": 55,
+      "lat": 19.5,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_56",
+      "iy": 52,
+      "ix": 56,
+      "lat": 19.5,
+      "lon": 80.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_52_57",
+      "iy": 52,
+      "ix": 57,
+      "lat": 19.5,
+      "lon": 80.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_25",
+      "iy": 53,
+      "ix": 25,
+      "lat": 19.75,
+      "lon": 72.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_26",
+      "iy": 53,
+      "ix": 26,
+      "lat": 19.75,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_27",
+      "iy": 53,
+      "ix": 27,
+      "lat": 19.75,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_53_28",
+      "iy": 53,
+      "ix": 28,
+      "lat": 19.75,
+      "lon": 73.5,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_53_29",
+      "iy": 53,
+      "ix": 29,
+      "lat": 19.75,
+      "lon": 73.75,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_53_30",
+      "iy": 53,
+      "ix": 30,
+      "lat": 19.75,
+      "lon": 74.0,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_53_31",
+      "iy": 53,
+      "ix": 31,
+      "lat": 19.75,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_53_32",
+      "iy": 53,
+      "ix": 32,
+      "lat": 19.75,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_53_33",
+      "iy": 53,
+      "ix": 33,
+      "lat": 19.75,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_53_34",
+      "iy": 53,
+      "ix": 34,
+      "lat": 19.75,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_35",
+      "iy": 53,
+      "ix": 35,
+      "lat": 19.75,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_36",
+      "iy": 53,
+      "ix": 36,
+      "lat": 19.75,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_37",
+      "iy": 53,
+      "ix": 37,
+      "lat": 19.75,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_38",
+      "iy": 53,
+      "ix": 38,
+      "lat": 19.75,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_39",
+      "iy": 53,
+      "ix": 39,
+      "lat": 19.75,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_40",
+      "iy": 53,
+      "ix": 40,
+      "lat": 19.75,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_41",
+      "iy": 53,
+      "ix": 41,
+      "lat": 19.75,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_42",
+      "iy": 53,
+      "ix": 42,
+      "lat": 19.75,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_43",
+      "iy": 53,
+      "ix": 43,
+      "lat": 19.75,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_44",
+      "iy": 53,
+      "ix": 44,
+      "lat": 19.75,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_45",
+      "iy": 53,
+      "ix": 45,
+      "lat": 19.75,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_46",
+      "iy": 53,
+      "ix": 46,
+      "lat": 19.75,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_47",
+      "iy": 53,
+      "ix": 47,
+      "lat": 19.75,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_50",
+      "iy": 53,
+      "ix": 50,
+      "lat": 19.75,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_51",
+      "iy": 53,
+      "ix": 51,
+      "lat": 19.75,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_52",
+      "iy": 53,
+      "ix": 52,
+      "lat": 19.75,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_53",
+      "iy": 53,
+      "ix": 53,
+      "lat": 19.75,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_54",
+      "iy": 53,
+      "ix": 54,
+      "lat": 19.75,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_55",
+      "iy": 53,
+      "ix": 55,
+      "lat": 19.75,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_53_56",
+      "iy": 53,
+      "ix": 56,
+      "lat": 19.75,
+      "lon": 80.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_25",
+      "iy": 54,
+      "ix": 25,
+      "lat": 20.0,
+      "lon": 72.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_26",
+      "iy": 54,
+      "ix": 26,
+      "lat": 20.0,
+      "lon": 73.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_27",
+      "iy": 54,
+      "ix": 27,
+      "lat": 20.0,
+      "lon": 73.25,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_28",
+      "iy": 54,
+      "ix": 28,
+      "lat": 20.0,
+      "lon": 73.5,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_29",
+      "iy": 54,
+      "ix": 29,
+      "lat": 20.0,
+      "lon": 73.75,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_30",
+      "iy": 54,
+      "ix": 30,
+      "lat": 20.0,
+      "lon": 74.0,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_31",
+      "iy": 54,
+      "ix": 31,
+      "lat": 20.0,
+      "lon": 74.25,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_32",
+      "iy": 54,
+      "ix": 32,
+      "lat": 20.0,
+      "lon": 74.5,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_33",
+      "iy": 54,
+      "ix": 33,
+      "lat": 20.0,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_34",
+      "iy": 54,
+      "ix": 34,
+      "lat": 20.0,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_54_35",
+      "iy": 54,
+      "ix": 35,
+      "lat": 20.0,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_36",
+      "iy": 54,
+      "ix": 36,
+      "lat": 20.0,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_37",
+      "iy": 54,
+      "ix": 37,
+      "lat": 20.0,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_38",
+      "iy": 54,
+      "ix": 38,
+      "lat": 20.0,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_39",
+      "iy": 54,
+      "ix": 39,
+      "lat": 20.0,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_40",
+      "iy": 54,
+      "ix": 40,
+      "lat": 20.0,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_41",
+      "iy": 54,
+      "ix": 41,
+      "lat": 20.0,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_42",
+      "iy": 54,
+      "ix": 42,
+      "lat": 20.0,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_43",
+      "iy": 54,
+      "ix": 43,
+      "lat": 20.0,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_44",
+      "iy": 54,
+      "ix": 44,
+      "lat": 20.0,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_45",
+      "iy": 54,
+      "ix": 45,
+      "lat": 20.0,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_46",
+      "iy": 54,
+      "ix": 46,
+      "lat": 20.0,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_47",
+      "iy": 54,
+      "ix": 47,
+      "lat": 20.0,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_48",
+      "iy": 54,
+      "ix": 48,
+      "lat": 20.0,
+      "lon": 78.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_49",
+      "iy": 54,
+      "ix": 49,
+      "lat": 20.0,
+      "lon": 78.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_50",
+      "iy": 54,
+      "ix": 50,
+      "lat": 20.0,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_51",
+      "iy": 54,
+      "ix": 51,
+      "lat": 20.0,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_52",
+      "iy": 54,
+      "ix": 52,
+      "lat": 20.0,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_53",
+      "iy": 54,
+      "ix": 53,
+      "lat": 20.0,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_54",
+      "iy": 54,
+      "ix": 54,
+      "lat": 20.0,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_55",
+      "iy": 54,
+      "ix": 55,
+      "lat": 20.0,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_54_56",
+      "iy": 54,
+      "ix": 56,
+      "lat": 20.0,
+      "lon": 80.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_28",
+      "iy": 55,
+      "ix": 28,
+      "lat": 20.25,
+      "lon": 73.5,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_55_29",
+      "iy": 55,
+      "ix": 29,
+      "lat": 20.25,
+      "lon": 73.75,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_55_30",
+      "iy": 55,
+      "ix": 30,
+      "lat": 20.25,
+      "lon": 74.0,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_55_31",
+      "iy": 55,
+      "ix": 31,
+      "lat": 20.25,
+      "lon": 74.25,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_55_32",
+      "iy": 55,
+      "ix": 32,
+      "lat": 20.25,
+      "lon": 74.5,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_55_33",
+      "iy": 55,
+      "ix": 33,
+      "lat": 20.25,
+      "lon": 74.75,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_55_34",
+      "iy": 55,
+      "ix": 34,
+      "lat": 20.25,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_55_35",
+      "iy": 55,
+      "ix": 35,
+      "lat": 20.25,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_36",
+      "iy": 55,
+      "ix": 36,
+      "lat": 20.25,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_37",
+      "iy": 55,
+      "ix": 37,
+      "lat": 20.25,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_38",
+      "iy": 55,
+      "ix": 38,
+      "lat": 20.25,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_39",
+      "iy": 55,
+      "ix": 39,
+      "lat": 20.25,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_40",
+      "iy": 55,
+      "ix": 40,
+      "lat": 20.25,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_41",
+      "iy": 55,
+      "ix": 41,
+      "lat": 20.25,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_42",
+      "iy": 55,
+      "ix": 42,
+      "lat": 20.25,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_43",
+      "iy": 55,
+      "ix": 43,
+      "lat": 20.25,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_44",
+      "iy": 55,
+      "ix": 44,
+      "lat": 20.25,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_45",
+      "iy": 55,
+      "ix": 45,
+      "lat": 20.25,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_46",
+      "iy": 55,
+      "ix": 46,
+      "lat": 20.25,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_47",
+      "iy": 55,
+      "ix": 47,
+      "lat": 20.25,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_48",
+      "iy": 55,
+      "ix": 48,
+      "lat": 20.25,
+      "lon": 78.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_49",
+      "iy": 55,
+      "ix": 49,
+      "lat": 20.25,
+      "lon": 78.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_50",
+      "iy": 55,
+      "ix": 50,
+      "lat": 20.25,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_51",
+      "iy": 55,
+      "ix": 51,
+      "lat": 20.25,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_52",
+      "iy": 55,
+      "ix": 52,
+      "lat": 20.25,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_53",
+      "iy": 55,
+      "ix": 53,
+      "lat": 20.25,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_54",
+      "iy": 55,
+      "ix": 54,
+      "lat": 20.25,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_55_55",
+      "iy": 55,
+      "ix": 55,
+      "lat": 20.25,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_28",
+      "iy": 56,
+      "ix": 28,
+      "lat": 20.5,
+      "lon": 73.5,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_56_29",
+      "iy": 56,
+      "ix": 29,
+      "lat": 20.5,
+      "lon": 73.75,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_56_30",
+      "iy": 56,
+      "ix": 30,
+      "lat": 20.5,
+      "lon": 74.0,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_56_31",
+      "iy": 56,
+      "ix": 31,
+      "lat": 20.5,
+      "lon": 74.25,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_56_32",
+      "iy": 56,
+      "ix": 32,
+      "lat": 20.5,
+      "lon": 74.5,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_56_33",
+      "iy": 56,
+      "ix": 33,
+      "lat": 20.5,
+      "lon": 74.75,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_56_34",
+      "iy": 56,
+      "ix": 34,
+      "lat": 20.5,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_56_35",
+      "iy": 56,
+      "ix": 35,
+      "lat": 20.5,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_36",
+      "iy": 56,
+      "ix": 36,
+      "lat": 20.5,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_37",
+      "iy": 56,
+      "ix": 37,
+      "lat": 20.5,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_38",
+      "iy": 56,
+      "ix": 38,
+      "lat": 20.5,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_39",
+      "iy": 56,
+      "ix": 39,
+      "lat": 20.5,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_40",
+      "iy": 56,
+      "ix": 40,
+      "lat": 20.5,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_41",
+      "iy": 56,
+      "ix": 41,
+      "lat": 20.5,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_42",
+      "iy": 56,
+      "ix": 42,
+      "lat": 20.5,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_43",
+      "iy": 56,
+      "ix": 43,
+      "lat": 20.5,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_44",
+      "iy": 56,
+      "ix": 44,
+      "lat": 20.5,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_45",
+      "iy": 56,
+      "ix": 45,
+      "lat": 20.5,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_46",
+      "iy": 56,
+      "ix": 46,
+      "lat": 20.5,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_47",
+      "iy": 56,
+      "ix": 47,
+      "lat": 20.5,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_48",
+      "iy": 56,
+      "ix": 48,
+      "lat": 20.5,
+      "lon": 78.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_49",
+      "iy": 56,
+      "ix": 49,
+      "lat": 20.5,
+      "lon": 78.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_50",
+      "iy": 56,
+      "ix": 50,
+      "lat": 20.5,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_51",
+      "iy": 56,
+      "ix": 51,
+      "lat": 20.5,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_52",
+      "iy": 56,
+      "ix": 52,
+      "lat": 20.5,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_53",
+      "iy": 56,
+      "ix": 53,
+      "lat": 20.5,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_54",
+      "iy": 56,
+      "ix": 54,
+      "lat": 20.5,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_55",
+      "iy": 56,
+      "ix": 55,
+      "lat": 20.5,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_56_56",
+      "iy": 56,
+      "ix": 56,
+      "lat": 20.5,
+      "lon": 80.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_30",
+      "iy": 57,
+      "ix": 30,
+      "lat": 20.75,
+      "lon": 74.0,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_57_31",
+      "iy": 57,
+      "ix": 31,
+      "lat": 20.75,
+      "lon": 74.25,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_57_32",
+      "iy": 57,
+      "ix": 32,
+      "lat": 20.75,
+      "lon": 74.5,
+      "nashik": true,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_57_33",
+      "iy": 57,
+      "ix": 33,
+      "lat": 20.75,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_57_34",
+      "iy": 57,
+      "ix": 34,
+      "lat": 20.75,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_57_35",
+      "iy": 57,
+      "ix": 35,
+      "lat": 20.75,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_36",
+      "iy": 57,
+      "ix": 36,
+      "lat": 20.75,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_37",
+      "iy": 57,
+      "ix": 37,
+      "lat": 20.75,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_38",
+      "iy": 57,
+      "ix": 38,
+      "lat": 20.75,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_39",
+      "iy": 57,
+      "ix": 39,
+      "lat": 20.75,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_40",
+      "iy": 57,
+      "ix": 40,
+      "lat": 20.75,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_41",
+      "iy": 57,
+      "ix": 41,
+      "lat": 20.75,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_42",
+      "iy": 57,
+      "ix": 42,
+      "lat": 20.75,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_43",
+      "iy": 57,
+      "ix": 43,
+      "lat": 20.75,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_44",
+      "iy": 57,
+      "ix": 44,
+      "lat": 20.75,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_45",
+      "iy": 57,
+      "ix": 45,
+      "lat": 20.75,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_46",
+      "iy": 57,
+      "ix": 46,
+      "lat": 20.75,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_47",
+      "iy": 57,
+      "ix": 47,
+      "lat": 20.75,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_48",
+      "iy": 57,
+      "ix": 48,
+      "lat": 20.75,
+      "lon": 78.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_49",
+      "iy": 57,
+      "ix": 49,
+      "lat": 20.75,
+      "lon": 78.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_50",
+      "iy": 57,
+      "ix": 50,
+      "lat": 20.75,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_51",
+      "iy": 57,
+      "ix": 51,
+      "lat": 20.75,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_52",
+      "iy": 57,
+      "ix": 52,
+      "lat": 20.75,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_53",
+      "iy": 57,
+      "ix": 53,
+      "lat": 20.75,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_54",
+      "iy": 57,
+      "ix": 54,
+      "lat": 20.75,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_55",
+      "iy": 57,
+      "ix": 55,
+      "lat": 20.75,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_57_56",
+      "iy": 57,
+      "ix": 56,
+      "lat": 20.75,
+      "lon": 80.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_30",
+      "iy": 58,
+      "ix": 30,
+      "lat": 21.0,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_58_31",
+      "iy": 58,
+      "ix": 31,
+      "lat": 21.0,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_58_32",
+      "iy": 58,
+      "ix": 32,
+      "lat": 21.0,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_58_33",
+      "iy": 58,
+      "ix": 33,
+      "lat": 21.0,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": true
+    },
+    {
+      "grid_id": "IMD025_58_34",
+      "iy": 58,
+      "ix": 34,
+      "lat": 21.0,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_35",
+      "iy": 58,
+      "ix": 35,
+      "lat": 21.0,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_36",
+      "iy": 58,
+      "ix": 36,
+      "lat": 21.0,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_37",
+      "iy": 58,
+      "ix": 37,
+      "lat": 21.0,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_38",
+      "iy": 58,
+      "ix": 38,
+      "lat": 21.0,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_39",
+      "iy": 58,
+      "ix": 39,
+      "lat": 21.0,
+      "lon": 76.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_40",
+      "iy": 58,
+      "ix": 40,
+      "lat": 21.0,
+      "lon": 76.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_41",
+      "iy": 58,
+      "ix": 41,
+      "lat": 21.0,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_42",
+      "iy": 58,
+      "ix": 42,
+      "lat": 21.0,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_43",
+      "iy": 58,
+      "ix": 43,
+      "lat": 21.0,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_44",
+      "iy": 58,
+      "ix": 44,
+      "lat": 21.0,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_45",
+      "iy": 58,
+      "ix": 45,
+      "lat": 21.0,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_46",
+      "iy": 58,
+      "ix": 46,
+      "lat": 21.0,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_47",
+      "iy": 58,
+      "ix": 47,
+      "lat": 21.0,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_48",
+      "iy": 58,
+      "ix": 48,
+      "lat": 21.0,
+      "lon": 78.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_49",
+      "iy": 58,
+      "ix": 49,
+      "lat": 21.0,
+      "lon": 78.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_50",
+      "iy": 58,
+      "ix": 50,
+      "lat": 21.0,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_51",
+      "iy": 58,
+      "ix": 51,
+      "lat": 21.0,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_52",
+      "iy": 58,
+      "ix": 52,
+      "lat": 21.0,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_53",
+      "iy": 58,
+      "ix": 53,
+      "lat": 21.0,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_54",
+      "iy": 58,
+      "ix": 54,
+      "lat": 21.0,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_58_55",
+      "iy": 58,
+      "ix": 55,
+      "lat": 21.0,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_30",
+      "iy": 59,
+      "ix": 30,
+      "lat": 21.25,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_31",
+      "iy": 59,
+      "ix": 31,
+      "lat": 21.25,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_32",
+      "iy": 59,
+      "ix": 32,
+      "lat": 21.25,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_33",
+      "iy": 59,
+      "ix": 33,
+      "lat": 21.25,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_34",
+      "iy": 59,
+      "ix": 34,
+      "lat": 21.25,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_35",
+      "iy": 59,
+      "ix": 35,
+      "lat": 21.25,
+      "lon": 75.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_36",
+      "iy": 59,
+      "ix": 36,
+      "lat": 21.25,
+      "lon": 75.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_37",
+      "iy": 59,
+      "ix": 37,
+      "lat": 21.25,
+      "lon": 75.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_38",
+      "iy": 59,
+      "ix": 38,
+      "lat": 21.25,
+      "lon": 76.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_41",
+      "iy": 59,
+      "ix": 41,
+      "lat": 21.25,
+      "lon": 76.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_42",
+      "iy": 59,
+      "ix": 42,
+      "lat": 21.25,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_43",
+      "iy": 59,
+      "ix": 43,
+      "lat": 21.25,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_44",
+      "iy": 59,
+      "ix": 44,
+      "lat": 21.25,
+      "lon": 77.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_45",
+      "iy": 59,
+      "ix": 45,
+      "lat": 21.25,
+      "lon": 77.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_46",
+      "iy": 59,
+      "ix": 46,
+      "lat": 21.25,
+      "lon": 78.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_47",
+      "iy": 59,
+      "ix": 47,
+      "lat": 21.25,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_48",
+      "iy": 59,
+      "ix": 48,
+      "lat": 21.25,
+      "lon": 78.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_49",
+      "iy": 59,
+      "ix": 49,
+      "lat": 21.25,
+      "lon": 78.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_50",
+      "iy": 59,
+      "ix": 50,
+      "lat": 21.25,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_51",
+      "iy": 59,
+      "ix": 51,
+      "lat": 21.25,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_52",
+      "iy": 59,
+      "ix": 52,
+      "lat": 21.25,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_53",
+      "iy": 59,
+      "ix": 53,
+      "lat": 21.25,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_54",
+      "iy": 59,
+      "ix": 54,
+      "lat": 21.25,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_55",
+      "iy": 59,
+      "ix": 55,
+      "lat": 21.25,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_59_56",
+      "iy": 59,
+      "ix": 56,
+      "lat": 21.25,
+      "lon": 80.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_32",
+      "iy": 60,
+      "ix": 32,
+      "lat": 21.5,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_33",
+      "iy": 60,
+      "ix": 33,
+      "lat": 21.5,
+      "lon": 74.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_34",
+      "iy": 60,
+      "ix": 34,
+      "lat": 21.5,
+      "lon": 75.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_42",
+      "iy": 60,
+      "ix": 42,
+      "lat": 21.5,
+      "lon": 77.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_43",
+      "iy": 60,
+      "ix": 43,
+      "lat": 21.5,
+      "lon": 77.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_47",
+      "iy": 60,
+      "ix": 47,
+      "lat": 21.5,
+      "lon": 78.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_48",
+      "iy": 60,
+      "ix": 48,
+      "lat": 21.5,
+      "lon": 78.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_50",
+      "iy": 60,
+      "ix": 50,
+      "lat": 21.5,
+      "lon": 79.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_51",
+      "iy": 60,
+      "ix": 51,
+      "lat": 21.5,
+      "lon": 79.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_52",
+      "iy": 60,
+      "ix": 52,
+      "lat": 21.5,
+      "lon": 79.5,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_53",
+      "iy": 60,
+      "ix": 53,
+      "lat": 21.5,
+      "lon": 79.75,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_54",
+      "iy": 60,
+      "ix": 54,
+      "lat": 21.5,
+      "lon": 80.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_60_55",
+      "iy": 60,
+      "ix": 55,
+      "lat": 21.5,
+      "lon": 80.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_61_30",
+      "iy": 61,
+      "ix": 30,
+      "lat": 21.75,
+      "lon": 74.0,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_61_31",
+      "iy": 61,
+      "ix": 31,
+      "lat": 21.75,
+      "lon": 74.25,
+      "nashik": false,
+      "excluded_from_training": false
+    },
+    {
+      "grid_id": "IMD025_61_32",
+      "iy": 61,
+      "ix": 32,
+      "lat": 21.75,
+      "lon": 74.5,
+      "nashik": false,
+      "excluded_from_training": false
+    }
+  ],
+  "dates": [
+    "2025-01-01",
+    "2025-01-02",
+    "2025-01-03",
+    "2025-01-04",
+    "2025-01-05",
+    "2025-01-06",
+    "2025-01-07",
+    "2025-01-08",
+    "2025-01-09",
+    "2025-01-10",
+    "2025-01-11",
+    "2025-01-12",
+    "2025-01-13",
+    "2025-01-14",
+    "2025-01-15",
+    "2025-01-16",
+    "2025-01-17",
+    "2025-01-18",
+    "2025-01-19",
+    "2025-01-20",
+    "2025-01-21",
+    "2025-01-22",
+    "2025-01-23",
+    "2025-01-24",
+    "2025-01-25",
+    "2025-01-26",
+    "2025-01-27",
+    "2025-01-28",
+    "2025-01-29",
+    "2025-01-30",
+    "2025-01-31",
+    "2025-02-01",
+    "2025-02-02",
+    "2025-02-03",
+    "2025-02-04",
+    "2025-02-05",
+    "2025-02-06",
+    "2025-02-07",
+    "2025-02-08",
+    "2025-02-09",
+    "2025-02-10",
+    "2025-02-11",
+    "2025-02-12",
+    "2025-02-13",
+    "2025-02-14",
+    "2025-02-15",
+    "2025-02-16",
+    "2025-02-17",
+    "2025-02-18",
+    "2025-02-19",
+    "2025-02-20",
+    "2025-02-21",
+    "2025-02-22",
+    "2025-02-23",
+    "2025-02-24",
+    "2025-02-25",
+    "2025-02-26",
+    "2025-02-27",
+    "2025-02-28",
+    "2025-03-01",
+    "2025-03-02",
+    "2025-03-03",
+    "2025-03-04",
+    "2025-03-05",
+    "2025-03-06",
+    "2025-03-07",
+    "2025-03-08",
+    "2025-03-09",
+    "2025-03-10",
+    "2025-03-11",
+    "2025-03-12",
+    "2025-03-13",
+    "2025-03-14",
+    "2025-03-15",
+    "2025-03-16",
+    "2025-03-17",
+    "2025-03-18",
+    "2025-03-19",
+    "2025-03-20",
+    "2025-03-21",
+    "2025-03-22",
+    "2025-03-23",
+    "2025-03-24",
+    "2025-03-25",
+    "2025-03-26",
+    "2025-03-27",
+    "2025-03-28",
+    "2025-03-29",
+    "2025-03-30",
+    "2025-03-31",
+    "2025-04-01",
+    "2025-04-02",
+    "2025-04-03",
+    "2025-04-04",
+    "2025-04-05",
+    "2025-04-06",
+    "2025-04-07",
+    "2025-04-08",
+    "2025-04-09",
+    "2025-04-10",
+    "2025-04-11",
+    "2025-04-12",
+    "2025-04-13",
+    "2025-04-14",
+    "2025-04-15",
+    "2025-04-16",
+    "2025-04-17",
+    "2025-04-18",
+    "2025-04-19",
+    "2025-04-20",
+    "2025-04-21",
+    "2025-04-22",
+    "2025-04-23",
+    "2025-04-24",
+    "2025-04-25",
+    "2025-04-26",
+    "2025-04-27",
+    "2025-04-28",
+    "2025-04-29",
+    "2025-04-30",
+    "2025-05-01",
+    "2025-05-02",
+    "2025-05-03",
+    "2025-05-04",
+    "2025-05-05",
+    "2025-05-06",
+    "2025-05-07",
+    "2025-05-08",
+    "2025-05-09",
+    "2025-05-10",
+    "2025-05-11",
+    "2025-05-12",
+    "2025-05-13",
+    "2025-05-14",
+    "2025-05-15",
+    "2025-05-16",
+    "2025-05-17",
+    "2025-05-18",
+    "2025-05-19",
+    "2025-05-20",
+    "2025-05-21",
+    "2025-05-22",
+    "2025-05-23",
+    "2025-05-24",
+    "2025-05-25",
+    "2025-05-26",
+    "2025-05-27",
+    "2025-05-28",
+    "2025-05-29",
+    "2025-05-30",
+    "2025-05-31",
+    "2025-06-01",
+    "2025-06-02",
+    "2025-06-03",
+    "2025-06-04",
+    "2025-06-05",
+    "2025-06-06",
+    "2025-06-07",
+    "2025-06-08",
+    "2025-06-09",
+    "2025-06-10",
+    "2025-06-11",
+    "2025-06-12",
+    "2025-06-13",
+    "2025-06-14",
+    "2025-06-15",
+    "2025-06-16",
+    "2025-06-17",
+    "2025-06-18",
+    "2025-06-19",
+    "2025-06-20",
+    "2025-06-21",
+    "2025-06-22",
+    "2025-06-23",
+    "2025-06-24",
+    "2025-06-25",
+    "2025-06-26",
+    "2025-06-27",
+    "2025-06-28",
+    "2025-06-29",
+    "2025-06-30",
+    "2025-07-01",
+    "2025-07-02",
+    "2025-07-03",
+    "2025-07-04",
+    "2025-07-05",
+    "2025-07-06",
+    "2025-07-07",
+    "2025-07-08",
+    "2025-07-09",
+    "2025-07-10",
+    "2025-07-11",
+    "2025-07-12",
+    "2025-07-13",
+    "2025-07-14",
+    "2025-07-15",
+    "2025-07-16",
+    "2025-07-17",
+    "2025-07-18",
+    "2025-07-19",
+    "2025-07-20",
+    "2025-07-21",
+    "2025-07-22",
+    "2025-07-23",
+    "2025-07-24",
+    "2025-07-25",
+    "2025-07-26",
+    "2025-07-27",
+    "2025-07-28",
+    "2025-07-29",
+    "2025-07-30",
+    "2025-07-31",
+    "2025-08-01",
+    "2025-08-02",
+    "2025-08-03",
+    "2025-08-04",
+    "2025-08-05",
+    "2025-08-06",
+    "2025-08-07",
+    "2025-08-08",
+    "2025-08-09",
+    "2025-08-10",
+    "2025-08-11",
+    "2025-08-12",
+    "2025-08-13",
+    "2025-08-14",
+    "2025-08-15",
+    "2025-08-16",
+    "2025-08-17",
+    "2025-08-18",
+    "2025-08-19",
+    "2025-08-20",
+    "2025-08-21",
+    "2025-08-22",
+    "2025-08-23",
+    "2025-08-24",
+    "2025-08-25",
+    "2025-08-26",
+    "2025-08-27",
+    "2025-08-28",
+    "2025-08-29",
+    "2025-08-30",
+    "2025-08-31",
+    "2025-09-01",
+    "2025-09-02",
+    "2025-09-03",
+    "2025-09-04",
+    "2025-09-05",
+    "2025-09-06",
+    "2025-09-07",
+    "2025-09-08",
+    "2025-09-09",
+    "2025-09-10",
+    "2025-09-11",
+    "2025-09-12",
+    "2025-09-13",
+    "2025-09-14",
+    "2025-09-15",
+    "2025-09-16",
+    "2025-09-17",
+    "2025-09-18",
+    "2025-09-19",
+    "2025-09-20",
+    "2025-09-21",
+    "2025-09-22",
+    "2025-09-23",
+    "2025-09-24",
+    "2025-09-25",
+    "2025-09-26",
+    "2025-09-27",
+    "2025-09-28",
+    "2025-09-29",
+    "2025-09-30",
+    "2025-10-01",
+    "2025-10-02",
+    "2025-10-03",
+    "2025-10-04",
+    "2025-10-05",
+    "2025-10-06",
+    "2025-10-07",
+    "2025-10-08",
+    "2025-10-09",
+    "2025-10-10",
+    "2025-10-11",
+    "2025-10-12",
+    "2025-10-13",
+    "2025-10-14",
+    "2025-10-15",
+    "2025-10-16",
+    "2025-10-17",
+    "2025-10-18",
+    "2025-10-19",
+    "2025-10-20",
+    "2025-10-21",
+    "2025-10-22",
+    "2025-10-23",
+    "2025-10-24",
+    "2025-10-25",
+    "2025-10-26",
+    "2025-10-27",
+    "2025-10-28",
+    "2025-10-29",
+    "2025-10-30",
+    "2025-10-31",
+    "2025-11-01",
+    "2025-11-02",
+    "2025-11-03",
+    "2025-11-04",
+    "2025-11-05",
+    "2025-11-06",
+    "2025-11-07",
+    "2025-11-08",
+    "2025-11-09",
+    "2025-11-10",
+    "2025-11-11",
+    "2025-11-12",
+    "2025-11-13",
+    "2025-11-14",
+    "2025-11-15",
+    "2025-11-16",
+    "2025-11-17",
+    "2025-11-18",
+    "2025-11-19",
+    "2025-11-20",
+    "2025-11-21",
+    "2025-11-22",
+    "2025-11-23",
+    "2025-11-24",
+    "2025-11-25",
+    "2025-11-26",
+    "2025-11-27",
+    "2025-11-28",
+    "2025-11-29",
+    "2025-11-30",
+    "2025-12-01",
+    "2025-12-02",
+    "2025-12-03",
+    "2025-12-04",
+    "2025-12-05",
+    "2025-12-06",
+    "2025-12-07",
+    "2025-12-08",
+    "2025-12-09",
+    "2025-12-10",
+    "2025-12-11",
+    "2025-12-12",
+    "2025-12-13",
+    "2025-12-14",
+    "2025-12-15",
+    "2025-12-16",
+    "2025-12-17",
+    "2025-12-18",
+    "2025-12-19",
+    "2025-12-20",
+    "2025-12-21",
+    "2025-12-22",
+    "2025-12-23",
+    "2025-12-24",
+    "2025-12-25",
+    "2025-12-26",
+    "2025-12-27",
+    "2025-12-28",
+    "2025-12-29",
+    "2025-12-30",
+    "2025-12-31"
+  ],
+  "sources": [
+    {
+      "year": 2025,
+      "sha256": "b4fa5ffb389496c0fa7d5a468d1cb47e4db0bcabcd11be4f273c0e6cfa7d611d"
+    }
+  ],
+  "state_boundary_sha256": "60fdd2b3fbd54cb37559446718afa77eb1c25836433f74482dc7e4735e081ee9",
+  "nashik_boundary_sha256": "66bfaa05b33269372bac6f2f460f99dba079d0674231b12a8f5a327d05d964e9",
+  "coverage": "Grid centers inside supplied state polygon; boundary cells and geographic labels are approximate",
+  "spatial_holdout": "Nashik centers withheld; additional 0.25 degree halo excluded from training",
+  "dataset_version": "imd-mh-ab17f6679502dc028f18",
+  "array_sha256": "3777ecc18ebb243f5675fb1c976ee1b52b2004e5dec701827ae8991582e6c5f4",
+  "rows": 365,
+  "cell_count": 423,
+  "nashik_cells": 22,
+  "missing_values": 0
+}

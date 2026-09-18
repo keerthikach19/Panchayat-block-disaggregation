@@ -1,0 +1,44 @@
+{
+  "schema_version": "gfs-imd-calibration-v1",
+  "gfs_catalog_url": "https://stac.dynamical.org/noaa-gfs-forecast/collection.json",
+  "gfs_snapshot_id": "FWTKVCTA0XJXBHS3F9K0",
+  "gfs_asset_url": "https://dynamical-noaa-gfs.s3.us-west-2.amazonaws.com/noaa-gfs-forecast/v0.2.7.icechunk",
+  "variables": ["precipitation_surface", "precipitable_water_atmosphere", "relative_humidity_2m"],
+  "historical_dataset": "imd-mh-34a5f8f7716669bf2297",
+  "selection_dataset": "imd-mh-ab17f6679502dc028f18",
+  "train_years": [2021, 2022, 2023],
+  "calibration_years": [2024],
+  "selection_years": [2025],
+  "historical_init_month_day_start": "05-31",
+  "historical_init_month_day_end": "10-25",
+  "historical_init_stride_days": 5,
+  "fresh_init_start": "2026-05-31",
+  "fresh_init_end": "2026-09-09",
+  "fresh_init_stride_days": 3,
+  "init_hour_utc": 0,
+  "decision_delay_hours": 12,
+  "availability_status": "12-hour decision buffer after initialization is assumed; actual historical dissemination timestamps are not independently verified",
+  "lead_days": [1, 2, 3, 4, 5],
+  "first_window_start_hour": 27,
+  "window_hours": 24,
+  "observation_window": "24 hours ending 03:00 UTC on the IMD observation date",
+  "observation_window_sources": [
+    "https://journals.ametsoc.org/view/journals/hydr/24/6/JHM-D-22-0160.1.xml",
+    "https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022EA002595",
+    "https://mausam.imd.gov.in/chennai/mcdata/ne_monsoon_2020.pdf"
+  ],
+  "event_threshold_mm": 20,
+  "alert_selection": {
+    "minimum_recall": 0.5,
+    "minimum_precision": 0.5,
+    "maximum_false_positive_rate": 0.25,
+    "probability_thresholds": [0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2, 0.225, 0.25, 0.275, 0.3, 0.325, 0.35, 0.375, 0.4, 0.45, 0.5, 0.6, 0.7, 0.8],
+    "fallback": "maximum CSI with unmet joint 50/50 target reported; never relax the observed 20 mm event definition"
+  },
+  "model_parameters": {
+    "n_estimators": 250, "num_leaves": 15, "min_child_samples": 100,
+    "learning_rate": 0.04, "reg_lambda": 20.0, "verbosity": -1,
+    "n_jobs": 4, "random_state": 42, "deterministic": true, "force_col_wise": true
+  },
+  "production_activation_allowed": false
+}

@@ -1,0 +1,4 @@
+-r requirements-dev.txt
+xarray==2026.7.0
+icechunk==2.2.1
+zarr==3.4.0

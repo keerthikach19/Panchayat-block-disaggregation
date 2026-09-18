@@ -1,4 +1,40 @@
-# Final model card — 12 September 2026
+# Model card — updated 18 September 2026
+
+## Forecast-informed experiment: final iteration
+
+The [GFS experiment](NWP_RAINFALL_MODEL.md) uses archived rainfall and moisture
+forecasts, training on 2021–2023, calibrating on 2024 and selecting on 2025 outside
+Nashik and its buffer. The frozen models were audited on 748 provisional 2026
+Nashik grid-days per lead. Detection is 32.5–48.4%; precision is 49.5–86.7%.
+**No lead reaches both 50% targets.** Against raw GFS on the same cases, event CSI
+improves for leads 2–5 and worsens for lead 1. Amount MAE/RMSE improve for leads
+1, 2 and 5; underprediction remains, and bias worsens for leads 1 and 5.
+
+See [complete results, counts and uncertainty](reports/nwp-rainfall-results.md).
+This is a sampled partial-season grid test, not village validation or a complete
+operational archive. Forecast initialization and assumed delivery timing are
+distinguished. The serving map remains unchanged; GFS corrections are not applied
+to the different IMD block forecast product.
+
+## Earlier rainfall-history experiment
+
+The [revised experiment](RAINFALL_EVENT_MODEL.md) adds neighboring rainfall and
+trends, Tweedie/squared-error amount candidates, and a separately calibrated
+≥20 mm event classifier. Training uses 2010–2018, calibration 2019 and selection
+2020–2021, excluding Nashik and its buffer throughout. The locked models were
+audited on newly acquired 2025 observations.
+
+On fresh Nashik 2025 grid-days, event detection is 30.2–35.3% across leads,
+compared with 2.6–6.8% for the old selected model. Alert precision is 29.5–31.6%,
+so most alerts are still false alarms. Day 1 bias improves from −4.70 to −0.34 mm
+and RMSE from 15.99 to 15.60 mm, while MAE worsens from 6.56 to 8.20 mm.
+These are tradeoffs, not uniformly better forecasts. Validation did not achieve
+the combined event selection targets; the declared fallback selected maximum CSI.
+See the [complete measured results](reports/rainfall-events-results.md).
+
+The event output does not change rainfall amounts. No serving model is replaced:
+this is a grid-scale research model with limited event skill and no matched
+historical issued-forecast inputs or independent village observations.
 
 ## Release decision
 
@@ -38,7 +74,12 @@ All errors are mm on held-out grid-days. MAE around 6 mm is not a promise of 6 m
 
 The two sources were issued on different days and may use different forecast products and accumulation intervals. Each route normalizes the terrain pattern against a different parent footprint. Equal terrain does not make atmospheric forecasts or parent references equal. Forcing a 6–10 mm maximum gap would hide disagreement without proving accuracy. The comparison preserves both predictions, original inputs, dates and numerical source/reference decomposition.
 
-Historical analyses stop in 2024, while the supplied issued forecasts are from 2026; there are zero verified issued-forecast/observation pairs. An operational bias-calibration model cannot be honestly trained from those non-overlapping records. The alignment and reconciliation modules are implemented and tested, but do not invent missing training pairs or operational reconciliation weights.
+The supplied IMD block/district bulletins still lack verified, time-aligned local
+observation pairs for operational calibration. The separate GFS experiment now
+has matched historical forecast/IMD grid pairs, with an explicitly assumed
+publication buffer and provisional 2026 test observations. These do not establish
+calibration of the IMD block/district products or local village accuracy. No
+operational reconciliation weights are invented.
 
 ## Reproduce
 

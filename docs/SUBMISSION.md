@@ -24,7 +24,7 @@ artifacts are already packaged; training is not required to start the app.
 | Click a village | Source/local values, units, model, elevation, provenance and advisory preview |
 | Switch to Live district forecast | Current public IMD bulletin, full available weather; cached retrieval and failures explicitly labelled |
 | Open Same-day comparison | Exact shared village IDs/dates, rainfall differences and all-weather summary; source issues may differ |
-| Open Model & training | Completed Maharashtra benchmark, test results, limitations and explicit retain-model decision |
+| Open Model & training | GFS-based model, independent sampled 2026 audit, exact detection/precision and GFS comparison; earlier rainfall-history results are expandable |
 | Open a village's bulletin link | Printable five-day GKMS-style draft, source/local weather, general guidance, missing field inputs, provenance |
 | Preview dissemination | Text preview only; no SMS or WhatsApp message sent |
 | Run block mode offline | Packaged forecasts work; optional street labels and uncached district retrieval require internet |
@@ -45,7 +45,12 @@ Their hashes, acquisition commands and model reports are retained for reproducib
 This is a working academic prototype for traceable weather downscaling. It does
 not establish village-scale forecast accuracy. The new statewide historical
 benchmark was completed and rejected as a serving replacement because its low
-average error hid poor heavy-rain performance. No arbitrary agreement cap is used.
+average error hid poor heavy-rain performance. The latest model adds archived GFS
+weather forecasts. Its sampled 2026 Nashik test has 32.5–48.4% event detection and
+49.5–86.7% alert precision; no lead reaches both 50% targets. Event CSI improves
+over uncorrected GFS for leads 2–5 and worsens for lead 1. See
+[exact results and limitations](reports/nwp-rainfall-results.md). This research
+model has not replaced village forecasts. No arbitrary agreement cap is used.
 The bulletin is an academic GKMS-style draft, not an official advisory.
 
 The original partial migration and the previously working hybrid release remain

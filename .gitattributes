@@ -4,3 +4,10 @@
 data/research/** -text
 config/calibration_experiment.json -text
 scripts/benchmark_maharashtra_rainfall.py -text
+config/rainfall_event_experiment.json -text
+scripts/train_rainfall_events.py -text
+src/modeling/rainfall_events.py -text
+config/nwp_experiment.json -text
+scripts/*nwp*.py -text
+src/modeling/nwp_calibration.py -text
+src/ingestion/nwp_archive.py -text
