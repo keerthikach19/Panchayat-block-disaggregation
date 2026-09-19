@@ -23,8 +23,7 @@ artifacts are already packaged; training is not required to start the app.
 | Toggle Before / After | Available for rainfall/temperature; humidity and wind speed display source values with no local-adjustment toggle |
 | Click a village | Source/local values, units, model, elevation, provenance and advisory preview |
 | Switch to Live district forecast | Current public IMD bulletin, full available weather; cached retrieval and failures explicitly labelled |
-| Open Same-day comparison | Exact shared village IDs/dates, rainfall differences and all-weather summary; source issues may differ |
-| Open Model & training | GFS-based model, independent sampled 2026 audit, exact detection/precision and GFS comparison; earlier rainfall-history results are expandable |
+| Open Model & training | Current village method and rainfall research evaluation, with direct amount-error and event scores; training coverage and uncertainty are expandable |
 | Open a village's bulletin link | Printable five-day GKMS-style draft, source/local weather, general guidance, missing field inputs, provenance |
 | Preview dissemination | Text preview only; no SMS or WhatsApp message sent |
 | Run block mode offline | Packaged forecasts work; optional street labels and uncached district retrieval require internet |

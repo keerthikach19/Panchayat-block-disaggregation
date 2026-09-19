@@ -42,7 +42,6 @@ previews, rather than an operational warning service.
 | Source and local views | Compare the official parent forecast with experimental rainfall and temperature estimates |
 | Village details | Inspect dates, source values, adjustments, elevation, units and provenance |
 | Block and district modes | Use packaged official block tables or retrieve the public IMD district bulletin |
-| Same-day comparison | Compare block-derived and district-derived estimates for matching villages and dates |
 | Model & training | Inspect research methods, rainfall errors, event detection, false alarms and uncertainty |
 | Printable bulletin | Generate a five-day GKMS-style advisory draft with source and local weather |
 | Message preview | Review advisory text locally without sending messages |
@@ -136,19 +135,6 @@ Expand **How elevation and terrain change the estimate** to inspect the inputs.
 Humidity and wind are shown as values from the official forecast, without local
 adjustment. Villages in the same block share the selected block's values; district
 mode shares the district's values.
-
-### Same-day comparison
-
-The comparison matches block and district outputs by village ID and overlapping
-validity dates. It shows rainfall differences, area-weighted summaries and other
-weather variables when both sources supply them. Date/block changes retain the
-selected run pair; **Compare latest sources** starts a new pairing. If dates do
-not overlap, the application reports that condition instead of comparing different
-days. District runs must be fetched again after a server restart.
-
-**Disagreement is not an accuracy score.** Forecasts may have different issue
-dates, spatial references or methods. A smaller difference between sources does
-not prove that either is closer to observed weather.
 
 ### Model evidence, bulletins and previews
 
@@ -579,7 +565,7 @@ workflow. [Baseline documentation](docs/BASELINE.md) records implementation hist
 | `GET /api/forecast` | Selected forecast records and metadata |
 | `GET /api/panchayats/geojson` | Forecast values joined to geometry |
 | `GET /api/panchayat/{panchayat_id}/explainability` | Source/local values and adjustment details |
-| `GET /api/comparison` | Matched block/district comparison |
+| `GET /api/comparison` | Diagnostic block/district comparison API (not shown as a dashboard tab) |
 | `GET /api/model-evidence` | Saved rainfall research reports |
 | `GET /api/validation-metrics` | Serving-model evidence and validation limitations |
 | `GET /api/advisories` | Weather-rule advisory previews |
@@ -594,8 +580,9 @@ For example:
 /api/comparison?valid_date=2026-09-14&block=Igatpuri
 ```
 
-Comparison also accepts `block_run_id` and `district_run_id` to pin both sources.
-Use `/docs` for schemas, accepted parameters and response formats.
+The diagnostic comparison endpoint also accepts `block_run_id` and
+`district_run_id` to pin both sources. Use `/docs` for schemas, accepted
+parameters and response formats.
 
 `/api/model-evidence` preserves the original report and adds optional
 `revised_benchmark` and `nwp_benchmark` reports, selected through
@@ -603,8 +590,8 @@ Use `/docs` for schemas, accepted parameters and response formats.
 and mismatched report identities are rejected. These pointers choose research
 evidence for display; they do not activate a forecasting model.
 
-To generate a detailed source-comparison report from the existing district cache
-without external requests:
+To generate the retained diagnostic source-comparison report from the existing
+district cache without external requests:
 
 ```powershell
 .venv\Scripts\python scripts/report_forecast_comparison.py

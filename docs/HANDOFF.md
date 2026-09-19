@@ -213,9 +213,9 @@ as requested. To change the default, rerun the documented build/activation comma
 for a retained dataset and method. Activation records the previous default.
 Never edit immutable output or normalized-source JSON in place.
 
-## Same-day comparison extension
+## Diagnostic source comparison
 
-The comparison tab and `/api/comparison` pair exact village IDs on intersecting
+The retained `/api/comparison` diagnostic pairs exact village IDs on intersecting
 forecast dates, pin both runs, and separate parent-input and reference-factor
 contributions algebraically. It includes equal-village/area-weighted statistics,
 date/block/village tables, a paired scatter plot and advisory-trigger sensitivity.
