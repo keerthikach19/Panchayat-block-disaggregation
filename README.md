@@ -112,6 +112,8 @@ node 'C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js' run build
 
 ## Using the dashboard
 
+The dashboard has two tabs: **Forecast map** and **Model & training**.
+
 ### Forecast map
 
 1. Choose **Official block forecasts** or **Live district forecast**.
@@ -139,8 +141,17 @@ mode shares the district's values.
 ### Model evidence, bulletins and previews
 
 **Model & training** explains the map's serving method and displays separate
-rainfall research results. Detection, alert precision and rainfall-amount errors
-measure different aspects of performance; definitions accompany the tables.
+GFS rainfall research results. Its tables show the selected model's direct MAE,
+RMSE, bias, amount-based detection, event recall, precision and false-alert ratio.
+**Training, test coverage and uncertainty** expands the split, forecast-window
+definition and approximate 95% intervals. Detection, alert precision and
+rainfall-amount errors measure different aspects of performance; definitions
+accompany the tables.
+
+On the forecast map, **Village model evaluation** describes the terrain model's
+seasonal-pattern evaluation. Expand **Seasonal-pattern evaluation** to view its
+MAE and RMSE. These seasonal scores and the GFS research scores evaluate different
+methods and targets; neither measures daily village forecast accuracy.
 
 A village's bulletin link opens a printable five-day GKMS-style draft. Advisory
 text follows transparent weather rules, such as reviewing spraying/drainage when
@@ -247,22 +258,18 @@ presented as a network of verified local weather observations.
 
 ## Rainfall modeling and evaluation
 
-The research progressed from an average-error rainfall model to separate
-amount/event models and then to forecast-informed models. The rainfall-history
-experiment added an event classifier to address
-the original model's poor ≥20 mm detection. Its fresh 2025 audit achieved
-30.2–35.3% detection and 29.5–31.6% precision across leads. Amount bias and RMSE
-improved against the old selected model, but MAE worsened. Those results remain
-documented in [the earlier experiment](docs/RAINFALL_EVENT_MODEL.md) and its
-[complete score tables](docs/reports/rainfall-events-results.md).
-
-The GFS experiment uses **issued numerical weather forecasts**: NOAA GFS
+The current research workflow estimates rainfall amounts and ≥20 mm event
+probabilities separately, using **issued numerical weather forecasts**: NOAA GFS
 rainfall, precipitable water and relative humidity, together with nearby forecast
 rainfall, coordinates and season. All weather features come from the same
 forecast initialization. Future observed rainfall is never an input. This gives
-the model information about forecast atmospheric conditions that the earlier
-rainfall-history model did not have. The experiment does not isolate the causal
-contribution of every individual feature.
+the model information about forecast atmospheric conditions. The experiment does
+not isolate the causal contribution of every individual feature.
+
+This workflow replaces rainfall history alone as the focus of the research
+evaluation. The earlier approach and its scores are retained in the
+[rainfall-history method](docs/RAINFALL_EVENT_MODEL.md) and
+[results archive](docs/reports/rainfall-events-results.md).
 
 ### Development and independent evaluation
 
@@ -326,6 +333,19 @@ threshold. An alert never forces the numeric amount estimate to 20 mm. All model
 choices, calibrations and thresholds were frozen before the 2026 audit and were
 not retuned after its results were examined.
 
+The frozen choices used for the displayed evaluation are:
+
+| Lead | Rainfall amount model | Event probability model |
+|---|---|---|
+| 1 | LightGBM Tweedie | LightGBM classifier |
+| 2 | LightGBM Tweedie | LightGBM classifier |
+| 3 | Uncorrected GFS | Rain-only logistic classifier |
+| 4 | Uncorrected GFS | LightGBM classifier |
+| 5 | LightGBM Tweedie | LightGBM classifier |
+
+The event classifiers use the separate probability calibration and alert
+threshold selected for each lead.
+
 ## Measured rainfall results
 
 **No lead achieved both 50% detection and 50% precision on the 2026 audit.**
@@ -353,13 +373,10 @@ false. Its 86.7% precision does **not** mean that it detected 86.7% of events.
 There is no single rainfall “accuracy percentage” that captures both these
 event decisions and the errors in predicted millimeters.
 
-Against raw GFS on the same cases, the selected event model improves CSI for
-leads 2–5 and worsens it for lead 1. Lead 2 has the strongest gain: hits increase
-from 13 to 37 while false alerts increase from 4 to 8. Lead 4 catches more events
-but produces more false alerts; lead 5's CSI gain is small. Much of the high
-precision is already present in raw GFS. The earlier model's 2025 scores use
-different cases and cannot establish a controlled before/after improvement over
-these 2026 scores. See the [full comparison](docs/reports/nwp-rainfall-results.md).
+The [full results report](docs/reports/nwp-rainfall-results.md) includes comparisons
+with uncorrected GFS on the same cases. Earlier rainfall-history scores use a
+different evaluation year and cannot establish a controlled improvement over
+these results.
 
 ### Rainfall-amount errors
 
@@ -367,18 +384,20 @@ All errors below are in millimeters. MAE is the average absolute error; RMSE
 penalizes larger errors more strongly. Lower is better for both. Bias is signed
 prediction minus observation, so a negative value indicates underprediction.
 
-| Lead | MAE: GFS → selected | RMSE: GFS → selected | Bias: GFS → selected | Amount ≥20 mm detection |
-|---|---:|---:|---:|---:|
-| 1 | 7.43 → 7.19 | 22.60 → 22.13 | -3.87 → -5.36 | 29.5% |
-| 2 | 6.63 → 6.03 | 20.17 → 17.80 | -3.80 → -3.27 | 28.4% |
-| 3 | 6.23 → 6.23 | 15.93 → 15.93 | -4.67 → -4.67 | 26.4% |
-| 4 | 8.50 → 8.50 | 25.86 → 25.86 | -5.96 → -5.96 | 22.1% |
-| 5 | 8.93 → 6.76 | 31.06 → 18.06 | -1.57 → -2.97 | 22.9% |
+These are the selected model's scores, matching the dashboard's amount table.
 
-Amount MAE and RMSE improve on leads 1, 2 and 5. Leads 3 and 4 retain raw GFS.
-Underprediction remains substantial, and bias worsens on leads 1 and 5 despite
-lower MAE/RMSE. The amount-based detection column thresholds the numeric rainfall
-estimate at 20 mm; it is separate from the probability-based alerts above.
+| Lead | MAE | RMSE | Bias | Amount ≥20 mm detection | Grid-day cases |
+|---|---:|---:|---:|---:|---:|
+| 1 | 7.19 | 22.13 | -5.36 | 29.5% | 748 |
+| 2 | 6.03 | 17.80 | -3.27 | 28.4% | 748 |
+| 3 | 6.23 | 15.93 | -4.67 | 26.4% | 748 |
+| 4 | 8.50 | 25.86 | -5.96 | 22.1% | 748 |
+| 5 | 6.76 | 18.06 | -2.97 | 22.9% | 748 |
+
+Underprediction remains substantial at every lead. The amount-based detection
+column thresholds the numeric rainfall estimate at 20 mm; it is separate from
+the probability-based alerts above. An event alert can be raised even when the
+amount estimate is below 20 mm.
 
 Approximate 95% intervals are included in the dashboard's expanded method details
 and the [full results report](docs/reports/nwp-rainfall-results.md). They use 500
@@ -580,15 +599,18 @@ For example:
 /api/comparison?valid_date=2026-09-14&block=Igatpuri
 ```
 
-The diagnostic comparison endpoint also accepts `block_run_id` and
-`district_run_id` to pin both sources. Use `/docs` for schemas, accepted
-parameters and response formats.
+The diagnostic comparison endpoint matches exact village IDs and overlapping
+forecast dates. It also accepts `block_run_id` and `district_run_id` to pin both
+sources. This testing tool is available through the API and report script only.
+Differences between its two forecast sources are not accuracy scores. Use `/docs`
+for schemas, accepted parameters and response formats.
 
-`/api/model-evidence` preserves the original report and adds optional
-`revised_benchmark` and `nwp_benchmark` reports, selected through
-`data/research/benchmarks/event_evidence.json` and `nwp_evidence.json`. Unsafe IDs
-and mismatched report identities are rejected. These pointers choose research
-evidence for display; they do not activate a forecasting model.
+**Model & training** renders the `nwp_benchmark` portion of `/api/model-evidence`,
+selected through `data/research/benchmarks/nwp_evidence.json`. The API also retains
+the original report and an optional `revised_benchmark`, selected through
+`event_evidence.json`, for research access; the dashboard does not render those
+earlier experiments. Unsafe IDs and mismatched report identities are rejected.
+These pointers select saved evidence; they do not activate a forecasting model.
 
 To generate the retained diagnostic source-comparison report from the existing
 district cache without external requests:
@@ -628,11 +650,10 @@ Tests distinguish software correctness from meteorological accuracy. Research
 modules and old district model artifacts are retained but are not loaded by production.
 Training rejects zero-variance targets; inference does not train or overwrite CSVs.
 
-Recorded verification on 18 September 2026 covered **82 distinct passing
-tests**: an 81-test repository run plus the saved-evidence regression, with
-affected API/evidence tests rerun. The frontend built successfully, dependency
-checks were clean, and browser checks covered the model tables, Vanasgaon details
-and local message preview without console errors. These checks establish software
+The most recent full verification completed **82 passing tests** and a successful
+production frontend build. The served JavaScript bundle was also checked for the
+removed comparison tab. These are recorded checks of that code state; rerun the
+commands above after changing application or model code. They establish software
 behavior and reproducibility, not meteorological accuracy.
 
 ## Deployment
