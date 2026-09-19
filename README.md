@@ -1,6 +1,6 @@
 # Nashik Village Weather Downscaling
 
-(Deployement link: https://panchayat-block-disaggregation.onrender.com)
+(Deployment link: https://panchayat-block-disaggregation.onrender.com)
 
 A weather dashboard and rainfall research project for exploring how forecasts
 issued for a block or district can be represented at village scale in Nashik,
